@@ -4,7 +4,6 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorBackground">
 
-
     <Button
         android:id="@+id/action_tweet"
         android:layout_width="match_parent"
