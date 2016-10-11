@@ -5,11 +5,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.user.lskiller.OnRecyclerListener;
 import com.example.user.lskiller.R;
+import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
+
+import twitter4j.MediaEntity;
+import twitter4j.Status;
 
 /**
  * Created by USER on 2016/10/05.
@@ -44,9 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         holder.textView.setText(statuses.get(position).getText());
         holder.icon.setImageUrl(statuses.get(position).getUser().getProfileImageURL());
 
-        holder.media1.setImageUrl(mediaList.get(position));
-        holder.media2.setImageUrl(mediaList.get(position));
-        holder.media3.setImageUrl(mediaList.get(position));
+        setMedias(holder, position);
         holder.itemView.setClickable(true);
 
         // クリック処理
@@ -56,6 +62,43 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                 mListener.onRecyclerClicked(v, position);
             }
         });
+    }
+
+    private void setMedias(RecyclerViewHolder holder, int position) {
+        holder.gridLayout.setColumnCount(2);
+        holder.gridLayout.setRowCount(2);
+        if (holder.gridLayout.getChildCount() > 0) {
+            holder.gridLayout.removeAllViews();
+        }
+
+        Status status = statuses.get(position);
+
+        /** 画像の取得 */
+        MediaEntity[] mediaEntities = status.getExtendedMediaEntities();
+        /** 画像が含まれていない場合はもちろん処理をスルーします. */
+        if (mediaEntities.length <= 0) {
+            return;
+        }
+
+        /** 画像を表示する処理 */
+        for (int i = 0; i < mediaEntities.length; i++) {
+            /** URLから画像セット(contextはもちろんandroid.content.Contextクラスのインスタンスです) */
+            SmartImageView imageView = new SmartImageView(mContext);
+            imageView.setImageUrl(mediaEntities[i].getMediaURL());
+
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+            /** 画像はリサイズしないので両方ともwrap_contentで. */
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = 300;
+            params.height = 300;
+            /** 画像と画像の間を少し空ける. */
+            params.setMarginEnd(15);
+            imageView.setLayoutParams(params);
+
+            /** 画像表示用のレイアウトに突っ込む. */
+            holder.gridLayout.addView(imageView, params);
+        }
     }
 
     @Override

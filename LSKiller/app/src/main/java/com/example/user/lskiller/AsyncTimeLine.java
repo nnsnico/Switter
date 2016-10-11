@@ -83,6 +83,8 @@ public class AsyncTimeLine extends AsyncTask<Void, Void, List<twitter4j.Status>>
                         mediaList.add(mediaResult.getMediaURL());
                     }
                     Log.d("activity_tag", "mediaList.added from page " + count);
+                }else{
+                    mediaList.add(null);
                 }
                 Log.d("activity_tag", "mData.added from page " + count);
                 count++;

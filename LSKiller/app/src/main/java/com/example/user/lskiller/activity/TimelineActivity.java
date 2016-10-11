@@ -98,6 +98,11 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, final Intent resultData){
+
+    }
+
     public void reloadTimeLine() {
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new AsyncTimeLine(
                 mTwitter,

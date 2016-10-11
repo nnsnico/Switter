@@ -45,24 +45,14 @@
 
     <!--2x2のグリッドレイアウト-->
     <GridLayout
+        android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/icon"
         android:layout_below="@+id/text"
-        android:rowCount="2"
-        android:columnCount="2">
+        android:layout_toEndOf="@+id/icon"
+        android:columnCount="2"
+        android:rowCount="2">
 
-        <com.loopj.android.image.SmartImageView
-            android:id="@+id/media1"
-            android:scaleType="fitCenter"/>
-
-        <com.loopj.android.image.SmartImageView
-            android:id="@+id/media2"
-            android:scaleType="fitCenter"/>
-
-        <com.loopj.android.image.SmartImageView
-            android:id="@+id/media3"
-            android:scaleType="fitCenter"/>
     </GridLayout>
 
 </RelativeLayout>
