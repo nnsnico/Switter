@@ -57,13 +57,12 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                     LinearLayoutManager.VERTICAL,
                     false
             ));
-
             recyclerView.addItemDecoration(new DividerItemDecoration(this));
-
             reloadTimeLine();
         }
     }
 
+    // スワイプアクション
     private void swipeLayoutConfig() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
