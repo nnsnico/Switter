@@ -1,6 +1,6 @@
 # TwitterClient（仮）
 
-Twitterクライアントを工大祭に向けて作成します。
+Twitterクライアントを趣味で作成します。
 
 自分用に作るのであんまり深くは考えない
 
@@ -16,7 +16,7 @@ Twitterクライアントを工大祭に向けて作成します。
 * AndroidStudio 2.1
 
 ### TargetAPI
-* Min 21 (Lolipop)
+* Min 21 (Lolipopでいいでしょ)
 * Max 24 (Nuger)
 
 ### デバッグ端末
