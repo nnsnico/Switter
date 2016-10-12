@@ -76,7 +76,7 @@ public class AsyncTimeLine extends AsyncTask<Void, Void, List<twitter4j.Status>>
             int count = 1;
             for (twitter4j.Status status : result) {
                 statuses.add(status);
-                // TODO 画像の複数表示
+                // add mediaEntities
                 mediaEntities = status.getExtendedMediaEntities();
                 if(mediaEntities.length > 0) {
                     for(MediaEntity mediaResult : mediaEntities){

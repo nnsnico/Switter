@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.example.user.lskiller.R;
 import com.loopj.android.image.SmartImage;
 import com.loopj.android.image.SmartImageView;
@@ -22,6 +23,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
     TextView screenName;
     SmartImageView icon;
     GridLayout gridLayout;
+    SwipeLayout swipeLayout;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
@@ -30,5 +32,6 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         screenName = (TextView) itemView.findViewById(R.id.screen_name);
         icon = (SmartImageView) itemView.findViewById(R.id.icon);
         gridLayout = (GridLayout) itemView.findViewById(R.id.grid);
+        swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipeMenu);
     }
 }

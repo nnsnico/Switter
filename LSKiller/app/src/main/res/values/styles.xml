@@ -16,4 +16,11 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="RecyclerStyle">
+        <item name="android:background">@drawable/ripple_effect</item>
+        <item name="android:foreground">@drawable/ripple_effect</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
 </resources>

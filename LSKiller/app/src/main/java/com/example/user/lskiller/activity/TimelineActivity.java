@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.example.user.lskiller.AsyncTimeLine;
 import com.example.user.lskiller.CustomRecycler.DividerItemDecoration;
 import com.example.user.lskiller.OnRecyclerListener;
@@ -31,6 +32,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     private Toolbar toolbar;
     private List<Status> statuses = new ArrayList<Status>();
     private RecyclerView recyclerView;
+//    private SwipeLayout swipeLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -43,6 +45,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
         swipeLayoutConfig();
+//        swipeLayout = (SwipeLayout)findViewById(R.id.swipeMenu);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         // Twitterのトークンが取得されているか
@@ -58,11 +61,13 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                     false
             ));
             recyclerView.addItemDecoration(new DividerItemDecoration(this));
+
+//            SwipeMenuConfig();
             reloadTimeLine();
         }
     }
 
-    // スワイプアクション
+    // トップスワイプアクション
     private void swipeLayoutConfig() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -72,6 +77,31 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
             }
         });
     }
+
+    // left swipe Action
+//    private void SwipeMenuConfig(){
+//        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+//        swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//
+//        swipeLayout.findViewById(R.id.reTweet).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//
+//        swipeLayout.findViewById(R.id.reply).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//    }
 
     private void toolbarConfig() {
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
@@ -95,11 +125,6 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 return true;
             }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, final Intent resultData){
-
     }
 
     public void reloadTimeLine() {

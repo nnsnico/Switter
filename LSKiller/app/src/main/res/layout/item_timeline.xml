@@ -1,58 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/RecyclerStyle"
+    android:id="@+id/swipeMenu"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBackground"
-    android:padding="8dp">
+    android:layout_height="wrap_content">
 
-    <com.loopj.android.image.SmartImageView
-        android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"/>
+    <LinearLayout
+        android:tag="swipe_menu"
+        android:gravity="right"
+        android:layout_width="210dp"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/icon"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/icon"
-        android:text="名前入ります"
-        android:textColor="@color/colorPrimary"/>
+        <ImageView
+            android:id="@+id/reply"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorReply"
+            android:src="@mipmap/ic_launcher"/>
 
-    <TextView
-        android:id="@+id/screen_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/name"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/name"
-        android:text="\uFF20gabu"
-        android:textColor="@color/colorPrimary"/>
+        <ImageView
+            android:id="@+id/reTweet"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorReTweet"
+            android:src="@android:drawable/btn_star"/>
 
-    <TextView
-        android:id="@+id/text"
+        <ImageView
+            android:id="@+id/favorite"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorFavorite"
+            android:src="@android:drawable/ic_delete"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        style="@style/RecyclerStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name"
-        android:layout_below="@+id/name"
-        android:text="本文本文本文本文本文本文本文本文本文本文"
-        android:textColor="@color/colorPrimary"/>
+        android:background="@color/colorBackground"
+        android:padding="8dp">
 
-    <!--2x2のグリッドレイアウト-->
-    <GridLayout
-        android:id="@+id/grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text"
-        android:layout_toEndOf="@+id/icon"
-        android:columnCount="2"
-        android:rowCount="2">
+        <com.loopj.android.image.SmartImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
 
-    </GridLayout>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/icon"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/icon"
+            android:text="名前入ります"
+            android:textColor="@color/colorPrimary"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/screen_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/name"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/name"
+            android:text="\uFF20gabu"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/name"
+            android:layout_below="@+id/name"
+            android:text="本文本文本文本文本文本文本文本文本文本文"
+            android:textColor="@color/colorPrimary"/>
+
+        <!--2x2のグリッドレイアウト-->
+        <GridLayout
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:layout_toEndOf="@+id/icon"
+            android:columnCount="2"
+            android:rowCount="2">
+
+        </GridLayout>
+
+    </RelativeLayout>
+</com.daimajia.swipe.SwipeLayout>

@@ -6,4 +6,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBackground">#111a50</color>
     <color name="colorDivider">#6e7aba</color>
+    <color name="colorFavorite">#ff00a1</color>
+    <color name="colorReTweet">#76FF03</color>
+    <color name="colorReply">#FFEA00</color>
 </resources>

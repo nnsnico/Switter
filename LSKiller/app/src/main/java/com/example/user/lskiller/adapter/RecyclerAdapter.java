@@ -8,14 +8,18 @@ import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.example.user.lskiller.OnRecyclerListener;
 import com.example.user.lskiller.R;
+import com.example.user.lskiller.Utils.TwitterUtils;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
 
 import twitter4j.MediaEntity;
 import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 /**
  * Created by USER on 2016/10/05.
@@ -27,13 +31,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private List<String> mediaList;
     private Context mContext;
     private OnRecyclerListener mListener;
+    private Twitter mTwitter;
 
-    public RecyclerAdapter(Context context,List<String> mediaList, List<twitter4j.Status> data, OnRecyclerListener listener) {
+    public RecyclerAdapter(
+            Context context,
+            List<String> mediaList,
+            List<twitter4j.Status> data,
+            OnRecyclerListener listener
+    ) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
         this.mediaList = mediaList;
         statuses = data;
         mListener = listener;
+        mTwitter = TwitterUtils.getTwitterInstance(context);
     }
 
     @Override
@@ -53,11 +64,43 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         setMedias(holder, position);
         holder.itemView.setClickable(true);
 
+        setSwipeMenu(holder, position);
+
         // クリック処理
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onRecyclerClicked(v, position);
+            }
+        });
+    }
+
+    private void setSwipeMenu(RecyclerViewHolder holder, final int position) {
+        holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right,
+                holder.swipeLayout.findViewWithTag("swipe_menu"));
+        holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                try {
+//                    mTwitter.createFavorite(statuses.get(position).getId());
+//                } catch (TwitterException e) {
+//                    e.printStackTrace();
+//                }
+            }
+        });
+
+        holder.swipeLayout.findViewById(R.id.reTweet).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        holder.swipeLayout.findViewById(R.id.reply).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }
