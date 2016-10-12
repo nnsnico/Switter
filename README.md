@@ -2,6 +2,8 @@
 
 Twitterクライアントを趣味で作成します。
 
+iOSのメールアプリっぽいものをイメージ
+
 自分用に作るのであんまり深くは考えない
 
 ## 主な仕様（欲望）
@@ -26,6 +28,7 @@ Twitterクライアントを趣味で作成します。
 * [Twitter API](https://dev.twitter.com/)
 * [twitter4j](http://twitter4j.org/ja/index.html)
 * [SmartImageView](http://loopj.com/android-smart-image-view/)
-* [SuperRecyclerView](https://github.com/Malinskiy/SuperRecyclerView)
+* ~~[SuperRecyclerView](https://github.com/Malinskiy/SuperRecyclerView)~~(使わない)
+* [SwipeLayout](https://github.com/daimajia/AndroidSwipeLayout)
 * Android Support Design ver.24
 * Android Support AppCompat v7
