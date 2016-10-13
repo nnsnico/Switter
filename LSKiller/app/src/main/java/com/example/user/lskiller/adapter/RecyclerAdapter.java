@@ -1,17 +1,21 @@
 package com.example.user.lskiller.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.example.user.lskiller.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
+import com.example.user.lskiller.activity.TimelineActivity;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -67,18 +71,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         setSwipeMenu(holder, position);
 
         // クリック処理
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onRecyclerClicked(v, position);
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mListener.onRecyclerClicked(v, position);
+//            }
+//        });
     }
 
-    private void setSwipeMenu(RecyclerViewHolder holder, final int position) {
+    private void setSwipeMenu(final RecyclerViewHolder holder, final int position) {
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right,
-                holder.swipeLayout.findViewWithTag("swipe_menu"));
+        holder.swipeLayout.findViewWithTag("swipe_menu"));
         holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,22 +91,27 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 //                } catch (TwitterException e) {
 //                    e.printStackTrace();
 //                }
+                mListener.onRecyclerClicked("fav", statuses, position);
+                holder.swipeLayout.close();
             }
         });
 
         holder.swipeLayout.findViewById(R.id.reTweet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mListener.onRecyclerClicked("ret", statuses,position);
+                holder.swipeLayout.close();
             }
         });
 
         holder.swipeLayout.findViewById(R.id.reply).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mListener.onRecyclerClicked("rep", statuses, position);
+                holder.swipeLayout.close();
             }
         });
+
     }
 
     private void setMedias(RecyclerViewHolder holder, int position) {

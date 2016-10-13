@@ -3,6 +3,8 @@ package com.example.user.lskiller.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,20 +12,24 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Toast;
 
-import com.daimajia.swipe.SwipeLayout;
-import com.example.user.lskiller.AsyncTimeLine;
+import com.example.user.lskiller.FavoriteAsync;
+import com.example.user.lskiller.TimeLineAsync;
 import com.example.user.lskiller.CustomRecycler.DividerItemDecoration;
 import com.example.user.lskiller.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
+import com.example.user.lskiller.adapter.RecyclerAdapter;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.Twitter;
+import twitter4j.TwitterException;
 
 public class TimelineActivity extends AppCompatActivity implements OnRecyclerListener {
 
@@ -32,6 +38,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     private Toolbar toolbar;
     private List<Status> statuses = new ArrayList<Status>();
     private RecyclerView recyclerView;
+    private RecyclerAdapter adapter;
 //    private SwipeLayout swipeLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -78,31 +85,6 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         });
     }
 
-    // left swipe Action
-//    private void SwipeMenuConfig(){
-//        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-//        swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//
-//        swipeLayout.findViewById(R.id.reTweet).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//
-//        swipeLayout.findViewById(R.id.reply).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//    }
-
     private void toolbarConfig() {
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
@@ -128,7 +110,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     }
 
     public void reloadTimeLine() {
-        AsyncTask<Void, Void, List<twitter4j.Status>> task = new AsyncTimeLine(
+        AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
                 mTwitter,
                 statuses,
                 TimelineActivity.this,
@@ -138,7 +120,21 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     }
 
     @Override
-    public void onRecyclerClicked(View v, int position) {
-
+    public void onRecyclerClicked(String tag,final List<Status> statuses,final int position) {
+        switch (tag){
+            case "fav":
+                AsyncTask<Long, Void, Boolean> task = new FavoriteAsync(
+                        TimelineActivity.this,
+                        TimelineActivity.this,
+                        statuses,
+                        position);
+                task.execute();
+                break;
+            case "ret":
+                break;
+            case "rep":
+                break;
+        }
+        reloadTimeLine();
     }
 }

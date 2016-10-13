@@ -3,6 +3,7 @@ package com.example.user.lskiller;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,9 +25,8 @@ import twitter4j.TwitterException;
 /**
  * Created by USER on 2016/10/09.
  */
-public class AsyncTimeLine extends AsyncTask<Void, Void, List<twitter4j.Status>> {
+public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>> {
 
-    Context context;
     Twitter mTwitter;
     List<twitter4j.Status> statuses;
     List<String> mediaList = new ArrayList<String>();
@@ -34,8 +34,9 @@ public class AsyncTimeLine extends AsyncTask<Void, Void, List<twitter4j.Status>>
     RecyclerView recyclerView;
     ProgressBar progressBar;
     MediaEntity[] mediaEntities;
+    Parcelable recyclerViewState;
 
-    public AsyncTimeLine(
+    public TimeLineAsync(
             Twitter mTwitter,
             List<twitter4j.Status> statuses,
             Activity activeView,
@@ -49,6 +50,7 @@ public class AsyncTimeLine extends AsyncTask<Void, Void, List<twitter4j.Status>>
 
     @Override
     public void onPreExecute(){
+        recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
         progressBar = (ProgressBar) activity.findViewById(R.id.progress);
         progressBar.setVisibility(ProgressBar.VISIBLE);
     }
@@ -89,16 +91,17 @@ public class AsyncTimeLine extends AsyncTask<Void, Void, List<twitter4j.Status>>
                 Log.d("activity_tag", "mData.added from page " + count);
                 count++;
             }
-            recyclerView.setAdapter(
-                    new RecyclerAdapter(
-                            activity,
-                            mediaList,
-                            statuses,
-                            (OnRecyclerListener) activity
-                    )
-            );
+            RecyclerAdapter adapter = new RecyclerAdapter(
+                    activity,
+                    mediaList,
+                    statuses,
+                    (OnRecyclerListener) activity);
+            recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+            recyclerView.setAdapter(adapter);
         } else {
-            final Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content), "タイムラインの取得に失敗しました\n時間を置いてから再度起動してください", Snackbar.LENGTH_INDEFINITE);
+            final Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
+                    "タイムラインの取得に失敗しました\n時間を置いてから再度起動してください",
+                    Snackbar.LENGTH_INDEFINITE);
             View view = snackbar.getView();
             FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
             params.gravity = Gravity.TOP;
