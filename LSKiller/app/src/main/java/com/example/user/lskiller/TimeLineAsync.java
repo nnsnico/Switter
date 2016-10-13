@@ -1,7 +1,6 @@
 package com.example.user.lskiller;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.design.widget.Snackbar;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;

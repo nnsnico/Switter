@@ -1,21 +1,17 @@
 package com.example.user.lskiller.adapter;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.example.user.lskiller.OnRecyclerListener;
+import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
-import com.example.user.lskiller.activity.TimelineActivity;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -23,7 +19,6 @@ import java.util.List;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 
 /**
  * Created by USER on 2016/10/05.

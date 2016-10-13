@@ -1,6 +1,5 @@
 package com.example.user.lskiller.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,57 +14,47 @@ import android.widget.Toast;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
 
-import java.util.List;
-
 import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.User;
 
 /**
- * Created by USER on 2016/08/16.
+ * Created by USER on 2016/10/13.
  */
-public class TweetActivity extends FragmentActivity{
+public class ReplyActivity extends FragmentActivity {
 
     private EditText mInputText;
     private Twitter mTwitter;
     private TextView countText;
+    String screenName;
+    long UserId;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tweet);
+        setContentView(R.layout.activity_reply);
 
-//        final String screenName = getIntent().getExtras().getString("screenName");
+        screenName = getIntent().getStringExtra("screenName");
+        UserId = getIntent().getLongExtra("status", 1);
 
         mTwitter = TwitterUtils.getTwitterInstance(this);
         mInputText = (EditText)findViewById(R.id.input_text);
-        countTweet();
-        countText = (TextView)findViewById(R.id.countText);
+        mInputText.setText("@" + screenName + " ", TextView.BufferType.EDITABLE);
+        mInputText.setSelection(mInputText.getText().length());
 
-//        assert screenName != null;
-//        if(screenName.isEmpty()){
-//            mInputText.setText(String.format("%s ", screenName));
-//        }
+        countText = (TextView)findViewById(R.id.countText);
+        countText.setText(String.format("%s/140",Integer.toString(140 - mInputText.getText().length())));
+        countTweet();
 
         findViewById(R.id.action_tweet).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-//                if(screenName.isEmpty()){
-//                    try {
-//                        reply(screenName);
-//                    } catch (TwitterException e) {
-//                        e.printStackTrace();
-//                    }
-//                }else {
-                    tweet();
-//                }
+                reply(mInputText.getText().toString(), UserId);
             }
         });
-    }
-
-    private void reply(String screenName) throws TwitterException{
-
     }
 
     private void countTweet() {
@@ -100,12 +89,12 @@ public class TweetActivity extends FragmentActivity{
         });
     }
 
-    private void tweet(){
+    private void reply(final String message,  final long UserId){
         AsyncTask<String, Void, Boolean> task = new AsyncTask<String, Void, Boolean>(){
             @Override
             protected Boolean doInBackground(String... params){
                 try{
-                    mTwitter.updateStatus(params[0]);
+                    mTwitter.updateStatus(new StatusUpdate(message).inReplyToStatusId(UserId));
                     return true;
                 } catch (TwitterException e) {
                     e.printStackTrace();
@@ -116,10 +105,10 @@ public class TweetActivity extends FragmentActivity{
             @Override
             protected void onPostExecute(Boolean result){
                 if(result){
-                    showTweet("ツイートしました");
+                showTweet("返信しました");
                     finish();
                 }else{
-                    showTweet("ツイート出来ませんでした");
+                    showTweet("返信出来ませんでした");
                 }
             }
         };

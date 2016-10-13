@@ -1,10 +1,10 @@
 package com.example.user.lskiller.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,24 +12,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.user.lskiller.FavoriteAsync;
+import com.example.user.lskiller.ReTweetAsync;
 import com.example.user.lskiller.TimeLineAsync;
 import com.example.user.lskiller.CustomRecycler.DividerItemDecoration;
-import com.example.user.lskiller.OnRecyclerListener;
+import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
 import com.example.user.lskiller.adapter.RecyclerAdapter;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.Twitter;
-import twitter4j.TwitterException;
 
 public class TimelineActivity extends AppCompatActivity implements OnRecyclerListener {
 
@@ -123,16 +120,28 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     public void onRecyclerClicked(String tag,final List<Status> statuses,final int position) {
         switch (tag){
             case "fav":
-                AsyncTask<Long, Void, Boolean> task = new FavoriteAsync(
+                AsyncTask<Long, Void, Boolean> favoriteTask = new FavoriteAsync(
                         TimelineActivity.this,
                         TimelineActivity.this,
                         statuses,
                         position);
-                task.execute();
+                favoriteTask.execute();
                 break;
             case "ret":
+                AsyncTask<Long, Void, Boolean> reTweetTask = new ReTweetAsync(
+                        TimelineActivity.this,
+                        TimelineActivity.this,
+                        statuses,
+                        position
+                );
+                reTweetTask.execute();
                 break;
             case "rep":
+                ContentValues content = new ContentValues();
+                Intent intent = new Intent(TimelineActivity.this, ReplyActivity.class);
+                intent.putExtra("screenName", statuses.get(position).getUser().getScreenName());
+                intent.putExtra("status", statuses.get(position).getUser().getId());
+                startActivity(intent);
                 break;
         }
         reloadTimeLine();
