@@ -6,10 +6,10 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:tag="swipe_menu"
-        android:gravity="right"
         android:layout_width="210dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:tag="swipe_menu">
 
         <ImageView
             android:id="@+id/reply"
@@ -67,6 +67,16 @@
             android:layout_toRightOf="@+id/name"
             android:text="\uFF20gabu"
             android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="投稿時間"
+            android:textColor="@color/colorPrimary"
+            android:layout_above="@+id/text"
+            android:layout_alignParentEnd="true"/>
 
         <TextView
             android:id="@+id/text"

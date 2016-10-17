@@ -1,4 +1,4 @@
-package com.example.user.lskiller;
+package com.example.user.lskiller.AsyncTask;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,7 +9,6 @@ import com.example.user.lskiller.Utils.TwitterUtils;
 
 import java.util.List;
 
-import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 

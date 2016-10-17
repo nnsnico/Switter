@@ -17,34 +17,48 @@
         />
 
     <FrameLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/action_tweet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/bt_tweet_style"
-            android:text="@string/action_tweet"
-            android:textColor="@android:color/white"
-            apps:fabSize="normal"
-            />
-
-        <EditText
-            android:id="@+id/input_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:ems="10"
-            android:gravity="left|top"
-            android:inputType="textMultiLine"
-            android:textColor="@android:color/white">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <requestFocus/>
-        </EditText>
+            <EditText
+                android:id="@+id/input_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:gravity="left|top"
+                android:inputType="textMultiLine"
+                android:textColor="@android:color/white">
+
+                <requestFocus/>
+            </EditText>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="right">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"/>
+
+            <Button
+                android:id="@+id/action_tweet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"/>
+
+        </LinearLayout>
 
     </FrameLayout>
 

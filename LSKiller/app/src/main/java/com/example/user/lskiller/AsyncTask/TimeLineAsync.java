@@ -1,4 +1,4 @@
-package com.example.user.lskiller;
+package com.example.user.lskiller.AsyncTask;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.example.user.lskiller.Listener.OnRecyclerListener;
+import com.example.user.lskiller.R;
 import com.example.user.lskiller.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;

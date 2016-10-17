@@ -1,10 +1,8 @@
 package com.example.user.lskiller.activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,14 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.example.user.lskiller.FavoriteAsync;
-import com.example.user.lskiller.ReTweetAsync;
-import com.example.user.lskiller.TimeLineAsync;
+import com.example.user.lskiller.AsyncTask.FavoriteAsync;
+import com.example.user.lskiller.AsyncTask.ReTweetAsync;
+import com.example.user.lskiller.AsyncTask.TimeLineAsync;
 import com.example.user.lskiller.CustomRecycler.DividerItemDecoration;
 import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
-import com.example.user.lskiller.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +30,8 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     Twitter mTwitter;
     //    private ListView listView;
     private Toolbar toolbar;
-    private List<Status> statuses = new ArrayList<Status>();
+    private List<Status> statuses = new ArrayList<>();
     private RecyclerView recyclerView;
-    private RecyclerAdapter adapter;
 //    private SwipeLayout swipeLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -137,10 +133,9 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 reTweetTask.execute();
                 break;
             case "rep":
-                ContentValues content = new ContentValues();
                 Intent intent = new Intent(TimelineActivity.this, ReplyActivity.class);
                 intent.putExtra("screenName", statuses.get(position).getUser().getScreenName());
-                intent.putExtra("status", statuses.get(position).getUser().getId());
+                intent.putExtra("status", statuses.get(position).getId());
                 startActivity(intent);
                 break;
         }

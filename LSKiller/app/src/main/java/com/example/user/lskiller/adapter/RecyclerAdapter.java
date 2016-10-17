@@ -15,10 +15,12 @@ import com.example.user.lskiller.Utils.TwitterUtils;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
+import java.util.Locale;
 
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.Twitter;
+import twitter4j.util.TimeSpanConverter;
 
 /**
  * Created by USER on 2016/10/05.
@@ -31,6 +33,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private Context mContext;
     private OnRecyclerListener mListener;
     private Twitter mTwitter;
+    private TimeSpanConverter timeSpanConverter = new TimeSpanConverter(Locale.JAPAN);
 
     public RecyclerAdapter(
             Context context,
@@ -59,8 +62,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         holder.name.setText(statuses.get(position).getUser().getName());
         holder.textView.setText(statuses.get(position).getText());
         holder.icon.setImageUrl(statuses.get(position).getUser().getProfileImageURL());
+        holder.createTime.setText(timeSpanConverter.toTimeSpanString(statuses.get(position).getCreatedAt()));
 
         setMedias(holder, position);
+
         holder.itemView.setClickable(true);
 
         setSwipeMenu(holder, position);
@@ -81,11 +86,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                try {
-//                    mTwitter.createFavorite(statuses.get(position).getId());
-//                } catch (TwitterException e) {
-//                    e.printStackTrace();
-//                }
                 mListener.onRecyclerClicked("fav", statuses, position);
                 holder.swipeLayout.close();
             }

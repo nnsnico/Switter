@@ -69,17 +69,18 @@ public class ReplyActivity extends FragmentActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int textColor = Color.WHITE;
+                countText.setTextColor(textColor);
 
                 // 入力文字数の表示
                 String s = charSequence.toString();
                 textLength = s.length();
-                countText.setText(String.format("%s/140",Integer.toString(140 - textLength)));
 
                 // 指定文字数オーバーで文字色を赤くする
-                if (textLength < 0) {
+                if (textLength > 140) {
                     textColor = Color.RED;
+                    countText.setTextColor(textColor);
                 }
-                countText.setTextColor(textColor);
+                countText.setText(String.format("%s/140", Integer.toString(140 - textLength)));
             }
 
             @Override
@@ -94,7 +95,9 @@ public class ReplyActivity extends FragmentActivity {
             @Override
             protected Boolean doInBackground(String... params){
                 try{
-                    mTwitter.updateStatus(new StatusUpdate(message).inReplyToStatusId(UserId));
+                    StatusUpdate su = new StatusUpdate(message);
+                    su.setInReplyToStatusId(UserId);
+                    mTwitter.updateStatus(su);
                     return true;
                 } catch (TwitterException e) {
                     e.printStackTrace();

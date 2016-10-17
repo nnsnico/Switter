@@ -16,11 +16,12 @@ import twitter4j.MediaEntity;
 /**
  * Created by USER on 2016/10/06.
  */
-public class RecyclerViewHolder extends RecyclerView.ViewHolder{
+public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
     TextView textView;
     TextView name;
     TextView screenName;
+    TextView createTime;
     SmartImageView icon;
     GridLayout gridLayout;
     SwipeLayout swipeLayout;
@@ -30,6 +31,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder{
         textView = (TextView) itemView.findViewById(R.id.text);
         name = (TextView) itemView.findViewById(R.id.name);
         screenName = (TextView) itemView.findViewById(R.id.screen_name);
+        createTime = (TextView) itemView.findViewById(R.id.createTime);
         icon = (SmartImageView) itemView.findViewById(R.id.icon);
         gridLayout = (GridLayout) itemView.findViewById(R.id.grid);
         swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipeMenu);

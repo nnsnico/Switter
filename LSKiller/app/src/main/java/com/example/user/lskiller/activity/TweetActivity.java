@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -80,17 +81,18 @@ public class TweetActivity extends FragmentActivity{
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int textColor = Color.WHITE;
+                countText.setTextColor(textColor);
 
                 // 入力文字数の表示
                 String s = charSequence.toString();
                 textLength = s.length();
-                countText.setText(String.format("%s/140",Integer.toString(140 - textLength)));
 
                 // 指定文字数オーバーで文字色を赤くする
-                if (textLength < 0) {
+                if (textLength > 140) {
                     textColor = Color.RED;
+                    countText.setTextColor(textColor);
                 }
-                countText.setTextColor(textColor);
+                countText.setText(String.format("%s/140", Integer.toString(140 - textLength)));
             }
 
             @Override
