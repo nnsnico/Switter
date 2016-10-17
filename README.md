@@ -30,6 +30,6 @@ iOSのメールアプリっぽいものをイメージ
 * [SmartImageView](http://loopj.com/android-smart-image-view/)
 * ~~[SuperRecyclerView](https://github.com/Malinskiy/SuperRecyclerView)~~(使わない)
 * [SwipeLayout](https://github.com/daimajia/AndroidSwipeLayout)
-* [FloatingActionMenu](https://github.com/futuresimple/android-floating-action-button)
+* ~~[FloatingActionMenu](https://github.com/futuresimple/android-floating-action-button)~~(使わない)
 * Android Support Design ver.24
 * Android Support AppCompat v7
