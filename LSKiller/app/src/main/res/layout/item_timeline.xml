@@ -43,18 +43,17 @@
 
         <com.loopj.android.image.SmartImageView
             android:id="@+id/icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/name"
+            android:layout_below="@+id/name"/>
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/icon"
-            android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/icon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:text="名前入ります"
             android:textColor="@color/colorPrimary"/>
 
@@ -62,28 +61,29 @@
             android:id="@+id/screen_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/name"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="8dp"
-            android:layout_toRightOf="@+id/name"
+            android:layout_toEndOf="@+id/name"
             android:text="\uFF20gabu"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorSecondPrimary"/>
 
         <TextView
             android:id="@+id/createTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/text"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="8dp"
             android:text="投稿時間"
-            android:textColor="@color/colorPrimary"
-            android:layout_above="@+id/text"
-            android:layout_alignParentEnd="true"/>
+            android:textColor="@color/colorSecondPrimary"/>
 
         <TextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/name"
             android:layout_below="@+id/name"
+            android:layout_toEndOf="@+id/icon"
+            android:paddingLeft="8dp"
             android:text="本文本文本文本文本文本文本文本文本文本文"
             android:textColor="@color/colorPrimary"/>
 
@@ -95,9 +95,21 @@
             android:layout_below="@+id/text"
             android:layout_toEndOf="@+id/icon"
             android:columnCount="2"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:rowCount="2">
 
         </GridLayout>
+
+        <TextView
+            android:id="@+id/reTweetedUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorSecondPrimary"
+            android:textSize="12sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
 </com.daimajia.swipe.SwipeLayout>

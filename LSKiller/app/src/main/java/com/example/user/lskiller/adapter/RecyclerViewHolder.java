@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
@@ -22,6 +23,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     TextView name;
     TextView screenName;
     TextView createTime;
+    TextView reTweetedUser;
     SmartImageView icon;
     GridLayout gridLayout;
     SwipeLayout swipeLayout;
@@ -32,7 +34,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         name = (TextView) itemView.findViewById(R.id.name);
         screenName = (TextView) itemView.findViewById(R.id.screen_name);
         createTime = (TextView) itemView.findViewById(R.id.createTime);
+        reTweetedUser = (TextView) itemView.findViewById(R.id.reTweetedUser);
         icon = (SmartImageView) itemView.findViewById(R.id.icon);
+        icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
         gridLayout = (GridLayout) itemView.findViewById(R.id.grid);
         swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipeMenu);
     }

@@ -57,14 +57,42 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
-
-        holder.screenName.setText("@" + statuses.get(position).getUser().getScreenName());
-        holder.name.setText(statuses.get(position).getUser().getName());
-        holder.textView.setText(statuses.get(position).getText());
-        holder.icon.setImageUrl(statuses.get(position).getUser().getProfileImageURL());
-        holder.createTime.setText(timeSpanConverter.toTimeSpanString(statuses.get(position).getCreatedAt()));
-
-        setMedias(holder, position);
+        /** リツイートされたステータスか確認 */
+        if (!statuses.get(position).isRetweet()) {
+            /** リツイートされていない（普通のタイムライン） */
+            holder.screenName.setText(String.format("@%s",
+                    statuses.get(position).getUser().getScreenName()));
+            holder.name.setText(statuses.get(position).getUser().getName());
+            holder.textView.setText(statuses.get(position).getText());
+            holder.icon.setImageUrl(statuses.get(position).getUser().getOriginalProfileImageURL());
+            holder.createTime.setText(timeSpanConverter.toTimeSpanString(statuses.get(position).getCreatedAt()));
+            holder.reTweetedUser.setText("");
+            setMedias(holder, position);
+        } else {
+            /** リツイートされたユーザをタイムラインに差し替える */
+            holder.screenName.setText(
+                    String.format("@%s",
+                            statuses.get(position)
+                                    .getRetweetedStatus()
+                                    .getUser()
+                                    .getScreenName()));
+            holder.name.setText(statuses.get(position).getRetweetedStatus().getUser().getName());
+            holder.textView.setText(statuses.get(position).getRetweetedStatus().getText());
+            holder.icon.setImageUrl(
+                    statuses.get(position)
+                            .getRetweetedStatus()
+                            .getUser()
+                            .getOriginalProfileImageURL());
+            holder.createTime.setText(timeSpanConverter.toTimeSpanString(
+                    statuses.get(position)
+                            .getRetweetedStatus()
+                            .getUser()
+                            .getCreatedAt()));
+            holder.reTweetedUser.setText(
+                    String.format("%sさんがRTしました",
+                            statuses.get(position).getUser().getName()));
+            setMedias(holder, position);
+        }
 
         holder.itemView.setClickable(true);
 
@@ -79,10 +107,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 //        });
     }
 
+    // TimeLineActivity側で処理
     private void setSwipeMenu(final RecyclerViewHolder holder, final int position) {
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right,
-        holder.swipeLayout.findViewWithTag("swipe_menu"));
+                holder.swipeLayout.findViewWithTag("swipe_menu"));
         holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +123,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         holder.swipeLayout.findViewById(R.id.reTweet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onRecyclerClicked("ret", statuses,position);
+                mListener.onRecyclerClicked("ret", statuses, position);
                 holder.swipeLayout.close();
             }
         });
