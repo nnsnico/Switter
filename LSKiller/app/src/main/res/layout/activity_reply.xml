@@ -47,16 +47,28 @@
             android:layout_weight="9"
             android:gravity="right">
 
-            <Button
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"/>
+                android:textColor="@color/colorPrimary"
+                android:layout_gravity="bottom"
+                android:id="@+id/uploadedMediaCount"/>
+
+            <Button
+                android:id="@+id/action_media"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom"
+                android:layout_margin="10dp"
+                android:background="@drawable/camera"/>
 
             <Button
                 android:id="@+id/action_tweet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"/>
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom"
+                android:layout_margin="10dp"
+                android:background="@drawable/tweet"/>
 
         </LinearLayout>
 

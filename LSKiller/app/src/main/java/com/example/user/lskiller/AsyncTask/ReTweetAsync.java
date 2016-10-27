@@ -36,25 +36,26 @@ public class ReTweetAsync extends AsyncTask<Long, Void, Boolean> {
     }
 
     @Override
-    protected void onPreExecute(){
+    protected void onPreExecute() {
         mTwitter = TwitterUtils.getTwitterInstance(context);
     }
 
     @Override
     protected Boolean doInBackground(Long... longs) {
-        if(statuses.get(position).isRetweeted()){
-            try{
+        if (statuses.get(position).isRetweeted()) {
+            try {
                 mTwitter.destroyStatus(statuses.get(position).getId());
+
                 return true;
-            }catch (TwitterException e){
+            } catch (TwitterException e) {
                 e.printStackTrace();
                 return false;
             }
-        }else{
-            try{
+        } else {
+            try {
                 mTwitter.retweetStatus(statuses.get(position).getId());
                 return true;
-            }catch (TwitterException e){
+            } catch (TwitterException e) {
                 e.printStackTrace();
                 return false;
             }
@@ -66,14 +67,14 @@ public class ReTweetAsync extends AsyncTask<Long, Void, Boolean> {
         Snackbar snackbar;
 
         if (result) {
-            if (!statuses.get(position).isFavorited()) {
+            if (!statuses.get(position).isRetweeted()) {
                 snackbar = Snackbar.make(
                         activity.findViewById(android.R.id.content),
                         "ReTweet",
                         Snackbar.LENGTH_LONG
                 );
                 snackbar.show();
-            }else {
+            } else {
                 snackbar = Snackbar.make(
                         activity.findViewById(android.R.id.content),
                         "destroy ReTweet",

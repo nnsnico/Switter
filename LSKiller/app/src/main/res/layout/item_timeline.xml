@@ -15,22 +15,35 @@
             android:id="@+id/reply"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@color/colorReply"
-            android:src="@mipmap/ic_launcher"/>
+            android:background="@color/colorBackground"
+            android:padding="15dp"
+            android:src="@drawable/reply"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/divider_style"/>
 
         <ImageView
             android:id="@+id/reTweet"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@color/colorReTweet"
-            android:src="@android:drawable/btn_star"/>
+            android:background="@color/colorBackground"
+            android:padding="15dp"
+            android:src="@drawable/retweet"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/divider_style"/>
 
         <ImageView
             android:id="@+id/favorite"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@color/colorFavorite"
-            android:src="@android:drawable/ic_delete"/>
+            android:background="@color/colorBackground"
+            android:padding="15dp"
+            android:src="@drawable/fav"/>
 
     </LinearLayout>
 
@@ -83,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_toEndOf="@+id/icon"
+            android:paddingBottom="8dp"
             android:paddingLeft="8dp"
             android:text="本文本文本文本文本文本文本文本文本文本文"
             android:textColor="@color/colorPrimary"/>
@@ -95,9 +109,8 @@
             android:layout_below="@+id/text"
             android:layout_toEndOf="@+id/icon"
             android:columnCount="2"
-            android:paddingLeft="8dp"
-            android:paddingTop="8dp"
             android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
             android:rowCount="2">
 
         </GridLayout>
@@ -106,10 +119,10 @@
             android:id="@+id/reTweetedUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorSecondPrimary"
-            android:textSize="12sp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorSecondPrimary"
+            android:textSize="12sp"/>
 
     </RelativeLayout>
 </com.daimajia.swipe.SwipeLayout>

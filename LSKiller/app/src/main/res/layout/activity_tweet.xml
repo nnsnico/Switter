@@ -17,9 +17,9 @@
         />
 
     <FrameLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,16 +47,28 @@
             android:layout_weight="9"
             android:gravity="right">
 
-            <Button
+            <TextView
+                android:id="@+id/uploadedMediaCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"/>
+                android:layout_gravity="bottom"
+                android:textColor="@color/colorPrimary"/>
+
+            <Button
+                android:id="@+id/action_media"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom"
+                android:layout_margin="10dp"
+                android:background="@drawable/camera"/>
 
             <Button
                 android:id="@+id/action_tweet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"/>
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="bottom"
+                android:layout_margin="10dp"
+                android:background="@drawable/tweet"/>
 
         </LinearLayout>
 

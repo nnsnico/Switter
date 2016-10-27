@@ -30,6 +30,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
+
         textView = (TextView) itemView.findViewById(R.id.text);
         name = (TextView) itemView.findViewById(R.id.name);
         screenName = (TextView) itemView.findViewById(R.id.screen_name);

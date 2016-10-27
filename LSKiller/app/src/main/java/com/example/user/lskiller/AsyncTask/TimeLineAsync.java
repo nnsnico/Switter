@@ -42,7 +42,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
             List<twitter4j.Status> statuses,
             Activity activeView,
             RecyclerView recyclerView
-    ){
+    ) {
         this.mTwitter = mTwitter;
         this.statuses = statuses;
         this.activity = activeView;
@@ -50,7 +50,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
     }
 
     @Override
-    public void onPreExecute(){
+    public void onPreExecute() {
         recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
         progressBar = (ProgressBar) activity.findViewById(R.id.progress);
         progressBar.setVisibility(ProgressBar.VISIBLE);
@@ -71,7 +71,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
     }
 
     @Override
-    protected void onPostExecute(List<twitter4j.Status> result){
+    protected void onPostExecute(List<twitter4j.Status> result) {
         progressBar.setVisibility(ProgressBar.GONE);
         if (result != null) {
             mediaList.clear();
@@ -81,12 +81,12 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
                 statuses.add(status);
                 // add mediaEntities
                 mediaEntities = status.getExtendedMediaEntities();
-                if(mediaEntities.length > 0) {
-                    for(MediaEntity mediaResult : mediaEntities){
+                if (mediaEntities.length > 0) {
+                    for (MediaEntity mediaResult : mediaEntities) {
                         mediaList.add(mediaResult.getMediaURL());
                     }
                     Log.d("activity_tag", "mediaList.added from page " + count);
-                }else{
+                } else {
                     mediaList.add(null);
                 }
                 Log.d("activity_tag", "mData.added from page " + count);
@@ -104,7 +104,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
                     "タイムラインの取得に失敗しました\n時間を置いてから再度起動してください",
                     Snackbar.LENGTH_INDEFINITE);
             View view = snackbar.getView();
-            FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
             params.gravity = Gravity.TOP;
             view.setLayoutParams(params);
             snackbar.setAction("OK", new View.OnClickListener() {

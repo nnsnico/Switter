@@ -35,25 +35,25 @@ public class FavoriteAsync extends AsyncTask<Long, Void, Boolean> {
     }
 
     @Override
-    protected void onPreExecute(){
+    protected void onPreExecute() {
         mTwitter = TwitterUtils.getTwitterInstance(context);
     }
 
     @Override
     protected Boolean doInBackground(Long... longs) {
-        if(statuses.get(position).isFavorited()){
-            try{
+        if (statuses.get(position).isFavorited()) {
+            try {
                 mTwitter.destroyFavorite(statuses.get(position).getId());
                 return true;
-            }catch (TwitterException e){
+            } catch (TwitterException e) {
                 e.printStackTrace();
                 return false;
             }
-        }else{
-            try{
+        } else {
+            try {
                 mTwitter.createFavorite(statuses.get(position).getId());
                 return true;
-            }catch (TwitterException e){
+            } catch (TwitterException e) {
                 e.printStackTrace();
                 return false;
             }
@@ -72,7 +72,7 @@ public class FavoriteAsync extends AsyncTask<Long, Void, Boolean> {
                         Snackbar.LENGTH_LONG
                 );
                 snackbar.show();
-            }else {
+            } else {
                 snackbar = Snackbar.make(
                         activity.findViewById(android.R.id.content),
                         "destroy Favorite",

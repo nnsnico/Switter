@@ -1,8 +1,12 @@
 package com.example.user.lskiller.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,23 +23,31 @@ import twitter4j.auth.RequestToken;
 /**
  * Created by USER on 2016/08/14.
  */
-public class TwitterOAuthActivity extends AppCompatActivity{
+public class TwitterOAuthActivity extends AppCompatActivity {
 
     private String mCallbackURL;
     private Twitter mTwitter;
     private RequestToken mRequestToken;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_twitter_oauth);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(
+                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            }
+        }
 
         mCallbackURL = getString(R.string.twitter_callback_url);
         mTwitter = TwitterUtils.getTwitterInstance(this);
 
         findViewById(R.id.action_start_oauth).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startAuthorize();
             }
         });

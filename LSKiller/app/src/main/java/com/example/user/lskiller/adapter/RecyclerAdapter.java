@@ -88,6 +88,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                             .getRetweetedStatus()
                             .getUser()
                             .getCreatedAt()));
+
             holder.reTweetedUser.setText(
                     String.format("%sさんがRTしました",
                             statuses.get(position).getUser().getName()));
@@ -161,6 +162,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             imageView.setImageUrl(mediaEntities[i].getMediaURL());
 
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setPadding(0, 0, 0, 32);
 
             /** 画像はリサイズしないので両方ともwrap_contentで. */
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();

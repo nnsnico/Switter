@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LSKiller</string>
+    <string name="app_name">Switter</string>
     <string name="twitter_consumer_key">kpnMHtrYd0qBa4VkBPlfbGcmp</string>
     <string name="twitter_consumer_secret">Sxa8GikC8Mqvomzfj0pFkdbv02cBuEoeRcTnnM9K0pbbb2SpTA</string>
     <string name="twitter_oauth">Twitter認証</string>
@@ -7,5 +7,46 @@
     <string name="menu_refresh">Refresh</string>
     <string name="menu_tweet">Tweet</string>
     <string name="action_tweet">Tweet</string>
+
+    <string name="version">version 1.0</string>
+    <string name="copyright">
+        "--------------------------------------------\n"
+        "オープンソースライセンス\n"
+        "--------------------------------------------\n\n"
+
+        "* twitter4j\n"
+        "Copyright 2007 Yusuke Yamamoto\n\n"
+
+        "Licensed under the Apache License, Version 2.0 (the "License");\n"
+        "you may not use this file except in compliance with the License.\n"
+        "You may obtain a copy of the License at\n\n"
+
+        "http://www.apache.org/licenses/LICENSE-2.0\n\n"
+
+        "Unless required by applicable law or agreed to in writing, software\n"
+        "Distributed under the License is distributed on an "AS IS" BASIS,\n"
+        "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n"
+        "See the License for the specific language governing permissions and\n"
+        "limitations under the License.\n\n"
+
+
+    </string>
+    <string name="about">
+        "このアプリは工大祭に向けて個人で作成されたTwitterClientです。\n"
+        "機能面で至らない点がまだ多いですが使っていただけると幸いです。\n\n"
+
+        "\-\-追加予定機能\-\-\n"
+        "* プロフィール画面の実装\n"
+        "* 画像の拡大表示\n"
+        "* 全UIの改善\n"
+        "  etc…\n\n"
+
+        "\-\-現在確認されているバグ\-\-\n"
+        "* RTが解除できない\n"
+        "* 自分のRTを解除すると、同時にツイートが削除されてしまう\n\n"
+
+        "Twitterで進捗報告をしております。よかったらフォロー+アドバイスをお願いします\n"
+        "@tym_free"
+    </string>
 
 </resources>
