@@ -59,7 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         /** リツイートされたステータスか確認 */
         if (!statuses.get(position).isRetweet()) {
-            /** リツイートされていない（普通のタイムライン） */
+            /** リツイートされていない（通常のタイムライン） */
             holder.screenName.setText(String.format("@%s",
                     statuses.get(position).getUser().getScreenName()));
             holder.name.setText(statuses.get(position).getUser().getName());
@@ -88,7 +88,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                             .getRetweetedStatus()
                             .getUser()
                             .getCreatedAt()));
-
+            /** リツイート元の名前を挿入 */
             holder.reTweetedUser.setText(
                     String.format("%sさんがRTしました",
                             statuses.get(position).getUser().getName()));

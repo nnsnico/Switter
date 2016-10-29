@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 
 import com.example.user.lskiller.Utils.TwitterUtils;
 
 import java.util.List;
 
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -42,11 +44,19 @@ public class ReTweetAsync extends AsyncTask<Long, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Long... longs) {
+
         if (statuses.get(position).isRetweeted()) {
             try {
-                mTwitter.destroyStatus(statuses.get(position).getId());
-
-                return true;
+                if (!statuses.get(position).isRetweetedByMe()) {
+                    Log.d("destroy retweet" , "destroy retweet of me");
+                    mTwitter.destroyStatus(statuses.get(position).getId());
+                    mTwitter.updateStatus(statuses.get(position).getText());
+                    return true;
+                } else {
+                    Log.d("destroy retweet" , "destroy retweet of User");
+                    mTwitter.destroyStatus(statuses.get(position).getCurrentUserRetweetId());
+                    return true;
+                }
             } catch (TwitterException e) {
                 e.printStackTrace();
                 return false;

@@ -36,6 +36,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
     ProgressBar progressBar;
     MediaEntity[] mediaEntities;
     Parcelable recyclerViewState;
+    int endPage = 40;
 
     public TimeLineAsync(
             Twitter mTwitter,
@@ -49,6 +50,22 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
         this.recyclerView = recyclerView;
     }
 
+    public TimeLineAsync(
+            Twitter mTwitter,
+            List<twitter4j.Status> statuses,
+            Activity activeView,
+            RecyclerView recyclerView,
+            int endPage
+    ){
+        this.mTwitter = mTwitter;
+        this.statuses = statuses;
+        this.activity = activeView;
+        this.recyclerView = recyclerView;
+        this.endPage = endPage;
+    }
+
+
+
     @Override
     public void onPreExecute() {
         recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
@@ -59,9 +76,8 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
     @Override
     protected List<twitter4j.Status> doInBackground(Void... voids) {
         try {
-//            ProgressBar progressBar = (ProgressBar)findViewById(R.id.progress);
             // 1ページ当たりの取得ツイート数
-            Paging page = new Paging(1, 40);
+            Paging page = new Paging(1, endPage);
 
             return mTwitter.getHomeTimeline(page);
         } catch (TwitterException e) {
@@ -79,7 +95,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
             int count = 1;
             for (twitter4j.Status status : result) {
                 statuses.add(status);
-                // add mediaEntities
+                // mediaEntities
                 mediaEntities = status.getExtendedMediaEntities();
                 if (mediaEntities.length > 0) {
                     for (MediaEntity mediaResult : mediaEntities) {

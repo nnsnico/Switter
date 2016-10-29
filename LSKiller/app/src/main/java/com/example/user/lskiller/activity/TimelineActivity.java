@@ -11,11 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.user.lskiller.AsyncTask.FavoriteAsync;
 import com.example.user.lskiller.AsyncTask.ReTweetAsync;
 import com.example.user.lskiller.AsyncTask.TimeLineAsync;
 import com.example.user.lskiller.CustomRecycler.DividerItemDecoration;
+import com.example.user.lskiller.Listener.EndlessScrollListener;
 import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
@@ -67,6 +69,16 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
 
 //            SwipeMenuConfig();
             reloadTimeLine();
+
+            // endScrollListener
+            recyclerView.addOnScrollListener(new EndlessScrollListener(
+                    (LinearLayoutManager)recyclerView.getLayoutManager()) {
+                @Override
+                public void onLoadMore(int current_page) {
+                    reloadTimeLine(current_page);
+                    Toast.makeText(TimelineActivity.this, "読み込み中・・・", Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 
@@ -109,38 +121,23 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         });
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu){
-//        getMenuInflater().inflate(R.menu.toolbar_item, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item){
-//        int id = item.getItemId();
-//        switch (id) {
-//            case R.id.menu_refresh:
-//                reloadTimeLine();
-//                return true;
-//            case R.id.menu_tweet:
-//                Intent intent = new Intent(TimelineActivity.this, TweetActivity.class);
-//                startActivity(intent);
-//                reloadTimeLine();
-//                return true;
-//            case R.id.AboutApp:
-//                Intent intent2 = new Intent(TimelineActivity.this, AboutAppActivity.class);
-//                startActivity(intent2);
-//        }
-//        return true;
-//    }
-
     public void reloadTimeLine() {
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
                 mTwitter,
                 statuses,
                 TimelineActivity.this,
                 recyclerView);
+        task.execute();
+    }
 
+    public void reloadTimeLine(int currentPage){
+        AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
+                mTwitter,
+                statuses,
+                TimelineActivity.this,
+                recyclerView,
+                currentPage
+        );
         task.execute();
     }
 
@@ -152,7 +149,8 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                         TimelineActivity.this,
                         TimelineActivity.this,
                         statuses,
-                        position);
+                        position
+                );
                 favoriteTask.execute();
                 break;
             case "ret":

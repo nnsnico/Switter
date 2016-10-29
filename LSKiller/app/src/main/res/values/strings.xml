@@ -8,7 +8,7 @@
     <string name="menu_tweet">Tweet</string>
     <string name="action_tweet">Tweet</string>
 
-    <string name="version">version 1.0</string>
+    <string name="version">version 0.0</string>
     <string name="copyright">
         "--------------------------------------------\n"
         "オープンソースライセンス\n"
@@ -40,10 +40,6 @@
         "* 画像の拡大表示\n"
         "* 全UIの改善\n"
         "  etc…\n\n"
-
-        "\-\-現在確認されているバグ\-\-\n"
-        "* RTが解除できない\n"
-        "* 自分のRTを解除すると、同時にツイートが削除されてしまう\n\n"
 
         "Twitterで進捗報告をしております。よかったらフォロー+アドバイスをお願いします\n"
         "@tym_free"
