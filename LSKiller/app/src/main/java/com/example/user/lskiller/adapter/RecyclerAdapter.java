@@ -37,6 +37,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     public RecyclerAdapter(
             Context context,
+            List<twitter4j.Status> data,
+            OnRecyclerListener listener
+    ) {
+        mInflater = LayoutInflater.from(context);
+        mContext = context;
+        statuses = data;
+        mListener = listener;
+        mTwitter = TwitterUtils.getTwitterInstance(context);
+    }
+
+    public RecyclerAdapter(
+            Context context,
             List<String> mediaList,
             List<twitter4j.Status> data,
             OnRecyclerListener listener
@@ -65,7 +77,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             holder.name.setText(statuses.get(position).getUser().getName());
             holder.textView.setText(statuses.get(position).getText());
             holder.icon.setImageUrl(statuses.get(position).getUser().getOriginalProfileImageURL());
-            holder.createTime.setText(timeSpanConverter.toTimeSpanString(statuses.get(position).getCreatedAt()));
+            holder.createTime.setText(
+                    timeSpanConverter.toTimeSpanString(statuses.get(position).getCreatedAt()));
             holder.reTweetedUser.setText("");
             setMedias(holder, position);
         } else {
@@ -83,11 +96,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                             .getRetweetedStatus()
                             .getUser()
                             .getOriginalProfileImageURL());
-            holder.createTime.setText(timeSpanConverter.toTimeSpanString(
-                    statuses.get(position)
-                            .getRetweetedStatus()
-                            .getUser()
-                            .getCreatedAt()));
+            holder.createTime.setText(
+                    timeSpanConverter.toTimeSpanString(
+                            statuses.get(position)
+                                    .getRetweetedStatus()
+                                    .getCreatedAt()
+                    )
+            );
             /** リツイート元の名前を挿入 */
             holder.reTweetedUser.setText(
                     String.format("%sさんがRTしました",
@@ -156,10 +171,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         }
 
         /** 画像を表示する処理 */
-        for (int i = 0; i < mediaEntities.length; i++) {
+        for (MediaEntity mediaEntity : mediaEntities) {
             /** URLから画像セット(contextはもちろんandroid.content.Contextクラスのインスタンスです) */
             SmartImageView imageView = new SmartImageView(mContext);
-            imageView.setImageUrl(mediaEntities[i].getMediaURL());
+            imageView.setImageUrl(mediaEntity.getMediaURL());
 
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageView.setPadding(0, 0, 0, 32);

@@ -117,7 +117,8 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
             recyclerView.setAdapter(adapter);
         } else {
             final Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
-                    "タイムラインの取得に失敗しました\n時間を置いてから再度起動してください",
+                    "タイムラインの取得に失敗しました\n" +
+                    "時間を置いてから再度起動してください",
                     Snackbar.LENGTH_INDEFINITE);
             View view = snackbar.getView();
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();

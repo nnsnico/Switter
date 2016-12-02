@@ -25,8 +25,10 @@ public class TwitterUtils {
      * @return twitter
      */
     public static Twitter getTwitterInstance(Context context) {
-        String consumerKey = context.getString(R.string.twitter_consumer_key);
-        String consumerSecret = context.getString(R.string.twitter_consumer_secret);
+//        String consumerKey = context.getString(R.string.twitter_consumer_key);
+        String consumerKey = "zD9EcQgAYgY3UjHS5Ghn6eQTx";
+//        String consumerSecret = context.getString(R.string.twitter_consumer_secret);
+        String consumerSecret = "NH8yGDdZqd8WQkiFzwZgyjNBEaQ6FYmRbV5BoAkjl7Ap1oZSkf";
 
         TwitterFactory factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();

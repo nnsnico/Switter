@@ -44,5 +44,18 @@
         "Twitterで進捗報告をしております。よかったらフォロー+アドバイスをお願いします\n"
         "@tym_free"
     </string>
+    <string name="pin">PINコード認証</string>
+    <string name="detailAppTitle">
+        Switterの認証方法
+    </string>
+
+    <string name="detailApp">
+        ①「Twitter認証」のボタンを押し、使いたいアカウントでログインを行ってください。\n\n
+
+        ③PINコードが発行されるのでコピーして下の入力欄に張り付けてください。\n\n
+
+        ②認証が完了します！\n\n
+    </string>
+    <string name="HintPin">PINコードを貼り付けてください</string>
 
 </resources>

@@ -9,20 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.user.lskiller.AsyncTask.FavoriteAsync;
 import com.example.user.lskiller.AsyncTask.ReTweetAsync;
 import com.example.user.lskiller.AsyncTask.TimeLineAsync;
-import com.example.user.lskiller.CustomRecycler.DividerItemDecoration;
+import com.example.user.lskiller.RecyclerItem.DividerItemDecoration;
 import com.example.user.lskiller.Listener.EndlessScrollListener;
 import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,11 +66,33 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
             recyclerView.addItemDecoration(new DividerItemDecoration(this));
 
 //            SwipeMenuConfig();
-            reloadTimeLine();
+//            FileInputStream inputStream = null;
+//            byte[] buffer = new byte[1024];
+//            try {
+//                File file = new File(getCacheDir(), "cache.txt");
+//                if (file.exists()) {
+//                    inputStream = new FileInputStream(file);
+//                    inputStream.read(buffer);
+//                    String data = new String(buffer, "UTF-8");
+//                    // TODO  キャッシュ読み込み（いるのか？）
+//                    recyclerView.setAdapter(new RecyclerAdapter(this, data., (OnRecyclerListener) this));
+//                }
+//            } catch (IOException e) {
+//                Log.e("MyApp", "exception", e);
+//            } finally {
+//                try {
+//                    if (inputStream != null) {
+//                        inputStream.close();
+                        reloadTimeLine();
+//                    }
+//                } catch (IOException e) {
+//                    Log.e("MyApp", "exception", e);
+//                }
+//            }
 
             // endScrollListener
             recyclerView.addOnScrollListener(new EndlessScrollListener(
-                    (LinearLayoutManager)recyclerView.getLayoutManager()) {
+                    (LinearLayoutManager) recyclerView.getLayoutManager()) {
                 @Override
                 public void onLoadMore(int current_page) {
                     reloadTimeLine(current_page);
@@ -130,7 +150,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         task.execute();
     }
 
-    public void reloadTimeLine(int currentPage){
+    public void reloadTimeLine(int currentPage) {
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
                 mTwitter,
                 statuses,
@@ -171,4 +191,34 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         }
         reloadTimeLine();
     }
+
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        FileOutputStream outputStream = null;
+//        try {
+//            // キャッシュ領域にファイルを作成し、書き込む。
+//            File file = new File(getCacheDir(), "cache.txt");
+//            file.createNewFile();
+//            if (file.exists()) {
+//                outputStream = new FileOutputStream(file);
+//
+//                outputStream.write(statuses.toString().getBytes());
+//                // ちなみにDDMSで確認したところ、確認時の環境下では
+//                // "/data/data/[パッケージ名]/cache/cache.txt"
+//                // に書き込まれた。
+//
+//            }
+//        } catch (IOException e) {
+//            Log.e("MyApp", "exception", e);
+//        } finally {
+//            try {
+//                if (outputStream != null) {
+//                    outputStream.close();
+//                }
+//            } catch (IOException e) {
+//                Log.e("MyApp", "exception", e);
+//            }
+//        }
+//    }
 }

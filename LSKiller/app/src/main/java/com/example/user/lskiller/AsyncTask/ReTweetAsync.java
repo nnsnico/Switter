@@ -44,9 +44,10 @@ public class ReTweetAsync extends AsyncTask<Long, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(Long... longs) {
-
+        // そのツイートがリツイートされているか調べる
         if (statuses.get(position).isRetweeted()) {
             try {
+                // リツイート元が自分であるかどうかを調べる
                 if (!statuses.get(position).isRetweetedByMe()) {
                     Log.d("destroy retweet" , "destroy retweet of me");
                     mTwitter.destroyStatus(statuses.get(position).getId());
@@ -62,6 +63,7 @@ public class ReTweetAsync extends AsyncTask<Long, Void, Boolean> {
                 return false;
             }
         } else {
+            // RTを行う
             try {
                 mTwitter.retweetStatus(statuses.get(position).getId());
                 return true;
