@@ -1,8 +1,10 @@
-# TwitterClient（仮）
+# TwitterClient 「Switter」（仮）
 
 Twitterクライアントを趣味で作成します。
 
 iOSのメールアプリっぽいものをイメージ
+
+スワイプするとメニューが表示される感じ
 
 自分用に作るのであんまり深くは考えない
 
@@ -31,5 +33,6 @@ iOSのメールアプリっぽいものをイメージ
 * ~~[SuperRecyclerView](https://github.com/Malinskiy/SuperRecyclerView)~~(使わない)
 * [SwipeLayout](https://github.com/daimajia/AndroidSwipeLayout)
 * ~~[FloatingActionMenu](https://github.com/futuresimple/android-floating-action-button)~~(使わない)
+* [PhotoView](https://github.com/chrisbanes/PhotoView)
 * Android Support Design ver.24
 * Android Support AppCompat v7
