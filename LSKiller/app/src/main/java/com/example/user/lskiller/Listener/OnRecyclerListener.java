@@ -11,7 +11,6 @@ import twitter4j.Status;
  * RecyclerView用の独自クリックリスナー
  */
 public interface OnRecyclerListener {
-
     void onRecyclerClicked(String tag, List<Status> statuses, int position);
-
+    void onRecyclerClicked(String tag, String url);
 }

@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.user.lskiller.AsyncTask.FavoriteAsync;
@@ -23,6 +24,7 @@ import com.example.user.lskiller.Utils.TwitterUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -190,6 +192,15 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 break;
         }
         reloadTimeLine();
+    }
+
+    @Override
+    public void onRecyclerClicked(String tag, String url) {
+        if(Objects.equals(tag, "img")){
+            Intent intent = new Intent(TimelineActivity.this, ImageViewerActivity.class);
+            intent.putExtra("imageView", url);
+            startActivity(intent);
+        }
     }
 
 //    @Override

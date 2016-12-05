@@ -93,7 +93,6 @@ public class TwitterOAuthActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String url) {
                 if (url != null) {
-                    // TODO webViewは脆弱性アリ PINコードで発行するようにする
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
                 } else {

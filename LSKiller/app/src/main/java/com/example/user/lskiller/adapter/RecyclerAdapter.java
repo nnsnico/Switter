@@ -2,6 +2,7 @@ package com.example.user.lskiller.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
         /** リツイートされたステータスか確認 */
         if (!statuses.get(position).isRetweet()) {
             /** リツイートされていない（通常のタイムライン） */
@@ -118,7 +119,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                mListener.onRecyclerClicked(v, position);
+//                mListener.onRecyclerClicked("img",statuses.get(position).getMediaEntities());
 //            }
 //        });
     }
@@ -151,7 +152,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                 holder.swipeLayout.close();
             }
         });
-
     }
 
     private void setMedias(RecyclerViewHolder holder, int position) {
@@ -164,16 +164,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         Status status = statuses.get(position);
 
         /** 画像の取得 */
-        MediaEntity[] mediaEntities = status.getExtendedMediaEntities();
+        final MediaEntity[] mediaEntities = status.getExtendedMediaEntities();
         /** 画像が含まれていない場合はもちろん処理をスルーします. */
         if (mediaEntities.length <= 0) {
             return;
         }
 
         /** 画像を表示する処理 */
-        for (MediaEntity mediaEntity : mediaEntities) {
+        for (final MediaEntity mediaEntity : mediaEntities) {
             /** URLから画像セット(contextはもちろんandroid.content.Contextクラスのインスタンスです) */
-            SmartImageView imageView = new SmartImageView(mContext);
+            final SmartImageView imageView = new SmartImageView(mContext);
             imageView.setImageUrl(mediaEntity.getMediaURL());
 
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
@@ -186,6 +186,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             /** 画像と画像の間を少し空ける. */
             params.setMarginEnd(15);
             imageView.setLayoutParams(params);
+
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mListener.onRecyclerClicked("img", mediaEntity.getMediaURL());
+                    Log.d("url", mediaEntity.getMediaURL());
+                }
+            });
 
             /** 画像表示用のレイアウトに突っ込む. */
             holder.gridLayout.addView(imageView, params);
