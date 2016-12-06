@@ -33,6 +33,7 @@ iOSのメールアプリっぽいものをイメージ
 * ~~[SuperRecyclerView](https://github.com/Malinskiy/SuperRecyclerView)~~(使わない)
 * [SwipeLayout](https://github.com/daimajia/AndroidSwipeLayout)
 * ~~[FloatingActionMenu](https://github.com/futuresimple/android-floating-action-button)~~(使わない)
-* [PhotoView](https://github.com/chrisbanes/PhotoView)
+* [PhotoView](https://github.com/chrisbanes/PhotoView)(使わないかも)
+* [Glide](https://github.com/bumptech/glide)
 * Android Support Design ver.24
 * Android Support AppCompat v7
