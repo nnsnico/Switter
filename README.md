@@ -24,7 +24,7 @@ iOSのメールアプリっぽいものをイメージ
 * Max 24 (Nuger)
 
 ### デバッグ端末
-~~ DOCOMO XperiaZ3 SO-01G~~
+* ~~DOCOMO XperiaZ3 SO-01G~~
 * DOCOMO Galaxy S7 Edge 
 
 ### Libraries
