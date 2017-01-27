@@ -25,7 +25,7 @@ iOSのメールアプリっぽいものをイメージ
 
 ### デバッグ端末
 * ~~DOCOMO XperiaZ3 SO-01G~~
-* DOCOMO Galaxy S7 Edge 
+* DOCOMO Galaxy S7 Edge SC-02H
 
 ### Libraries
 * [Twitter API](https://dev.twitter.com/)
