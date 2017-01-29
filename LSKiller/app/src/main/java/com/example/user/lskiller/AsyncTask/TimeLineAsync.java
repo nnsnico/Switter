@@ -28,15 +28,14 @@ import twitter4j.TwitterException;
  */
 public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>> {
 
-    Twitter mTwitter;
-    List<twitter4j.Status> statuses;
-    List<String> mediaList = new ArrayList<String>();
-    Activity activity;
-    RecyclerView recyclerView;
-    ProgressBar progressBar;
-    MediaEntity[] mediaEntities;
-    Parcelable recyclerViewState;
-    int endPage = 40;
+    private Twitter mTwitter;
+    private List<twitter4j.Status> statuses;
+    private List<String> mediaList = new ArrayList<String>();
+    private Activity activity;
+    private RecyclerView recyclerView;
+    private ProgressBar progressBar;
+    private Parcelable recyclerViewState;
+    private int endPage = 40;
 
     public TimeLineAsync(
             Twitter mTwitter,
@@ -56,14 +55,13 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
             Activity activeView,
             RecyclerView recyclerView,
             int endPage
-    ){
+    ) {
         this.mTwitter = mTwitter;
         this.statuses = statuses;
         this.activity = activeView;
         this.recyclerView = recyclerView;
         this.endPage = endPage;
     }
-
 
 
     @Override
@@ -96,7 +94,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
             for (twitter4j.Status status : result) {
                 statuses.add(status);
                 // mediaEntities
-                mediaEntities = status.getExtendedMediaEntities();
+                MediaEntity[] mediaEntities = status.getExtendedMediaEntities();
                 if (mediaEntities.length > 0) {
                     for (MediaEntity mediaResult : mediaEntities) {
                         mediaList.add(mediaResult.getMediaURL());
@@ -118,7 +116,7 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
         } else {
             final Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content),
                     "タイムラインの取得に失敗しました\n" +
-                    "時間を置いてから再度起動してください",
+                            "時間を置いてから再度起動してください",
                     Snackbar.LENGTH_INDEFINITE);
             View view = snackbar.getView();
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();

@@ -1,6 +1,7 @@
 package com.example.user.lskiller.Listener;
 
 import android.view.View;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ import twitter4j.Status;
  */
 public interface OnRecyclerListener {
     void onRecyclerClicked(String tag, List<Status> statuses, int position);
-    void onRecyclerClicked(String tag, String url);
+    void onRecyclerClicked(String tag, String url, ImageView imageView);
 }

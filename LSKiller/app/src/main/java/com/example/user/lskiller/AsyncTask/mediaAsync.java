@@ -14,9 +14,9 @@ import twitter4j.TwitterException;
  * Created by USER on 2016/10/19.
  */
 public class MediaAsync extends AsyncTask<Void, Void, Long> {
-    Intent resultData;
-    Twitter mTwitter;
-    Context context;
+    private Intent resultData;
+    private Twitter mTwitter;
+    private Context context;
 
     public MediaAsync(Intent resultData, Twitter mTwitter, Context context) {
         this.resultData = resultData;

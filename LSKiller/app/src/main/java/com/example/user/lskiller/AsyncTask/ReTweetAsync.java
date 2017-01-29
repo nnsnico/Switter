@@ -19,11 +19,11 @@ import twitter4j.TwitterException;
  */
 public class ReTweetAsync extends AsyncTask<Long, Void, Boolean> {
 
-    Context context;
-    Activity activity;
-    List<twitter4j.Status> statuses;
-    Twitter mTwitter;
-    int position;
+    private Context context;
+    private Activity activity;
+    private List<twitter4j.Status> statuses;
+    private Twitter mTwitter;
+    private int position;
 
     public ReTweetAsync(
             Activity activity,

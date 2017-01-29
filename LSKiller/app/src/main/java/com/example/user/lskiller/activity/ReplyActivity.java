@@ -43,7 +43,6 @@ public class ReplyActivity extends FragmentActivity {
     private TextView countText;
     private TextView countMedia;
     private final static int REQUEST_PICK = 1001;
-    private String screenName;
     private Intent saveData;
     private File path;
     private long UserId;
@@ -54,7 +53,7 @@ public class ReplyActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
 
-        screenName = getIntent().getStringExtra("screenName");
+        String screenName = getIntent().getStringExtra("screenName");
         UserId = getIntent().getLongExtra("status", 1);
 
         mTwitter = TwitterUtils.getTwitterInstance(this);

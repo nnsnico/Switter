@@ -30,23 +30,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private LayoutInflater mInflater;
     private List<twitter4j.Status> statuses;
-    private List<String> mediaList;
     private Context mContext;
     private OnRecyclerListener mListener;
-    private Twitter mTwitter;
     private TimeSpanConverter timeSpanConverter = new TimeSpanConverter(Locale.JAPAN);
 
-    public RecyclerAdapter(
-            Context context,
-            List<twitter4j.Status> data,
-            OnRecyclerListener listener
-    ) {
-        mInflater = LayoutInflater.from(context);
-        mContext = context;
-        statuses = data;
-        mListener = listener;
-        mTwitter = TwitterUtils.getTwitterInstance(context);
-    }
+//    public RecyclerAdapter(
+//            Context context,
+//            List<twitter4j.Status> data,
+//            OnRecyclerListener listener
+//    ) {
+//        mInflater = LayoutInflater.from(context);
+//        mContext = context;
+//        statuses = data;
+//        mListener = listener;
+//        mTwitter = TwitterUtils.getTwitterInstance(context);
+//    }
 
     public RecyclerAdapter(
             Context context,
@@ -56,10 +54,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     ) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
-        this.mediaList = mediaList;
         statuses = data;
         mListener = listener;
-        mTwitter = TwitterUtils.getTwitterInstance(context);
+        Twitter mTwitter = TwitterUtils.getTwitterInstance(context);
     }
 
     @Override
@@ -115,20 +112,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
         setSwipeMenu(holder, position);
 
-        // クリック処理
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mListener.onRecyclerClicked("img",statuses.get(position).getMediaEntities());
-//            }
-//        });
     }
 
     // TimeLineActivity側で処理
     private void setSwipeMenu(final RecyclerViewHolder holder, final int position) {
+        // ShowMode
         holder.swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        // Add Drag Menu
         holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right,
-                holder.swipeLayout.findViewWithTag("swipe_menu"));
+                holder.swipeLayout.findViewWithTag("swipe_menu_right"));
+        holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Left,
+                holder.swipeLayout.findViewWithTag("swipe_menu_left"));
+        // pushed Icon
         holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,7 +185,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onRecyclerClicked("img", mediaEntity.getMediaURL());
+                    mListener.onRecyclerClicked("img", mediaEntity.getMediaURL(), imageView);
                     Log.d("url", mediaEntity.getMediaURL());
                 }
             });

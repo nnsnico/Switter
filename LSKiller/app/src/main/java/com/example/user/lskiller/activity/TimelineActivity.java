@@ -3,6 +3,7 @@ package com.example.user.lskiller.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -32,11 +33,9 @@ import twitter4j.Twitter;
 public class TimelineActivity extends AppCompatActivity implements OnRecyclerListener {
 
     Twitter mTwitter;
-    //    private ListView listView;
     private Toolbar toolbar;
     private List<Status> statuses = new ArrayList<>();
     private RecyclerView recyclerView;
-    //    private SwipeLayout swipeLayout;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
@@ -48,9 +47,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         toolbarConfig();
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
-//        setSupportActionBar(toolbar);
         swipeLayoutConfig();
-//        swipeLayout = (SwipeLayout)findViewById(R.id.swipeMenu);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         // Twitterのトークンが取得されているか
@@ -66,32 +63,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                     false
             ));
             recyclerView.addItemDecoration(new DividerItemDecoration(this));
-
-//            SwipeMenuConfig();
-//            FileInputStream inputStream = null;
-//            byte[] buffer = new byte[1024];
-//            try {
-//                File file = new File(getCacheDir(), "cache.txt");
-//                if (file.exists()) {
-//                    inputStream = new FileInputStream(file);
-//                    inputStream.read(buffer);
-//                    String data = new String(buffer, "UTF-8");
-//                    // TODO  キャッシュ読み込み（いるのか？）
-//                    recyclerView.setAdapter(new RecyclerAdapter(this, data., (OnRecyclerListener) this));
-//                }
-//            } catch (IOException e) {
-//                Log.e("MyApp", "exception", e);
-//            } finally {
-//                try {
-//                    if (inputStream != null) {
-//                        inputStream.close();
-                        reloadTimeLine();
-//                    }
-//                } catch (IOException e) {
-//                    Log.e("MyApp", "exception", e);
-//                }
-//            }
-
+            reloadTimeLine();
             // endScrollListener
             recyclerView.addOnScrollListener(new EndlessScrollListener(
                     (LinearLayoutManager) recyclerView.getLayoutManager()) {
@@ -113,6 +85,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
+
     }
 
     private void toolbarConfig() {
@@ -195,41 +168,13 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     }
 
     @Override
-    public void onRecyclerClicked(String tag, String url) {
-        if(Objects.equals(tag, "img")){
+    public void onRecyclerClicked(String tag, String url, ImageView image) {
+        if (Objects.equals(tag, "img")) {
+            image.setTransitionName("image");
             Intent intent = new Intent(TimelineActivity.this, ImageViewerActivity.class);
             intent.putExtra("imageView", url);
-            startActivity(intent);
+            startActivity(intent, ActivityOptionsCompat.
+                    makeSceneTransitionAnimation(this, image, "image").toBundle());
         }
     }
-
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        FileOutputStream outputStream = null;
-//        try {
-//            // キャッシュ領域にファイルを作成し、書き込む。
-//            File file = new File(getCacheDir(), "cache.txt");
-//            file.createNewFile();
-//            if (file.exists()) {
-//                outputStream = new FileOutputStream(file);
-//
-//                outputStream.write(statuses.toString().getBytes());
-//                // ちなみにDDMSで確認したところ、確認時の環境下では
-//                // "/data/data/[パッケージ名]/cache/cache.txt"
-//                // に書き込まれた。
-//
-//            }
-//        } catch (IOException e) {
-//            Log.e("MyApp", "exception", e);
-//        } finally {
-//            try {
-//                if (outputStream != null) {
-//                    outputStream.close();
-//                }
-//            } catch (IOException e) {
-//                Log.e("MyApp", "exception", e);
-//            }
-//        }
-//    }
 }

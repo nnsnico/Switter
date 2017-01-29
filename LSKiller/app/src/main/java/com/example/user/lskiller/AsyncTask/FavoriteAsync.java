@@ -16,11 +16,11 @@ import twitter4j.TwitterException;
  * Created by USER on 2016/10/13.
  */
 public class FavoriteAsync extends AsyncTask<Long, Void, Boolean> {
-    Context context;
-    Activity activity;
-    List<twitter4j.Status> statuses;
-    Twitter mTwitter;
-    int position;
+    private Context context;
+    private Activity activity;
+    private List<twitter4j.Status> statuses;
+    private Twitter mTwitter;
+    private int position;
 
     public FavoriteAsync(
             Activity activity,

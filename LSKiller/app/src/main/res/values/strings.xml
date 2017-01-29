@@ -9,35 +9,11 @@
     <string name="action_tweet">Tweet</string>
 
     <string name="version">version 0.0</string>
-    <string name="copyright">
-        "--------------------------------------------\n"
-        "オープンソースライセンス\n"
-        "--------------------------------------------\n\n"
-
-        "* twitter4j\n"
-        "Copyright 2007 Yusuke Yamamoto\n\n"
-
-        "Licensed under the Apache License, Version 2.0 (the "License");\n"
-        "you may not use this file except in compliance with the License.\n"
-        "You may obtain a copy of the License at\n\n"
-
-        "http://www.apache.org/licenses/LICENSE-2.0\n\n"
-
-        "Unless required by applicable law or agreed to in writing, software\n"
-        "Distributed under the License is distributed on an "AS IS" BASIS,\n"
-        "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n"
-        "See the License for the specific language governing permissions and\n"
-        "limitations under the License.\n\n"
-
-
-    </string>
     <string name="about">
-        "このアプリは工大祭に向けて個人で作成されたTwitterClientです。\n"
         "機能面で至らない点がまだ多いですが使っていただけると幸いです。\n\n"
 
         "\-\-追加予定機能\-\-\n"
         "* プロフィール画面の実装\n"
-        "* 画像の拡大表示\n"
         "* 全UIの改善\n"
         "  etc…\n\n"
 
@@ -46,15 +22,15 @@
     </string>
     <string name="pin">PINコード認証</string>
     <string name="detailAppTitle">
-        Switterの認証方法
+        Switterの使い方
     </string>
 
     <string name="detailApp">
-        ①「Twitter認証」のボタンを押し、使いたいアカウントでログインを行ってください。\n\n
+        ① 「Twitter認証」のボタンを押し、使用したいTwitterアカウントでログインを行ってください。\n\n
 
-        ③PINコードが発行されるのでコピーして下の入力欄に張り付けてください。\n\n
+        ③ PINコードが発行されるのでコピーして下の入力欄に張り付けてください。\n\n
 
-        ②認証が完了します！\n\n
+        ② 認証が完了します！\n\n
     </string>
     <string name="HintPin">PINコードを貼り付けてください</string>
 

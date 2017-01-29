@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.cookpad.android.licensetools'
 
 android {
     compileSdkVersion 24
@@ -8,7 +9,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "0.0-develop"
     }
     buildTypes {
         release {

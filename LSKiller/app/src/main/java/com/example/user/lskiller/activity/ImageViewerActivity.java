@@ -1,21 +1,14 @@
 package com.example.user.lskiller.activity;
 
-import android.content.Context;
-import android.graphics.pdf.PdfDocument;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.example.user.lskiller.R;
 import com.loopj.android.image.SmartImageView;
 
-import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**

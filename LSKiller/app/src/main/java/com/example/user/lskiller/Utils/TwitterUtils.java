@@ -3,8 +3,6 @@ package com.example.user.lskiller.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.user.lskiller.R;
-
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;

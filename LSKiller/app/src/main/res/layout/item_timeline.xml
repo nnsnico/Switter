@@ -6,10 +6,25 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:tag="swipe_menu_left">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:padding="15dp"
+            android:src="@drawable/person"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="210dp"
         android:layout_height="match_parent"
         android:gravity="right"
-        android:tag="swipe_menu">
+        android:tag="swipe_menu_right">
 
         <ImageView
             android:id="@+id/reply"
