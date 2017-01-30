@@ -3,40 +3,84 @@ package com.example.user.lskiller.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.user.lskiller.R;
+import com.example.user.lskiller.View.PagerLayout;
 import com.loopj.android.image.SmartImageView;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrConfig;
 
-import uk.co.senab.photoview.PhotoViewAttacher;
+import java.util.ArrayList;
+
+import twitter4j.MediaEntity;
 
 /**
  * Created by USER on 2016/12/02.
  */
 public class ImageViewerActivity extends AppCompatActivity {
 
-    PhotoViewAttacher mAttacher;
     SmartImageView imageView;
+    MediaEntity[] mediaEntities;
+    ArrayList<ImageView> list = new ArrayList<>();
+    int position;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_preview);
 
-        imageView = (SmartImageView) findViewById(R.id.previewImage);
-        String url = getIntent().getExtras().getString("imageView");
-        imageView.setImageUrl(url);
+        slidrConfig();
 
-//        mAttacher = new PhotoViewAttacher(imageView);
+        ViewPager viewPager = (PagerLayout) findViewById(R.id.previewImage);
+        mediaEntities = (MediaEntity[]) getIntent().getSerializableExtra("media");
+        position = getIntent().getIntExtra("position", 0);
+        for (MediaEntity mediaEntity : mediaEntities) {
+            imageView = new SmartImageView(ImageViewerActivity.this);
+            imageView.setImageUrl(mediaEntity.getMediaURL());
+            list.add(imageView);
+        }
+        viewPager.setAdapter(new SimpleViewPager(list));
+        viewPager.setCurrentItem(position);
+        setContentView(viewPager);
     }
 
-    // TODO ViewPagerでイメージをスワイプで切り替える
-    static class SimpleViewPager extends PagerAdapter{
+    private void slidrConfig() {
+        SlidrConfig config = new SlidrConfig.Builder()
+                .edge(true)
+                .build();
+        Slidr.attach(this, config);
+    }
+
+    class SimpleViewPager extends PagerAdapter {
+        private ArrayList<ImageView> list;
+
+        SimpleViewPager(ArrayList<ImageView> list) {
+            this.list = list;
+        }
 
         @Override
         public int getCount() {
-            return 0;
+            return list.size();
+        }
+
+        @Override
+        public View instantiateItem(ViewGroup container, int position) {
+            container.addView(
+                    list.get(position),
+                    ViewPager.LayoutParams.MATCH_PARENT,
+                    ViewPager.LayoutParams.MATCH_PARENT);
+
+            return list.get(position);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
         }
 
         @Override

@@ -48,7 +48,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     public RecyclerAdapter(
             Context context,
-            List<String> mediaList,
             List<twitter4j.Status> data,
             OnRecyclerListener listener
     ) {
@@ -149,7 +148,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         });
     }
 
-    private void setMedias(RecyclerViewHolder holder, int position) {
+    private void setMedias(final RecyclerViewHolder holder, final int position) {
         holder.gridLayout.setColumnCount(2);
         holder.gridLayout.setRowCount(2);
         if (holder.gridLayout.getChildCount() > 0) {
@@ -165,6 +164,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             return;
         }
 
+        int count = 0;
         /** 画像を表示する処理 */
         for (final MediaEntity mediaEntity : mediaEntities) {
             /** URLから画像セット(contextはもちろんandroid.content.Contextクラスのインスタンスです) */
@@ -175,23 +175,26 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             imageView.setPadding(0, 0, 0, 32);
 
             /** 画像はリサイズしないので両方ともwrap_contentで. */
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            final GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 300;
             params.height = 300;
             /** 画像と画像の間を少し空ける. */
             params.setMarginEnd(15);
             imageView.setLayoutParams(params);
 
+            final int finalCount = count;
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onRecyclerClicked("img", mediaEntity.getMediaURL(), imageView);
-                    Log.d("url", mediaEntity.getMediaURL());
+                    // TODO 画像ポジションの指定
+                    mListener.onRecyclerClicked("img", mediaEntities, imageView, finalCount);
+                    Log.d("MediaUrl", mediaEntity.getMediaURL());
+                    Log.d("ExpandedUrl", mediaEntity.getExpandedURL());
                 }
             });
-
             /** 画像表示用のレイアウトに突っ込む. */
             holder.gridLayout.addView(imageView, params);
+            count++;
         }
     }
 

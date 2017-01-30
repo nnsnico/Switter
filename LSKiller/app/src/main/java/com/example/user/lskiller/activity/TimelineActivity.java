@@ -27,12 +27,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import icepick.Icepick;
+import icepick.State;
+import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.Twitter;
 
 public class TimelineActivity extends AppCompatActivity implements OnRecyclerListener {
 
-    Twitter mTwitter;
+    private Twitter mTwitter;
     private Toolbar toolbar;
     private List<Status> statuses = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -41,6 +44,9 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // restore State in before
+//        Icepick.restoreInstanceState(this, savedInstanceState);
+
         setContentView(R.layout.activity_timeline_material);
         // ツールバー
         toolbar = (Toolbar) findViewById(R.id.toolbar_material);
@@ -63,13 +69,13 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                     false
             ));
             recyclerView.addItemDecoration(new DividerItemDecoration(this));
-            reloadTimeLine();
+            getTimeLine();
             // endScrollListener
             recyclerView.addOnScrollListener(new EndlessScrollListener(
                     (LinearLayoutManager) recyclerView.getLayoutManager()) {
                 @Override
                 public void onLoadMore(int current_page) {
-                    reloadTimeLine(current_page);
+                    getTimeLine(current_page);
                     Toast.makeText(TimelineActivity.this, "読み込み中・・・", Toast.LENGTH_LONG).show();
                 }
             });
@@ -81,11 +87,10 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                reloadTimeLine();
+                getTimeLine();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
-
     }
 
     private void toolbarConfig() {
@@ -100,12 +105,12 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_refresh:
-                        reloadTimeLine();
+                        getTimeLine();
                         return true;
                     case R.id.menu_tweet:
                         Intent intent = new Intent(TimelineActivity.this, TweetActivity.class);
                         startActivity(intent);
-                        reloadTimeLine();
+                        getTimeLine();
                         return true;
                     case R.id.AboutApp:
                         Intent intent2 = new Intent(TimelineActivity.this, AboutAppActivity.class);
@@ -116,7 +121,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         });
     }
 
-    public void reloadTimeLine() {
+    public void getTimeLine() {
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
                 mTwitter,
                 statuses,
@@ -125,7 +130,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         task.execute();
     }
 
-    public void reloadTimeLine(int currentPage) {
+    public void getTimeLine(int currentPage) {
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
                 mTwitter,
                 statuses,
@@ -164,17 +169,32 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 startActivity(intent);
                 break;
         }
-        reloadTimeLine();
+        getTimeLine();
     }
 
     @Override
-    public void onRecyclerClicked(String tag, String url, ImageView image) {
+    public void onRecyclerClicked(
+            String tag, MediaEntity[] mediaEntity, ImageView image, int position) {
         if (Objects.equals(tag, "img")) {
             image.setTransitionName("image");
             Intent intent = new Intent(TimelineActivity.this, ImageViewerActivity.class);
-            intent.putExtra("imageView", url);
+            intent.putExtra("media", mediaEntity);
+            intent.putExtra("position", position);
             startActivity(intent, ActivityOptionsCompat.
                     makeSceneTransitionAnimation(this, image, "image").toBundle());
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // TODO Icepickによるelementの保存
+//        Icepick.saveInstanceState(this, outState);
+//        RecyclerAdapter adapter = new RecyclerAdapter(
+//                this,
+//                statuses,
+//                this
+//        );
+//        recyclerView.setAdapter(adapter);
     }
 }

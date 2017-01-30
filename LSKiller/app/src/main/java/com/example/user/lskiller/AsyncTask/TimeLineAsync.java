@@ -108,7 +108,6 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
             }
             RecyclerAdapter adapter = new RecyclerAdapter(
                     activity,
-                    mediaList,
                     statuses,
                     (OnRecyclerListener) activity);
             recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
