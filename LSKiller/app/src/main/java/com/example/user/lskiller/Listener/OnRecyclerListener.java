@@ -14,5 +14,5 @@ import twitter4j.Status;
  */
 public interface OnRecyclerListener {
     void onRecyclerClicked(String tag, List<Status> statuses, int position);
-    void onRecyclerClicked(String tag, MediaEntity[] url, ImageView imageView, int position);
+    void onRecyclerClicked(String tag, MediaEntity[] url, int position);
 }

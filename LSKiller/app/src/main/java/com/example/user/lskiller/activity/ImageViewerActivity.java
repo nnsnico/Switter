@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,10 +15,13 @@ import com.example.user.lskiller.View.PagerLayout;
 import com.loopj.android.image.SmartImageView;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
+import com.r0adkll.slidr.model.SlidrPosition;
 
 import java.util.ArrayList;
 
 import twitter4j.MediaEntity;
+
+import static com.r0adkll.slidr.model.SlidrPosition.RIGHT;
 
 /**
  * Created by USER on 2016/12/02.
@@ -33,6 +37,7 @@ public class ImageViewerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_preview);
+        getWindow().setEnterTransition(new Slide());
 
         slidrConfig();
 
@@ -51,6 +56,7 @@ public class ImageViewerActivity extends AppCompatActivity {
 
     private void slidrConfig() {
         SlidrConfig config = new SlidrConfig.Builder()
+                .position(SlidrPosition.HORIZONTAL)
                 .edge(true)
                 .build();
         Slidr.attach(this, config);

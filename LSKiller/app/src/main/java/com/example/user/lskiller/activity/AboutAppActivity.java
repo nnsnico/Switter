@@ -10,6 +10,7 @@ package com.example.user.lskiller.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.webkit.WebView;
 
 import com.example.user.lskiller.R;
@@ -23,6 +24,7 @@ public class AboutAppActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_app);
+        getWindow().setEnterTransition(new Slide());
 
         WebView webView = (WebView) findViewById(R.id.web_view);
         webView.loadUrl("file:///android_asset/licenses.html");

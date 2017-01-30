@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -52,6 +53,7 @@ public class ReplyActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
+        getWindow().setEnterTransition(new Slide());
 
         String screenName = getIntent().getStringExtra("screenName");
         UserId = getIntent().getLongExtra("status", 1);

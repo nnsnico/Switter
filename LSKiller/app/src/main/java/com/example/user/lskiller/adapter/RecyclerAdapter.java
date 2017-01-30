@@ -187,7 +187,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                 @Override
                 public void onClick(View view) {
                     // TODO 画像ポジションの指定
-                    mListener.onRecyclerClicked("img", mediaEntities, imageView, finalCount);
+                    mListener.onRecyclerClicked("img", mediaEntities, finalCount);
                     Log.d("MediaUrl", mediaEntity.getMediaURL());
                     Log.d("ExpandedUrl", mediaEntity.getExpandedURL());
                 }

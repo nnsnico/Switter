@@ -5,12 +5,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.Utils.TwitterUtils;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -109,12 +113,18 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                         return true;
                     case R.id.menu_tweet:
                         Intent intent = new Intent(TimelineActivity.this, TweetActivity.class);
-                        startActivity(intent);
+                        startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                TimelineActivity.this,
+                                (Pair<View, String>[]) null
+                        ).toBundle());
                         getTimeLine();
                         return true;
                     case R.id.AboutApp:
                         Intent intent2 = new Intent(TimelineActivity.this, AboutAppActivity.class);
-                        startActivity(intent2);
+                        startActivity(intent2, ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                TimelineActivity.this,
+                                (Pair<View, String>[]) null
+                        ).toBundle());
                 }
                 return true;
             }
@@ -166,7 +176,10 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 Intent intent = new Intent(TimelineActivity.this, ReplyActivity.class);
                 intent.putExtra("screenName", statuses.get(position).getUser().getScreenName());
                 intent.putExtra("status", statuses.get(position).getId());
-                startActivity(intent);
+                startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        TimelineActivity.this,
+                        (Pair<View, String>[]) null
+                ).toBundle());
                 break;
         }
         getTimeLine();
@@ -174,14 +187,13 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
 
     @Override
     public void onRecyclerClicked(
-            String tag, MediaEntity[] mediaEntity, ImageView image, int position) {
+            String tag, MediaEntity[] mediaEntity, int position) {
         if (Objects.equals(tag, "img")) {
-            image.setTransitionName("image");
             Intent intent = new Intent(TimelineActivity.this, ImageViewerActivity.class);
             intent.putExtra("media", mediaEntity);
             intent.putExtra("position", position);
             startActivity(intent, ActivityOptionsCompat.
-                    makeSceneTransitionAnimation(this, image, "image").toBundle());
+                    makeSceneTransitionAnimation(this, (Pair<View, String>[]) null).toBundle());
         }
     }
 
