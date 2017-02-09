@@ -1,4 +1,4 @@
-package com.example.user.lskiller.adapter;
+package com.example.user.lskiller.presentation.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +10,9 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.example.user.lskiller.Listener.OnRecyclerListener;
+import com.example.user.lskiller.domain.usecase.OnRecyclerListener;
 import com.example.user.lskiller.R;
-import com.example.user.lskiller.Utils.TwitterUtils;
+import com.example.user.lskiller.presentation.view.component.RecyclerViewHolder;
 import com.loopj.android.image.SmartImageView;
 
 import java.util.List;
@@ -20,7 +20,6 @@ import java.util.Locale;
 
 import twitter4j.MediaEntity;
 import twitter4j.Status;
-import twitter4j.Twitter;
 import twitter4j.util.TimeSpanConverter;
 
 /**
@@ -55,7 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         mContext = context;
         statuses = data;
         mListener = listener;
-        Twitter mTwitter = TwitterUtils.getTwitterInstance(context);
+//        Twitter mTwitter = TwitterUtils.getTwitterInstance(context);
     }
 
     @Override
@@ -186,7 +185,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // TODO 画像ポジションの指定
                     mListener.onRecyclerClicked("img", mediaEntities, finalCount);
                     Log.d("MediaUrl", mediaEntity.getMediaURL());
                     Log.d("ExpandedUrl", mediaEntity.getExpandedURL());

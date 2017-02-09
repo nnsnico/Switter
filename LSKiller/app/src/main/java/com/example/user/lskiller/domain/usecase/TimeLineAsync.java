@@ -1,4 +1,4 @@
-package com.example.user.lskiller.AsyncTask;
+package com.example.user.lskiller.domain.usecase;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -11,9 +11,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
-import com.example.user.lskiller.Listener.OnRecyclerListener;
 import com.example.user.lskiller.R;
-import com.example.user.lskiller.adapter.RecyclerAdapter;
+import com.example.user.lskiller.presentation.view.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,10 @@
-package com.example.user.lskiller.activity;
+package com.example.user.lskiller.presentation.view.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
@@ -11,28 +13,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Slide;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.user.lskiller.AsyncTask.FavoriteAsync;
-import com.example.user.lskiller.AsyncTask.ReTweetAsync;
-import com.example.user.lskiller.AsyncTask.TimeLineAsync;
-import com.example.user.lskiller.RecyclerItem.DividerItemDecoration;
-import com.example.user.lskiller.Listener.EndlessScrollListener;
-import com.example.user.lskiller.Listener.OnRecyclerListener;
+import com.example.user.lskiller.domain.usecase.FavoriteAsync;
+import com.example.user.lskiller.domain.usecase.ReTweetAsync;
+import com.example.user.lskiller.domain.usecase.TimeLineAsync;
+import com.example.user.lskiller.presentation.view.component.DividerItemDecoration;
+import com.example.user.lskiller.domain.usecase.EndlessScrollListener;
+import com.example.user.lskiller.domain.usecase.OnRecyclerListener;
 import com.example.user.lskiller.R;
-import com.example.user.lskiller.Utils.TwitterUtils;
+import com.example.user.lskiller.presentation.view.util.TwitterUtils;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import icepick.Icepick;
-import icepick.State;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -46,7 +43,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // restore State in before
 //        Icepick.restoreInstanceState(this, savedInstanceState);
@@ -80,7 +77,14 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 @Override
                 public void onLoadMore(int current_page) {
                     getTimeLine(current_page);
-                    Toast.makeText(TimelineActivity.this, "読み込み中・・・", Toast.LENGTH_LONG).show();
+                    final CoordinatorLayout layout
+                            = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+                    Snackbar snackbar;
+                    snackbar = Snackbar.make(
+                            layout,
+                            "読み込み中・・・",
+                            Snackbar.LENGTH_LONG);
+                    snackbar.show();
                 }
             });
         }
@@ -100,9 +104,8 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
     private void toolbarConfig() {
         toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         toolbar.setTitle(R.string.app_name);
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
-
         toolbar.inflateMenu(R.menu.toolbar_item);
+        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
         // ToolBarのアイテム取得
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -117,7 +120,6 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                                 TimelineActivity.this,
                                 (Pair<View, String>[]) null
                         ).toBundle());
-                        getTimeLine();
                         return true;
                     case R.id.AboutApp:
                         Intent intent2 = new Intent(TimelineActivity.this, AboutAppActivity.class);
@@ -135,7 +137,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
                 mTwitter,
                 statuses,
-                TimelineActivity.this,
+                this,
                 recyclerView);
         task.execute();
     }
@@ -144,7 +146,7 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         AsyncTask<Void, Void, List<twitter4j.Status>> task = new TimeLineAsync(
                 mTwitter,
                 statuses,
-                TimelineActivity.this,
+                this,
                 recyclerView,
                 currentPage
         );
@@ -156,8 +158,8 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
         switch (tag) {
             case "fav":
                 AsyncTask<Long, Void, Boolean> favoriteTask = new FavoriteAsync(
-                        TimelineActivity.this,
-                        TimelineActivity.this,
+                        this,
+                        this,
                         statuses,
                         position
                 );
@@ -165,31 +167,30 @@ public class TimelineActivity extends AppCompatActivity implements OnRecyclerLis
                 break;
             case "ret":
                 AsyncTask<Long, Void, Boolean> reTweetTask = new ReTweetAsync(
-                        TimelineActivity.this,
-                        TimelineActivity.this,
+                        this,
+                        this,
                         statuses,
                         position
                 );
                 reTweetTask.execute();
                 break;
             case "rep":
-                Intent intent = new Intent(TimelineActivity.this, ReplyActivity.class);
+                Intent intent = new Intent(this, ReplyActivity.class);
                 intent.putExtra("screenName", statuses.get(position).getUser().getScreenName());
                 intent.putExtra("status", statuses.get(position).getId());
                 startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        TimelineActivity.this,
+                        this,
                         (Pair<View, String>[]) null
                 ).toBundle());
                 break;
         }
-        getTimeLine();
     }
 
     @Override
     public void onRecyclerClicked(
             String tag, MediaEntity[] mediaEntity, int position) {
         if (Objects.equals(tag, "img")) {
-            Intent intent = new Intent(TimelineActivity.this, ImageViewerActivity.class);
+            Intent intent = new Intent(this, ImageViewerActivity.class);
             intent.putExtra("media", mediaEntity);
             intent.putExtra("position", position);
             startActivity(intent, ActivityOptionsCompat.

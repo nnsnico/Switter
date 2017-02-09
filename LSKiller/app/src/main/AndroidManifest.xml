@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.TimelineActivity"
+            android:name=".presentation.view.activity.TimelineActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,7 +22,7 @@
 
         <!--OAuthActivity-->
         <activity
-            android:name=".activity.TwitterOAuthActivity"
+            android:name=".presentation.view.activity.TwitterOAuthActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -37,23 +37,23 @@
         </activity>
 
         <activity
-            android:name=".activity.TweetActivity"
+            android:name=".presentation.view.activity.TweetActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
         </activity>
 
         <activity
-            android:name=".activity.ReplyActivity"
+            android:name=".presentation.view.activity.ReplyActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
         </activity>
 
         <activity
-            android:name=".activity.AboutAppActivity"
+            android:name=".presentation.view.activity.AboutAppActivity"
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".activity.ImageViewerActivity"
+            android:name=".presentation.view.activity.ImageViewerActivity"
             android:screenOrientation="portrait"/>
     </application>
 

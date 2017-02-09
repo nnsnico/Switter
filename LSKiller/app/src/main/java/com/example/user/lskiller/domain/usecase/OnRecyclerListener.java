@@ -1,7 +1,4 @@
-package com.example.user.lskiller.Listener;
-
-import android.view.View;
-import android.widget.ImageView;
+package com.example.user.lskiller.domain.usecase;
 
 import java.util.List;
 

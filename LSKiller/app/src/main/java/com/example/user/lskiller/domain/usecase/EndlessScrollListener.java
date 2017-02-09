@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.example.user.lskiller.Listener;
+package com.example.user.lskiller.domain.usecase;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,7 +25,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
 
     private LinearLayoutManager mLinearLayoutManager;
 
-    public EndlessScrollListener(LinearLayoutManager linearLayoutManager) {
+    protected EndlessScrollListener(LinearLayoutManager linearLayoutManager) {
         this.mLinearLayoutManager = linearLayoutManager;
     }
 
@@ -33,8 +33,6 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
-//        Log.d("dx", String.valueOf(dx));
-//        Log.d("dy", String.valueOf(dy));
         visibleItemCount = recyclerView.getChildCount();
         totalItemCount = mLinearLayoutManager.getItemCount();
         firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();

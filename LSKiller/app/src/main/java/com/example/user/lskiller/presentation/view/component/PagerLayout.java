@@ -1,4 +1,4 @@
-package com.example.user.lskiller.View;
+package com.example.user.lskiller.presentation.view.component;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
@@ -12,7 +12,6 @@ import java.util.IllegalFormatException;
  */
 
 public class PagerLayout extends ViewPager {
-
 
     public PagerLayout(Context context, AttributeSet attrs) {
         super(context, attrs);

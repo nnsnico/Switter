@@ -1,4 +1,4 @@
-package com.example.user.lskiller.activity;
+package com.example.user.lskiller.presentation.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.ClipData;
@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.lskiller.R;
-import com.example.user.lskiller.Utils.TwitterUtils;
+import com.example.user.lskiller.presentation.view.util.TwitterUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package com.example.user.lskiller.AsyncTask;
+package com.example.user.lskiller.domain.usecase;
 
 import android.content.ClipData;
 import android.content.Context;

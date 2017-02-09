@@ -1,11 +1,11 @@
-package com.example.user.lskiller.AsyncTask;
+package com.example.user.lskiller.domain.usecase;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 
-import com.example.user.lskiller.Utils.TwitterUtils;
+import com.example.user.lskiller.presentation.view.util.TwitterUtils;
 
 import java.util.List;
 

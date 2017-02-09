@@ -1,4 +1,4 @@
-package com.example.user.lskiller.activity;
+package com.example.user.lskiller.presentation.view.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.user.lskiller.R;
-import com.example.user.lskiller.View.PagerLayout;
+import com.example.user.lskiller.presentation.view.component.PagerLayout;
 import com.loopj.android.image.SmartImageView;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
@@ -20,8 +20,6 @@ import com.r0adkll.slidr.model.SlidrPosition;
 import java.util.ArrayList;
 
 import twitter4j.MediaEntity;
-
-import static com.r0adkll.slidr.model.SlidrPosition.RIGHT;
 
 /**
  * Created by USER on 2016/12/02.
@@ -54,6 +52,7 @@ public class ImageViewerActivity extends AppCompatActivity {
         setContentView(viewPager);
     }
 
+    // delete by horizontal slide
     private void slidrConfig() {
         SlidrConfig config = new SlidrConfig.Builder()
                 .position(SlidrPosition.HORIZONTAL)
@@ -62,6 +61,9 @@ public class ImageViewerActivity extends AppCompatActivity {
         Slidr.attach(this, config);
     }
 
+    /**
+     * ImageViewPager
+     */
     class SimpleViewPager extends PagerAdapter {
         private ArrayList<ImageView> list;
 

@@ -1,4 +1,4 @@
-package com.example.user.lskiller.Utils;
+package com.example.user.lskiller.presentation.view.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

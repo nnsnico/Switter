@@ -1,4 +1,4 @@
-package com.example.user.lskiller.adapter;
+package com.example.user.lskiller.presentation.view.component;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,18 +13,18 @@ import com.loopj.android.image.SmartImageView;
 /**
  * Created by USER on 2016/10/06.
  */
-class RecyclerViewHolder extends RecyclerView.ViewHolder {
+public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    TextView textView;
-    TextView name;
-    TextView screenName;
-    TextView createTime;
-    TextView reTweetedUser;
-    SmartImageView icon;
-    GridLayout gridLayout;
-    SwipeLayout swipeLayout;
+    public TextView textView;
+    public TextView name;
+    public TextView screenName;
+    public TextView createTime;
+    public TextView reTweetedUser;
+    public SmartImageView icon;
+    public GridLayout gridLayout;
+    public SwipeLayout swipeLayout;
 
-    RecyclerViewHolder(View itemView) {
+    public RecyclerViewHolder(View itemView) {
         super(itemView);
 
         textView = (TextView) itemView.findViewById(R.id.text);

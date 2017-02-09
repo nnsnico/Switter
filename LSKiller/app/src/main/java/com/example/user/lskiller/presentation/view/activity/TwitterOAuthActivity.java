@@ -1,34 +1,27 @@
-package com.example.user.lskiller.activity;
+package com.example.user.lskiller.presentation.view.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.View;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.user.lskiller.R;
-import com.example.user.lskiller.Utils.TwitterUtils;
+import com.example.user.lskiller.presentation.view.util.TwitterUtils;
 
 import java.util.Objects;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
-import twitter4j.auth.OAuthAuthorization;
 import twitter4j.auth.RequestToken;
-import twitter4j.conf.Configuration;
-import twitter4j.conf.ConfigurationContext;
 
 /**
  * Created by USER on 2016/08/14.

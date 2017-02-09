@@ -6,7 +6,7 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.example.user.lskiller.activity;
+package com.example.user.lskiller.presentation.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
