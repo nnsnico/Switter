@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorSecondPrimary">#448AFF</color>
-    <color name="colorPrimary">#26cbe1</color>
+    <color name="colorText">#26cbe1</color>
+    <color name="colorPrimary">#303f9f</color>
     <color name="colorPrimaryDark">#3f51b5</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -10,4 +11,5 @@
     <color name="colorFavorite">#ff00a1</color>
     <color name="colorReTweet">#76FF03</color>
     <color name="colorReply">#FFEA00</color>
+    <color name="colorBackTint">#c73f51b5</color>
 </resources>

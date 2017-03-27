@@ -14,54 +14,62 @@ import android.widget.ProgressBar;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.presentation.view.adapter.RecyclerAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.MediaEntity;
 import twitter4j.Paging;
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
+import twitter4j.User;
 
 /**
  * Created by USER on 2016/10/09.
  */
-public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>> {
+public class TimeLineAsync extends AsyncTask<Void, Void, List<Status>> {
 
     private Twitter mTwitter;
-    private List<twitter4j.Status> statuses;
-    private List<String> mediaList = new ArrayList<String>();
+    private List<twitter4j.Status> statuses = new ArrayList<>();
+    private ArrayList<String> mediaList = new ArrayList<String>();
     private Activity activity;
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private Parcelable recyclerViewState;
     private int endPage = 40;
+    private User user;
+    private boolean isUser;
 
     public TimeLineAsync(
             Twitter mTwitter,
-            List<twitter4j.Status> statuses,
             Activity activeView,
-            RecyclerView recyclerView
+            RecyclerView recyclerView,
+            User user,
+            boolean isUser
     ) {
         this.mTwitter = mTwitter;
-        this.statuses = statuses;
         this.activity = activeView;
         this.recyclerView = recyclerView;
+        this.isUser = isUser;
+        this.user = user;
     }
 
     public TimeLineAsync(
             Twitter mTwitter,
-            List<twitter4j.Status> statuses,
             Activity activeView,
             RecyclerView recyclerView,
-            int endPage
+            int endPage,
+            User user,
+            boolean isUser
     ) {
         this.mTwitter = mTwitter;
-        this.statuses = statuses;
         this.activity = activeView;
         this.recyclerView = recyclerView;
         this.endPage = endPage;
+        this.isUser = isUser;
+        this.user = user;
     }
-
 
     @Override
     public void onPreExecute() {
@@ -76,7 +84,11 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
             // 1ページ当たりの取得ツイート数
             Paging page = new Paging(1, endPage);
 
-            return mTwitter.getHomeTimeline(page);
+            if (isUser) {
+                return mTwitter.getUserTimeline(user.getId(), page);
+            } else {
+                return mTwitter.getHomeTimeline(page);
+            }
         } catch (TwitterException e) {
             e.printStackTrace();
         }
@@ -98,11 +110,9 @@ public class TimeLineAsync extends AsyncTask<Void, Void, List<twitter4j.Status>>
                     for (MediaEntity mediaResult : mediaEntities) {
                         mediaList.add(mediaResult.getMediaURL());
                     }
-                    Log.d("activity_tag", "mediaList.added from page " + count);
                 } else {
                     mediaList.add(null);
                 }
-                Log.d("activity_tag", "mData.added from page " + count);
                 count++;
             }
             RecyclerAdapter adapter = new RecyclerAdapter(

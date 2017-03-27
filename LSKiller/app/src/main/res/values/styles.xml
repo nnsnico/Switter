@@ -12,7 +12,7 @@
     </style>
 
     <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="ProgressStyle" parent="Base.Widget.AppCompat.ProgressBar.Horizontal">

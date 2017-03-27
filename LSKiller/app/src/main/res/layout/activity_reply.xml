@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="140/140"
         android:textColor="@android:color/white"
-        android:textSize="30dp"
+        android:textSize="30sp"
         />
 
     <FrameLayout
@@ -50,25 +50,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorText"
                 android:layout_gravity="bottom"
                 android:id="@+id/uploadedMediaCount"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/action_media"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="bottom"
                 android:layout_margin="10dp"
-                android:background="@drawable/camera"/>
+                android:background="@drawable/bt_tweet_style"
+                android:src="@drawable/camera"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/action_tweet"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="bottom"
                 android:layout_margin="10dp"
-                android:background="@drawable/tweet"/>
+                android:background="@drawable/bt_tweet_style"
+                android:src="@drawable/tweet"/>
 
         </LinearLayout>
 

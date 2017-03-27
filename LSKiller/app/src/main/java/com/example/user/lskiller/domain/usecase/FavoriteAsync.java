@@ -7,8 +7,10 @@ import android.support.design.widget.Snackbar;
 
 import com.example.user.lskiller.presentation.view.util.TwitterUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -18,14 +20,14 @@ import twitter4j.TwitterException;
 public class FavoriteAsync extends AsyncTask<Long, Void, Boolean> {
     private Context context;
     private Activity activity;
-    private List<twitter4j.Status> statuses;
+    private ArrayList<twitter4j.Status> statuses;
     private Twitter mTwitter;
     private int position;
 
     public FavoriteAsync(
             Activity activity,
             Context context,
-            List<twitter4j.Status> statuses,
+            ArrayList<twitter4j.Status> statuses,
             int position
     ) {
         this.activity = activity;

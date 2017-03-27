@@ -53,6 +53,7 @@ public class ReplyActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply);
+        // slide Transitional Animation
         getWindow().setEnterTransition(new Slide());
 
         String screenName = getIntent().getStringExtra("screenName");

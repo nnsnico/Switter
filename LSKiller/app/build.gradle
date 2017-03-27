@@ -2,14 +2,21 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.cookpad.android.licensetools'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.example.user.lskiller"
         minSdkVersion 21
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "0.0-develop"
+        jackOptions{
+            enabled true
+        }
+    }
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -24,12 +31,14 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:design:25.3.0'
     compile files('libs/twitter4j-core-4.0.4.jar')
     compile files('libs/android-smart-image-view-1.0.0.jar')
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     compile 'frankiesardo:icepick:3.2.0'
     provided 'frankiesardo:icepick-processor:3.2.0'
     compile 'com.r0adkll:slidableactivity:2.0.5'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

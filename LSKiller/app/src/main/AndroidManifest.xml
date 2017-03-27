@@ -55,6 +55,9 @@
         <activity
             android:name=".presentation.view.activity.ImageViewerActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".presentation.view.activity.ProfileActivity"
+                  android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

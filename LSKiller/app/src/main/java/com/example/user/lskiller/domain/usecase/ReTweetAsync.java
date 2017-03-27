@@ -8,8 +8,10 @@ import android.util.Log;
 
 import com.example.user.lskiller.presentation.view.util.TwitterUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
@@ -20,14 +22,14 @@ public class ReTweetAsync extends AsyncTask<Long, Void, Boolean> {
 
     private Context context;
     private Activity activity;
-    private List<twitter4j.Status> statuses;
+    private ArrayList<twitter4j.Status> statuses;
     private Twitter mTwitter;
     private int position;
 
     public ReTweetAsync(
             Activity activity,
             Context context,
-            List<twitter4j.Status> statuses,
+            ArrayList<twitter4j.Status> statuses,
             int position
     ) {
         this.activity = activity;

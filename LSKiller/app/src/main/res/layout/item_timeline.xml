@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeMenu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -8,15 +9,16 @@
     <LinearLayout
         android:layout_width="100dp"
         android:layout_height="match_parent"
+        android:background="@color/colorText"
         android:gravity="center"
         android:tag="swipe_menu_left">
 
         <ImageView
+            android:id="@+id/goProfile"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground"
             android:padding="15dp"
-            android:src="@drawable/person"/>
+            android:src="@drawable/arrow"/>
 
     </LinearLayout>
 
@@ -35,7 +37,7 @@
             android:src="@drawable/reply"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
             android:src="@drawable/divider_style"/>
 
@@ -48,7 +50,7 @@
             android:src="@drawable/retweet"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
             android:src="@drawable/divider_style"/>
 
@@ -69,12 +71,13 @@
         android:background="@color/colorBackground"
         android:padding="8dp">
 
-        <com.loopj.android.image.SmartImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignStart="@+id/name"
-            android:layout_below="@+id/name"/>
+            android:layout_below="@+id/name"
+            android:paddingTop="5dp"/>
 
         <TextView
             android:id="@+id/name"
@@ -83,7 +86,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:text="名前入ります"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorText"/>
 
         <TextView
             android:id="@+id/screen_name"
@@ -111,10 +114,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/name"
             android:layout_toEndOf="@+id/icon"
+            android:autoLink="web"
             android:paddingBottom="8dp"
             android:paddingLeft="8dp"
             android:text="本文本文本文本文本文本文本文本文本文本文"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorText"/>
 
         <!--2x2のグリッドレイアウト-->
         <GridLayout

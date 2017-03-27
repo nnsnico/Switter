@@ -1,25 +1,31 @@
 package com.example.user.lskiller.presentation.view.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.example.user.lskiller.domain.usecase.OnRecyclerListener;
 import com.example.user.lskiller.R;
 import com.example.user.lskiller.presentation.view.component.RecyclerViewHolder;
 import com.loopj.android.image.SmartImageView;
+import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import twitter4j.MediaEntity;
 import twitter4j.Status;
+import twitter4j.User;
 import twitter4j.util.TimeSpanConverter;
 
 /**
@@ -28,31 +34,19 @@ import twitter4j.util.TimeSpanConverter;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private LayoutInflater mInflater;
-    private List<twitter4j.Status> statuses;
+    private ArrayList<Status> statuses;
     private Context mContext;
     private OnRecyclerListener mListener;
-    private TimeSpanConverter timeSpanConverter = new TimeSpanConverter(Locale.JAPAN);
-
-//    public RecyclerAdapter(
-//            Context context,
-//            List<twitter4j.Status> data,
-//            OnRecyclerListener listener
-//    ) {
-//        mInflater = LayoutInflater.from(context);
-//        mContext = context;
-//        statuses = data;
-//        mListener = listener;
-//        mTwitter = TwitterUtils.getTwitterInstance(context);
-//    }
+    private TimeSpanConverter timeSpan = new TimeSpanConverter(Locale.JAPAN);
 
     public RecyclerAdapter(
             Context context,
-            List<twitter4j.Status> data,
+            List<Status> data,
             OnRecyclerListener listener
     ) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
-        statuses = data;
+        statuses = (ArrayList<Status>) data;
         mListener = listener;
 //        Twitter mTwitter = TwitterUtils.getTwitterInstance(context);
     }
@@ -66,43 +60,36 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
         /** リツイートされたステータスか確認 */
+        Status targetSta = statuses.get(position);
+
         if (!statuses.get(position).isRetweet()) {
             /** リツイートされていない（通常のタイムライン） */
             holder.screenName.setText(String.format("@%s",
-                    statuses.get(position).getUser().getScreenName()));
-            holder.name.setText(statuses.get(position).getUser().getName());
-            holder.textView.setText(statuses.get(position).getText());
-            holder.icon.setImageUrl(statuses.get(position).getUser().getOriginalProfileImageURL());
-            holder.createTime.setText(
-                    timeSpanConverter.toTimeSpanString(statuses.get(position).getCreatedAt()));
+                    targetSta.getUser().getScreenName()));
+            holder.name.setText(targetSta.getUser().getName());
+            holder.textView.setText(targetSta.getText());
+            Picasso.with(mContext)
+                    .load(targetSta.getUser().getOriginalProfileImageURL())
+                    .into(holder.icon);
+            holder.createTime.setText(timeSpan.toTimeSpanString(targetSta.getCreatedAt()));
             holder.reTweetedUser.setText("");
             setMedias(holder, position);
         } else {
             /** リツイートされたユーザをタイムラインに差し替える */
+            Status retStatus = statuses.get(position).getRetweetedStatus();
+
             holder.screenName.setText(
-                    String.format("@%s",
-                            statuses.get(position)
-                                    .getRetweetedStatus()
-                                    .getUser()
-                                    .getScreenName()));
-            holder.name.setText(statuses.get(position).getRetweetedStatus().getUser().getName());
-            holder.textView.setText(statuses.get(position).getRetweetedStatus().getText());
-            holder.icon.setImageUrl(
-                    statuses.get(position)
-                            .getRetweetedStatus()
-                            .getUser()
-                            .getOriginalProfileImageURL());
-            holder.createTime.setText(
-                    timeSpanConverter.toTimeSpanString(
-                            statuses.get(position)
-                                    .getRetweetedStatus()
-                                    .getCreatedAt()
-                    )
-            );
+                    String.format("@%s", retStatus.getUser().getScreenName()));
+            holder.name.setText(retStatus.getUser().getName());
+            holder.textView.setText(retStatus.getText());
+            Picasso.with(mContext)
+                    .load(retStatus.getUser().getOriginalProfileImageURL())
+                    .into(holder.icon);
+            holder.createTime.setText(timeSpan.toTimeSpanString(retStatus.getCreatedAt()));
             /** リツイート元の名前を挿入 */
             holder.reTweetedUser.setText(
                     String.format("%sさんがRTしました",
-                            statuses.get(position).getUser().getName()));
+                            targetSta.getUser().getName()));
             setMedias(holder, position);
         }
 
@@ -122,6 +109,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         holder.swipeLayout.addDrag(SwipeLayout.DragEdge.Left,
                 holder.swipeLayout.findViewWithTag("swipe_menu_left"));
         // pushed Icon
+        holder.swipeLayout.findViewById(R.id.goProfile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onRecyclerClicked("goPro", statuses, position);
+                holder.swipeLayout.close();
+            }
+        });
         holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
