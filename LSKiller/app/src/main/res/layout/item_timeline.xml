@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:apps="http://schemas.android.com/tools"
     android:id="@+id/swipeMenu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
-        android:background="@color/colorText"
+        android:background="@color/colorBackground"
         android:gravity="center"
         android:tag="swipe_menu_left">
 
@@ -18,7 +18,8 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:padding="15dp"
-            android:src="@drawable/arrow"/>
+            android:background="@drawable/ripple_effect"
+            android:src="@drawable/ic_person"/>
 
     </LinearLayout>
 
@@ -32,9 +33,9 @@
             android:id="@+id/reply"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground"
+            android:background="@drawable/ripple_effect"
             android:padding="15dp"
-            android:src="@drawable/reply"/>
+            android:src="@drawable/ic_reply"/>
 
         <ImageView
             android:layout_width="1dp"
@@ -45,9 +46,9 @@
             android:id="@+id/reTweet"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground"
+            android:background="@drawable/ripple_effect"
             android:padding="15dp"
-            android:src="@drawable/retweet"/>
+            android:src="@drawable/ic_retweet"/>
 
         <ImageView
             android:layout_width="1dp"
@@ -58,9 +59,9 @@
             android:id="@+id/favorite"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:background="@color/colorBackground"
+            android:background="@drawable/ripple_effect"
             android:padding="15dp"
-            android:src="@drawable/fav"/>
+            android:src="@drawable/ic_fav"/>
 
     </LinearLayout>
 
@@ -85,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="名前入ります"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            apps:text="名前入ります"/>
 
         <TextView
             android:id="@+id/screen_name"
@@ -95,8 +96,8 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="8dp"
             android:layout_toEndOf="@+id/name"
-            android:text="\uFF20gabu"
-            android:textColor="@color/colorSecondPrimary"/>
+            android:textColor="@color/colorSecondPrimary"
+            apps:text="\uFF20gabu"/>
 
         <TextView
             android:id="@+id/createTime"
@@ -105,8 +106,8 @@
             android:layout_above="@+id/text"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="8dp"
-            android:text="投稿時間"
-            android:textColor="@color/colorSecondPrimary"/>
+            android:textColor="@color/colorSecondPrimary"
+            apps:text="投稿時間"/>
 
         <TextView
             android:id="@+id/text"
@@ -117,8 +118,8 @@
             android:autoLink="web"
             android:paddingBottom="8dp"
             android:paddingLeft="8dp"
-            android:text="本文本文本文本文本文本文本文本文本文本文"
-            android:textColor="@color/colorText"/>
+            android:textColor="@color/colorText"
+            apps:text="本文本文本文本文本文本文本文本文本文本文"/>
 
         <!--2x2のグリッドレイアウト-->
         <GridLayout
