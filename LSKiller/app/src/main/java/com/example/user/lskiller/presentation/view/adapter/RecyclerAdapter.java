@@ -116,28 +116,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
                 holder.swipeLayout.close();
             }
         });
-        holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onRecyclerClicked("fav", statuses, position);
-                holder.swipeLayout.close();
-            }
+        holder.swipeLayout.findViewById(R.id.favorite).setOnClickListener(view -> {
+            mListener.onRecyclerClicked("fav", statuses, position);
+            holder.swipeLayout.close();
         });
 
-        holder.swipeLayout.findViewById(R.id.reTweet).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onRecyclerClicked("ret", statuses, position);
-                holder.swipeLayout.close();
-            }
+        holder.swipeLayout.findViewById(R.id.reTweet).setOnClickListener(view -> {
+            mListener.onRecyclerClicked("ret", statuses, position);
+            holder.swipeLayout.close();
         });
 
-        holder.swipeLayout.findViewById(R.id.reply).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onRecyclerClicked("rep", statuses, position);
-                holder.swipeLayout.close();
-            }
+        holder.swipeLayout.findViewById(R.id.reply).setOnClickListener(view -> {
+            mListener.onRecyclerClicked("rep", statuses, position);
+            holder.swipeLayout.close();
         });
     }
 
@@ -176,13 +167,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
             imageView.setLayoutParams(params);
 
             final int finalCount = count;
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mListener.onRecyclerClicked("img", mediaEntities, finalCount);
-                    Log.d("MediaUrl", mediaEntity.getMediaURL());
-                    Log.d("ExpandedUrl", mediaEntity.getExpandedURL());
-                }
+            imageView.setOnClickListener(view -> {
+                mListener.onRecyclerClicked("img", mediaEntities, finalCount);
+                Log.d("MediaUrl", mediaEntity.getMediaURL());
+                Log.d("ExpandedUrl", mediaEntity.getExpandedURL());
             });
             /** 画像表示用のレイアウトに突っ込む. */
             holder.gridLayout.addView(imageView, params);

@@ -56,12 +56,9 @@ public class TimelineActivity extends AppCompatActivity
         toolbarConfig();
         // SwipeLayoutConfig
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getTimeline();
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            getTimeline();
+            mSwipeRefreshLayout.setRefreshing(false);
         });
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         // Twitterのトークンが取得されているか
@@ -102,23 +99,20 @@ public class TimelineActivity extends AppCompatActivity
         toolbar.inflateMenu(R.menu.toolbar_item);
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.colorWhite));
         // ToolBarのアイテム取得
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.menu_refresh:
-                        getTimeline();
-                        return true;
-                    case R.id.menu_tweet:
-                        Intent intent = new Intent(TimelineActivity.this, TweetActivity.class);
-                        startIntent(intent);
-                        return true;
-                    case R.id.AboutApp:
-                        Intent intent2 = new Intent(TimelineActivity.this, AboutAppActivity.class);
-                        startIntent(intent2);
-                }
-                return true;
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.menu_refresh:
+                    getTimeline();
+                    return true;
+                case R.id.menu_tweet:
+                    Intent intent = new Intent(TimelineActivity.this, TweetActivity.class);
+                    startIntent(intent);
+                    return true;
+                case R.id.AboutApp:
+                    Intent intent2 = new Intent(TimelineActivity.this, AboutAppActivity.class);
+                    startIntent(intent2);
             }
+            return true;
         });
     }
 
