@@ -136,11 +136,11 @@ public class ProfileActivity extends AppCompatActivity
 //                        task.execute();
                         break;
                     case R.id.block:
-                        try {
-                            mTwitter.createBlock(status.getId());
-                        } catch (TwitterException e) {
-                            e.printStackTrace();
-                        }
+//                        try {
+//                            mTwitter.createBlock(status.getId());
+//                        } catch (TwitterException e) {
+//                            e.printStackTrace();
+//                        }
                         break;
                     // リツイート非表示できるのか
                     case R.id.mute_ret:
