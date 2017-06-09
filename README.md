@@ -17,11 +17,11 @@ iOSのメールアプリっぽいものをイメージ
 
 ## 開発環境
 ### IDE
-* AndroidStudio 2.1
+* AndroidStudio 2.3.3
 
 ### TargetAPI
 * Min 21 (Lolipopでいいでしょ)
-* Max 24 (Nuger)
+* Max 25 (Nuger)
 
 ### デバッグ端末
 * ~~DOCOMO XperiaZ3 SO-01G~~
