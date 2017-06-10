@@ -2,6 +2,8 @@ package com.example.user.lskiller.presentation.view.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -23,10 +25,18 @@ public class TwitterUtils {
      * @return twitter
      */
     public static Twitter getTwitterInstance(Context context) {
-//        String consumerKey = context.getString(R.string.twitter_consumer_key);
-        String consumerKey = "zD9EcQgAYgY3UjHS5Ghn6eQTx";
-//        String consumerSecret = context.getString(R.string.twitter_consumer_secret);
-        String consumerSecret = "NH8yGDdZqd8WQkiFzwZgyjNBEaQ6FYmRbV5BoAkjl7Ap1oZSkf";
+        String consumerKey = "";
+        String consumerSecret = "";
+
+        try {
+            ApplicationInfo info =
+                    context.getPackageManager().getApplicationInfo(
+                            context.getPackageName(), PackageManager.GET_META_DATA);
+            consumerKey = info.metaData.getString("apikey");
+            consumerSecret = info.metaData.getString("apisecret");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
 
         TwitterFactory factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();

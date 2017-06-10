@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Switter</string>
-    <string name="twitter_consumer_key">kpnMHtrYd0qBa4VkBPlfbGcmp</string>
-    <string name="twitter_consumer_secret">Sxa8GikC8Mqvomzfj0pFkdbv02cBuEoeRcTnnM9K0pbbb2SpTA</string>
     <string name="twitter_oauth">Twitter認証</string>
     <string name="twitter_callback_url">gabu://twitter</string>
     <string name="menu_refresh">Refresh</string>
