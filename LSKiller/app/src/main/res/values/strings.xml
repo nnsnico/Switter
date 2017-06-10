@@ -1,11 +1,37 @@
 <resources>
-    <string name="app_name">LSKiller</string>
-    <string name="twitter_consumer_key">kpnMHtrYd0qBa4VkBPlfbGcmp</string>
-    <string name="twitter_consumer_secret">Sxa8GikC8Mqvomzfj0pFkdbv02cBuEoeRcTnnM9K0pbbb2SpTA</string>
+    <string name="app_name">Switter</string>
     <string name="twitter_oauth">Twitter認証</string>
     <string name="twitter_callback_url">gabu://twitter</string>
     <string name="menu_refresh">Refresh</string>
     <string name="menu_tweet">Tweet</string>
     <string name="action_tweet">Tweet</string>
+
+    <string name="version">version 0.7-develop</string>
+    <string name="about">
+        "機能面で至らない点がまだ多いですが使っていただけると幸いです。\n\n"
+
+        "\-\-追加予定機能\-\-\n"
+        "* ミュート、リツイート機能の追加\n"
+        "* ふぁぼ、リツイートのアニメーション\n"
+        "* フォロー、フォロワー表示"
+        "  etc…\n\n"
+
+        "Twitterで進捗報告をしております。よかったらフォロー + アドバイスをお願いします\n"
+    </string>
+    <string name="pin">PINコード認証</string>
+    <string name="detailAppTitle">
+        Switterの使い方
+    </string>
+
+    <string name="detailApp">
+        ① 「Twitter認証」のボタンを押し、使用したいTwitterアカウントでログインを行ってください。\n\n
+
+        ③ PINコードが発行されるのでコピーして下の入力欄に張り付けてください。\n\n
+
+        ② 認証が完了します！\n\n
+    </string>
+    <string name="HintPin">PINコードを貼り付けてください</string>
+    <string name="about_app">このアプリについて</string>
+    <string name="my_screen_name"><u>\@tym_free</u></string>
 
 </resources>

@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools">
 
     <item
         android:id="@+id/menu_refresh"
-        android:icon="@android:drawable/stat_notify_sync"
+        android:icon="@drawable/ic_sync"
         android:orderInCategory="100"
         android:title="@string/menu_refresh"
         app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_tweet"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@drawable/ic_create"
         android:orderInCategory="100"
         android:title="@string/menu_tweet"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/AboutApp"
+        android:title="@string/about_app"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        tools:ignore="AppCompatResource"/>
+
+
 </menu>

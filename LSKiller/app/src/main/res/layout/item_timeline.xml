@@ -1,68 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
+<com.daimajia.swipe.SwipeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:apps="http://schemas.android.com/tools"
+    android:id="@+id/swipeMenu"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorBackground"
-    android:padding="8dp">
+    android:layout_height="wrap_content">
 
-    <com.loopj.android.image.SmartImageView
-        android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"/>
+    <LinearLayout
+        android:layout_width="70dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:gravity="center"
+        android:tag="swipe_menu_left">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/icon"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/icon"
-        android:text="名前入ります"
-        android:textColor="@color/colorPrimary"/>
+        <ImageView
+            android:id="@+id/goProfile"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:background="@drawable/ripple_effect"
+            android:src="@drawable/ic_person"/>
 
-    <TextView
-        android:id="@+id/screen_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/name"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@+id/name"
-        android:text="\uFF20gabu"
-        android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/text"
+    <LinearLayout
+        android:layout_width="210dp"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:tag="swipe_menu_right">
+
+        <ImageView
+            android:id="@+id/reply"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ripple_effect"
+            android:padding="15dp"
+            android:src="@drawable/ic_reply"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/divider_style"/>
+
+        <ImageView
+            android:id="@+id/reTweet"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ripple_effect"
+            android:padding="15dp"
+            android:src="@drawable/ic_retweet"/>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/divider_style"/>
+
+        <ImageView
+            android:id="@+id/favorite"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ripple_effect"
+            android:padding="15dp"
+            android:src="@drawable/ic_fav"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        style="@style/RecyclerStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/name"
-        android:layout_below="@+id/name"
-        android:text="本文本文本文本文本文本文本文本文本文本文"
-        android:textColor="@color/colorPrimary"/>
+        android:background="@color/colorBackground"
+        android:padding="8dp">
 
-    <!--2x2のグリッドレイアウト-->
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/icon"
-        android:layout_below="@+id/text"
-        android:rowCount="2"
-        android:columnCount="2">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/name"
+            android:layout_below="@+id/name"
+            android:paddingTop="5dp"/>
 
-        <com.loopj.android.image.SmartImageView
-            android:id="@+id/media1"
-            android:scaleType="fitCenter"/>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/colorText"
+            apps:text="名前入ります"/>
 
-        <com.loopj.android.image.SmartImageView
-            android:id="@+id/media2"
-            android:scaleType="fitCenter"/>
+        <TextView
+            android:id="@+id/screen_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@+id/name"
+            android:textColor="@color/colorSecondPrimary"
+            apps:text="\uFF20gabu"/>
 
-        <com.loopj.android.image.SmartImageView
-            android:id="@+id/media3"
-            android:scaleType="fitCenter"/>
-    </GridLayout>
+        <TextView
+            android:id="@+id/createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/text"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/colorSecondPrimary"
+            apps:text="投稿時間"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_toEndOf="@+id/icon"
+            android:autoLink="web"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:textColor="@color/colorText"
+            apps:text="本文本文本文本文本文本文本文本文本文本文"/>
+
+        <!--2x2のグリッドレイアウト-->
+        <GridLayout
+            android:id="@+id/grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:layout_toEndOf="@+id/icon"
+            android:columnCount="2"
+            android:paddingBottom="8dp"
+            android:paddingLeft="8dp"
+            android:rowCount="2">
+
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/reTweetedUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorSecondPrimary"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+</com.daimajia.swipe.SwipeLayout>

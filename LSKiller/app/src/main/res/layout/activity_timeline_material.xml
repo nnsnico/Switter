@@ -7,9 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
-    <include layout="@layout/layout_recycler_list">
-
-    </include>
+    <include layout="@layout/layout_recycler_list"/>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,19 +15,15 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            apps:layout_scrollFlags="scroll|enterAlways"
-            >
+            android:layout_height="?android:actionBarSize"
+            apps:layout_scrollFlags="scroll|enterAlways">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_material"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                >
-
-            </android.support.v7.widget.Toolbar>
+                android:background="@color/colorPrimary"
+                apps:navigationIcon="@drawable/ic_app_icon"/>
 
             <ProgressBar
                 android:id="@+id/progress"
@@ -37,9 +31,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="-7.5dp"
+                android:layout_marginTop="-4dp"
                 android:indeterminate="true"
+                android:progressDrawable="@drawable/progress_style"
                 android:visibility="visible"/>
-
         </FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
