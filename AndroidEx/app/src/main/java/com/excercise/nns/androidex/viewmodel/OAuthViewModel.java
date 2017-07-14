@@ -3,7 +3,6 @@ package com.excercise.nns.androidex.viewmodel;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.ObservableField;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +19,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import io.realm.Realm;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
@@ -32,7 +30,7 @@ import twitter4j.auth.AccessToken;
 public class OAuthViewModel extends BaseObservable {
     private OAuthContract contract;
     private Intent intent;
-    private Twitter twitter;
+    private OAuthUseCase useCase;
     @Bindable
     public String pin;
 
@@ -41,12 +39,12 @@ public class OAuthViewModel extends BaseObservable {
         this.contract = contract;
         // load Twitter Instance
         TwitterFactory factory = new TwitterFactory();
-        twitter = factory.getInstance();
+        Twitter twitter = factory.getInstance();
         twitter.setOAuthConsumer(consumer, consumerSecret);
+        useCase = new OAuthUseCase(twitter);
     }
 
     public void onClickPIN(View view) {
-        OAuthUseCase useCase = new OAuthUseCase(twitter);
         Observer<String> observer = new Observer<String>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -81,7 +79,6 @@ public class OAuthViewModel extends BaseObservable {
         if (Objects.equals(pin, "")) {
             contract.OAuthFailure("PIN is not ENTERED.");
         } else {
-            OAuthUseCase useCase = new OAuthUseCase(twitter);
             Observer<AccessToken> observer = new Observer<AccessToken>() {
                 @Override
                 public void onSubscribe(@NonNull Disposable d) {
@@ -89,16 +86,13 @@ public class OAuthViewModel extends BaseObservable {
 
                 @Override
                 public void onNext(@NonNull AccessToken accessToken) {
-                    if(accessToken != null) {
-                        Log.d(OAuthViewModel.class.getClass().toString(), "AccessToken got.");
-                        // store accessToken by Realm
-                        final Realm realm = Realm.getDefaultInstance(); //1
-                            realm.beginTransaction();   //2
-                                Token token = realm.createObject(Token.class);
-                                token.setAccessToken(accessToken.getToken());
-                                token.setTokenSecret(accessToken.getTokenSecret());
-                            realm.commitTransaction();  //2
-                        realm.close();  //1
+                    if (accessToken != null) {
+                        Log.d(OAuthViewModel.class.toString(), "AccessToken got.");
+                        // store accessToken by DBFlow
+                        final Token token= new Token();
+                        token.setAccessToken(accessToken.getToken());
+                        token.setTokenSecret(accessToken.getTokenSecret());
+                        token.save();
                     } else {
                         contract.OAuthFailure("Couldn't get AccessToken.\nPlease try again.");
                     }

@@ -5,4 +5,19 @@
     <string name="api_secret">o2hZaNoZRoRPCz9zMI8C4Q5QKQWsMI6uZq3GmieAVGRwPeBoYJ</string>
     <string name="pin">PIN</string>
     <string name="input_pin">INPUT PIN!</string>
+
+    <string name="detailAppTitle">
+        認証方法
+    </string>
+
+    <string name="detailApp">
+        ① 「PIN」ボタンを押し、使用したいTwitterアカウントでログインを行ってください。\n\n
+
+        ③ PINコードが発行されるのでコピーして下の入力欄に張り付けてください。\n\n
+
+        ② 認証が完了します！\n\n
+    </string>
+    <string name="about_app">このアプリについて</string>
+    <string name="menu_tweet">Tweet</string>
+    <string name="menu_refresh">Refresh</string>
 </resources>

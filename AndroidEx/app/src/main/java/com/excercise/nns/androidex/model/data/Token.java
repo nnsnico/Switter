@@ -1,14 +1,30 @@
 package com.excercise.nns.androidex.model.data;
 
-import io.realm.RealmObject;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 /**
  * Created by nns on 2017/06/19.
  */
 
-public class Token extends RealmObject {
+@Table(database = TokenDB.class)
+public class Token extends BaseModel {
+    @PrimaryKey(autoincrement = true)
+    private int id;
+    @Column
     private String accessToken;
+    @Column
     private String tokenSecret;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getAccessToken() {
         return accessToken;
@@ -26,7 +42,4 @@ public class Token extends RealmObject {
         this.tokenSecret = tokenSecret;
     }
 
-    public boolean hasAccessToken() {
-        return tokenSecret != null && accessToken != null;
-    }
 }

@@ -22,6 +22,7 @@ public class OAuthActivity extends AppCompatActivity implements OAuthContract {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ActivityOauthBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_oauth);
         String consumerKey = getString(R.string.api_key);

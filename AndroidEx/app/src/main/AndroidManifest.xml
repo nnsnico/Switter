@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.excercise.nns.androidex">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -20,8 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".view.activity.OAuthActivity"/>
+        <activity android:name=".view.activity.OAuthActivity" />
+        <activity android:name=".view.activity.TweetActivity" />
+        <activity android:name=".view.activity.AboutAppActivity" />
     </application>
 
 </manifest>
