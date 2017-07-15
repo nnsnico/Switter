@@ -13,8 +13,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.excercise.nns.androidex.R;
+import com.excercise.nns.androidex.contract.OnRecyclerListener;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.databinding.ActivityTimelineBinding;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
@@ -29,7 +31,7 @@ import java.util.List;
  * Created by nns on 2017/06/12.
  */
 
-public class TimelineActivity extends AppCompatActivity implements TimelineContract {
+public class TimelineActivity extends AppCompatActivity implements TimelineContract, OnRecyclerListener {
 
     private ActivityTimelineBinding binding;
 
@@ -89,10 +91,15 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
 
     @Override
     public void getTimelineSuccess(List<TwitterStatus> statuses) {
-        RecyclerAdapter adapter = new RecyclerAdapter(statuses);
+        RecyclerAdapter adapter = new RecyclerAdapter(statuses, this);
         Parcelable state = binding.recyclerView.getLayoutManager().onSaveInstanceState();
         binding.recyclerView.getLayoutManager().onRestoreInstanceState(state);
         binding.recyclerView.setAdapter(adapter);
         binding.swipeLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onClickItemClick(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

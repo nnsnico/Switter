@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.excercise.nns.androidex.R;
+import com.excercise.nns.androidex.contract.OnRecyclerListener;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
 import com.excercise.nns.androidex.model.data.Token;
@@ -67,12 +69,14 @@ public class TimelineViewModel {
         TimelineUseCase useCase = new TimelineUseCase(twitter);
         Observer<List<Status>> observer = new Observer<List<Status>>() {
             @Override
-            public void onSubscribe(@NonNull Disposable d) {}
+            public void onSubscribe(@NonNull Disposable d) {
+            }
+
             @Override
             public void onNext(@NonNull List<Status> result) {
                 if (result != null) {
                     statuses = new ArrayList<>();
-                    for(Status status : result) {
+                    for (Status status : result) {
                         TwitterStatus st = TwitterUtils.getStatus(status);
                         statuses.add(st);
                     }
@@ -81,12 +85,14 @@ public class TimelineViewModel {
                             "時間を置いてから再度起動してください");
                 }
             }
+
             @Override
             public void onError(@NonNull Throwable e) {
                 e.printStackTrace();
                 contract.getTimelineFailed("タイムラインの取得に失敗しました\n" +
                         "時間を置いてから再度起動してください");
             }
+
             @Override
             public void onComplete() {
                 contract.getTimelineSuccess(statuses);
@@ -135,7 +141,7 @@ public class TimelineViewModel {
 
     @BindingAdapter({"bind:uploadImage"})
     public static void loadUploadImage(GridLayout layout, MediaEntity[] entities) {
-        if(layout.getChildCount() > 0) {
+        if (layout.getChildCount() > 0) {
             layout.removeAllViews();
         }
         if (entities != null) {
@@ -153,5 +159,23 @@ public class TimelineViewModel {
                 Picasso.with(layout.getContext()).load(entity.getMediaURL()).into(image);
             }
         }
+    }
+
+    @BindingAdapter({"bind:targetStatus", "bind:listener"})
+    public static void onClickSwipeItem(
+            SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener) {
+        swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v -> {
+            listener.onClickItemClick("Clicked \"goProfile.\"");
+            swipeLayout.close();
+        });
+        swipeLayout.findViewById(R.id.reply).setOnClickListener(v -> {
+            swipeLayout.close();
+        });
+        swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {
+            swipeLayout.close();
+        });
+        swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
+            swipeLayout.close();
+        });
     }
 }
