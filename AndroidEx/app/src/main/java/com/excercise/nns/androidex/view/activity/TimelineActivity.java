@@ -99,7 +99,18 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     }
 
     @Override
-    public void onClickItemClick(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void onSwipeItemClick(String tag, TwitterStatus status) {
+        switch (tag) {
+            case "goPro":
+                break;
+            case "reply":
+                break;
+            case "retweet":
+                break;
+            case "fav":
+                break;
+            default:
+                break;
+        }
     }
 }
