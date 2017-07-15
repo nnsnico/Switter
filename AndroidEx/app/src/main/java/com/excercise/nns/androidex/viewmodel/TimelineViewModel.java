@@ -155,18 +155,14 @@ public class TimelineViewModel {
     @BindingAdapter({"bind:targetStatus", "bind:listener"})
     public static void onClickSwipeItem(
             SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener) {
-        swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v -> {
-            listener.onSwipeItemClick("goPro", status);
-        });
-        swipeLayout.findViewById(R.id.reply).setOnClickListener(v -> {
-            listener.onSwipeItemClick("reply", status);
-        });
-        swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {
-            listener.onSwipeItemClick("retweet", status);
-        });
-        swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
-            listener.onSwipeItemClick("fav", status);
-        });
+        swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v ->
+                listener.onSwipeItemClick("goPro", status));
+        swipeLayout.findViewById(R.id.reply).setOnClickListener(v ->
+                listener.onSwipeItemClick("reply", status));
+        swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v ->
+                listener.onSwipeItemClick("retweet", status));
+        swipeLayout.findViewById(R.id.favorite).setOnClickListener(v ->
+                listener.onSwipeItemClick("fav", status));
         swipeLayout.close();
     }
 }
