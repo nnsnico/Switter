@@ -50,17 +50,12 @@ public class TimelineViewModel {
     private ArrayList<TwitterStatus> statuses = new ArrayList<>();
 
     public TimelineViewModel(
-            TimelineContract contract, String consumerKey, String consumerSecret) {
+            TimelineContract contract) {
         this.contract = contract;
-        TwitterFactory factory = new TwitterFactory();
-        twitter = factory.getInstance();
-        twitter.setOAuthConsumer(consumerKey, consumerSecret);
-        // query token
-        Token token = SQLite.select().from(Token.class).where(Token_Table.id.is(1)).querySingle();
-        if (token != null)
-            twitter.setOAuthAccessToken(new AccessToken(token.getAccessToken(), token.getTokenSecret()));
-        else
+        twitter = TwitterUtils.getTwitterInstance();
+        if (twitter == null) {
             contract.onStartOAuth();
+        }
         // get timeline
         loadTimeline();
     }
