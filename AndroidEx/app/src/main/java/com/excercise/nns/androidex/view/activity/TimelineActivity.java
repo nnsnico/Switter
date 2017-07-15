@@ -43,11 +43,8 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         FlowManager.init(this);
-        String consumerKey = getString(R.string.api_key);
-        String consumerSecret = getString(R.string.api_secret);
-        TimelineViewModel viewModel = new TimelineViewModel(this, consumerKey, consumerSecret);
+        TimelineViewModel viewModel = new TimelineViewModel(this);
         binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_timeline);
         // toolbar setup
@@ -69,7 +66,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
 
     @Override
     public void onStartTweet() {
-        TweetActivity.start(this);
+        TweetActivity.start(this, null, 0);
     }
 
     @Override
@@ -104,6 +101,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
             case "goPro":
                 break;
             case "reply":
+                TweetActivity.start(this, status.getName(), status.getId());
                 break;
             case "retweet":
                 break;
