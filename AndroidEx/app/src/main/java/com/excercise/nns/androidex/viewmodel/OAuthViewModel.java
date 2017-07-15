@@ -47,8 +47,7 @@ public class OAuthViewModel extends BaseObservable {
     public void onClickPIN(View view) {
         Observer<String> observer = new Observer<String>() {
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
-            }
+            public void onSubscribe(@NonNull Disposable d) {}
 
             @Override
             public void onNext(@NonNull String url) {
@@ -81,8 +80,7 @@ public class OAuthViewModel extends BaseObservable {
         } else {
             Observer<AccessToken> observer = new Observer<AccessToken>() {
                 @Override
-                public void onSubscribe(@NonNull Disposable d) {
-                }
+                public void onSubscribe(@NonNull Disposable d) {}
 
                 @Override
                 public void onNext(@NonNull AccessToken accessToken) {
