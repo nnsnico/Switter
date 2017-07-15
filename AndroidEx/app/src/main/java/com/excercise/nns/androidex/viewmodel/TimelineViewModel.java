@@ -62,10 +62,10 @@ public class TimelineViewModel {
         else
             contract.onStartOAuth();
         // get timeline
-        loadTimeline(false, null);
+        loadTimeline();
     }
 
-    private void loadTimeline(boolean isUser, User user) {
+    private void loadTimeline() {
         TimelineUseCase useCase = new TimelineUseCase(twitter);
         Observer<List<Status>> observer = new Observer<List<Status>>() {
             @Override
@@ -98,25 +98,16 @@ public class TimelineViewModel {
                 contract.getTimelineSuccess(statuses);
             }
         };
-
-        // TODO: add page on Swipe bottom
-        if (isUser && user != null) {
-            useCase.getUserTimeline(user, 40)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer);
-        } else {
-            useCase.getHomeTimeline(40)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer);
-        }
+        useCase.getHomeTimeline(40)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
 
     public boolean onMenuClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_refresh:
-                loadTimeline(false, null);
+                loadTimeline();
                 return true;
             case R.id.menu_tweet:
                 contract.onStartTweet();
@@ -131,7 +122,7 @@ public class TimelineViewModel {
     }
 
     public void onRefresh() {
-        loadTimeline(false, null);
+        loadTimeline();
     }
 
     @BindingAdapter({"bind:imageUrl"})
@@ -165,17 +156,17 @@ public class TimelineViewModel {
     public static void onClickSwipeItem(
             SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener) {
         swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v -> {
-            listener.onClickItemClick("Clicked \"goProfile.\"");
-            swipeLayout.close();
+            listener.onSwipeItemClick("goPro", status);
         });
         swipeLayout.findViewById(R.id.reply).setOnClickListener(v -> {
-            swipeLayout.close();
+            listener.onSwipeItemClick("reply", status);
         });
         swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {
-            swipeLayout.close();
+            listener.onSwipeItemClick("retweet", status);
         });
         swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
-            swipeLayout.close();
+            listener.onSwipeItemClick("fav", status);
         });
+        swipeLayout.close();
     }
 }
