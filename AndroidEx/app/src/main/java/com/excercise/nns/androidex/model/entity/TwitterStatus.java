@@ -7,6 +7,7 @@ import twitter4j.MediaEntity;
  */
 
 public class TwitterStatus {
+    private long id;
     private String profileImageUrl;
     private String name;
     private String screenName;
@@ -14,6 +15,10 @@ public class TwitterStatus {
     private String tweetText;
     private MediaEntity[] mediaImageUrl;
     private String retweet = "";
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
@@ -41,6 +46,10 @@ public class TwitterStatus {
 
     public void setRetweet(String retweet) {
         this.retweet = retweet + "がリツイートしました";
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getProfileImageUrl() {
