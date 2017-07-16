@@ -18,6 +18,7 @@ import com.excercise.nns.androidex.model.data.Token;
 import com.excercise.nns.androidex.model.data.Token_Table;
 import com.excercise.nns.androidex.model.usecase.TimelineUseCase;
 import com.excercise.nns.androidex.utils.TwitterUtils;
+import com.excercise.nns.androidex.viewmodel.factory.TimelineObserverFactory;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.squareup.picasso.Picasso;
 
@@ -47,11 +48,12 @@ import twitter4j.auth.AccessToken;
 public class TimelineViewModel {
     private TimelineContract contract;
     private Twitter twitter;
-    private ArrayList<TwitterStatus> statuses = new ArrayList<>();
+    private TimelineObserverFactory factory;
 
     public TimelineViewModel(
             TimelineContract contract) {
         this.contract = contract;
+        factory = new TimelineObserverFactory(contract);
         twitter = TwitterUtils.getTwitterInstance();
         if (twitter == null) {
             contract.onStartOAuth();
@@ -62,37 +64,7 @@ public class TimelineViewModel {
 
     private void loadTimeline() {
         TimelineUseCase useCase = new TimelineUseCase(twitter);
-        Observer<List<Status>> observer = new Observer<List<Status>>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-            }
-
-            @Override
-            public void onNext(@NonNull List<Status> result) {
-                if (result != null) {
-                    statuses = new ArrayList<>();
-                    for (Status status : result) {
-                        TwitterStatus st = TwitterUtils.getStatus(status);
-                        statuses.add(st);
-                    }
-                } else {
-                    contract.getTimelineFailed("タイムラインの取得に失敗しました\n" +
-                            "時間を置いてから再度起動してください");
-                }
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                e.printStackTrace();
-                contract.getTimelineFailed("タイムラインの取得に失敗しました\n" +
-                        "時間を置いてから再度起動してください");
-            }
-
-            @Override
-            public void onComplete() {
-                contract.getTimelineSuccess(statuses);
-            }
-        };
+        Observer<List<Status>> observer = factory.getTimelineObserver();
         useCase.getHomeTimeline(40)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -133,13 +105,11 @@ public class TimelineViewModel {
         if (entities != null) {
             for (MediaEntity entity : entities) {
                 ImageView image = new ImageView(layout.getContext());
-                image.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                image.setPadding(0, 0, 0, 32);
-
+                image.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                 params.width = 300;
                 params.height = 300;
-                params.setMarginEnd(15);
+                params.setMargins(0, 0, 15, 15);
                 image.setLayoutParams(params);
                 layout.addView(image, params);
                 Picasso.with(layout.getContext()).load(entity.getMediaURL()).into(image);
@@ -147,17 +117,28 @@ public class TimelineViewModel {
         }
     }
 
-    @BindingAdapter({"bind:targetStatus", "bind:listener"})
+    @BindingAdapter({"bind:targetStatus", "bind:listener", "bind:contract"})
     public static void onClickSwipeItem(
-            SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener) {
-        swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v ->
-                listener.onSwipeItemClick("goPro", status));
-        swipeLayout.findViewById(R.id.reply).setOnClickListener(v ->
-                listener.onSwipeItemClick("reply", status));
-        swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v ->
-                listener.onSwipeItemClick("retweet", status));
-        swipeLayout.findViewById(R.id.favorite).setOnClickListener(v ->
-                listener.onSwipeItemClick("fav", status));
-        swipeLayout.close();
+            SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener, TimelineContract contract) {
+        swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v -> {
+            listener.onSwipeItemClick("goPro", status);
+            swipeLayout.close();
+        });
+        swipeLayout.findViewById(R.id.reply).setOnClickListener(v -> {
+            listener.onSwipeItemClick("reply", status);
+            swipeLayout.close();
+        });
+        swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {
+            // TODO: 2017/07/16 retweet user by usecase and observer.
+            // contract -> onRetweetSuccess and onRetweetFailed
+            swipeLayout.close();
+        });
+
+        swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
+            // TODO: 2017/07/16 favorite user by usecase and observer.
+            // contract -> onFavoriteSuccess and onFavoriteFailed
+            swipeLayout.close();
+        });
+
     }
 }

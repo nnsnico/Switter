@@ -11,6 +11,7 @@ import com.excercise.nns.androidex.BR;
 import com.excercise.nns.androidex.contract.OAuthContract;
 import com.excercise.nns.androidex.model.data.Token;
 import com.excercise.nns.androidex.model.usecase.OAuthUseCase;
+import com.excercise.nns.androidex.viewmodel.factory.OAuthObserverFactory;
 
 import java.util.Objects;
 
@@ -29,14 +30,16 @@ import twitter4j.auth.AccessToken;
 
 public class OAuthViewModel extends BaseObservable {
     private OAuthContract contract;
-    private Intent intent;
     private OAuthUseCase useCase;
+    private OAuthObserverFactory factory;
     @Bindable
     public String pin;
 
     public OAuthViewModel(
             OAuthContract contract, String consumer, String consumerSecret) {
         this.contract = contract;
+        // observer取得用のfactory
+        factory = new OAuthObserverFactory(contract);
         // load Twitter Instance
         TwitterFactory factory = new TwitterFactory();
         Twitter twitter = factory.getInstance();
@@ -45,28 +48,7 @@ public class OAuthViewModel extends BaseObservable {
     }
 
     public void onClickPIN(View view) {
-        Observer<String> observer = new Observer<String>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {}
-
-            @Override
-            public void onNext(@NonNull String url) {
-                if (url != null) {
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                }
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-                e.printStackTrace();
-                contract.RequestFailure();
-            }
-
-            @Override
-            public void onComplete() {
-                contract.RequestSuccessful(intent);
-            }
-        };
+        Observer<String> observer = factory.getRequestTokenObserver();
         // OAuth認証画面へ
         useCase.getRequestToken()
                 .subscribeOn(Schedulers.io())
@@ -78,35 +60,7 @@ public class OAuthViewModel extends BaseObservable {
         if (Objects.equals(pin, "")) {
             contract.OAuthFailure("PIN is not ENTERED.");
         } else {
-            Observer<AccessToken> observer = new Observer<AccessToken>() {
-                @Override
-                public void onSubscribe(@NonNull Disposable d) {}
-
-                @Override
-                public void onNext(@NonNull AccessToken accessToken) {
-                    if (accessToken != null) {
-                        Log.d(OAuthViewModel.class.toString(), "AccessToken got.");
-                        // store accessToken by DBFlow
-                        final Token token= new Token();
-                        token.setAccessToken(accessToken.getToken());
-                        token.setTokenSecret(accessToken.getTokenSecret());
-                        token.save();
-                    } else {
-                        contract.OAuthFailure("Couldn't get AccessToken.\nPlease try again.");
-                    }
-                }
-
-                @Override
-                public void onError(@NonNull Throwable e) {
-                    e.printStackTrace();
-                    contract.OAuthFailure("Failure...");
-                }
-
-                @Override
-                public void onComplete() {
-                    contract.OAuthSuccessful();
-                }
-            };
+            Observer<AccessToken> observer = factory.getAccessTokenObserver();
             useCase.readPinCode(pin)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
