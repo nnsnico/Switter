@@ -20,9 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".view.activity.OAuthActivity" />
-        <activity android:name=".view.activity.TweetActivity" />
+
+        <activity
+            android:name=".view.activity.TweetActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".view.activity.AboutAppActivity" />
+
         <activity android:name=".view.activity.ProfileActivity"></activity>
     </application>
 

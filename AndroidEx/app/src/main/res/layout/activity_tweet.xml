@@ -45,6 +45,7 @@
                     android:ems="10"
                     android:gravity="left|top"
                     android:inputType="textMultiLine"
+                    android:text="@{viewmodel.message}"
                     android:textColor="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -54,16 +55,18 @@
                     app:layout_constraintVertical_bias="0.0"
                     tools:text="ほげほげほげほげほげほげほげほげほげほげほげ" />
 
-                <ImageView
-                    android:id="@+id/tweet"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/ic_tweet"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
             </android.support.constraint.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/tweet"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginRight="16dp"
+                android:layout_gravity="end|bottom"
+                android:onClick="@{viewmodel.onClickTweet}"
+                android:src="@drawable/ic_tweet"
+                android:background="@drawable/bt_tweet_ripple" />
 
         </FrameLayout>
 
