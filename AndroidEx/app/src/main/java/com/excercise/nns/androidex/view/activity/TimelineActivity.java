@@ -100,7 +100,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
             case "goPro":
                 break;
             case "reply":
-                TweetActivity.start(this, status.getName(), status.getId());
+                TweetActivity.start(this, status.getScreenName(), status.getId());
                 break;
             case "retweet":
                 break;
