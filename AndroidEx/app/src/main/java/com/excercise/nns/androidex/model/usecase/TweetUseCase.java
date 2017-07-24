@@ -31,6 +31,16 @@ public class TweetUseCase {
         });
     }
 
-    // TODO: 2017/07/15 reply()
-
+    public Observable<Status> reply(String message, long userId) {
+        return Observable.create(e -> {
+            StatusUpdate statusUpdate = new StatusUpdate(message);
+            try {
+                statusUpdate.setInReplyToStatusId(userId);
+                e.onNext(twitter.updateStatus(statusUpdate));
+                e.onComplete();
+            } catch (TwitterException te) {
+                e.onError(te);
+            }
+        });
+    }
 }

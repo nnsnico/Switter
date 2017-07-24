@@ -6,6 +6,7 @@ import android.databinding.BindingAdapter;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,15 +36,26 @@ public class TweetViewModel extends BaseObservable {
     private Twitter twitter;
     private TweetContract contract;
     private TweetObserverFactory factory;
+    private String screenName;
+    private long userId;
     @Bindable
     public String message;
 
     public TweetViewModel(TweetContract contract, String screenName, long userId) {
         this.contract = contract;
+        this.screenName = screenName;
+        this.userId = userId;
+
         factory = new TweetObserverFactory(contract);
         twitter = TwitterUtils.getTwitterInstance();
 
         isUser = screenName != null;
+
+        if (isUser) {
+            contract.setReplyUser(screenName);
+        } else {
+            contract.setTweetCount(0, 0);
+        }
     }
 
     public void onClickTweet(View view) {
@@ -57,15 +69,22 @@ public class TweetViewModel extends BaseObservable {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer);
         } else {
-            // TODO: 2017/07/16  on reply by usecase
             // reply
-
+            Observer<Status> observer = factory.getTweetObserver();
+            contract.onSendingTweet();
+            useCase.reply(message, userId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
         }
     }
 
     public void onTweetChanged(CharSequence text, int i, int i1, int i2) {
-        // TODO: 2017/07/24  changed tweet color when text's length is over
-        contract.setTweetCount(text.toString().length());
+        if (isUser) {
+            contract.setTweetCount(text.toString().length(), screenName.length() + 2);
+        } else {
+            contract.setTweetCount(text.toString().length(), 0);
+        }
     }
 
     public void setMessage(String message) {

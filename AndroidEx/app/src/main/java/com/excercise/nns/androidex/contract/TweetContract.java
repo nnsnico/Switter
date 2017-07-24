@@ -8,5 +8,6 @@ public interface TweetContract {
     void onTweetSuccess();
     void onTweetFailed();
     void onSendingTweet();
-    void setTweetCount(int count);
+    void setTweetCount(int count, int screenNameCount);
+    void setReplyUser(String screenName);
 }

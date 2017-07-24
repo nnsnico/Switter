@@ -48,13 +48,19 @@ public class TweetActivity extends AppCompatActivity implements TweetContract {
     }
 
     @Override
-    public void setTweetCount(int count) {
-        if (count > 140) {
+    public void setTweetCount(int count, int screenNameCount) {
+        if (count > 140 - screenNameCount) {
             binding.tweetCount.setTextColor(Color.RED);
         } else {
             binding.tweetCount.setTextColor(Color.WHITE);
         }
-        binding.tweetCount.setText(String.format("%s/140", Integer.toString(140 - count)));
+        binding.tweetCount.setText(
+                String.format("%s/140", Integer.toString(140 - count + screenNameCount)));
+    }
+
+    @Override
+    public void setReplyUser(String screenName) {
+        binding.editTweet.setText(String.format("@%s ", screenName));
     }
 
     @Override
