@@ -22,12 +22,10 @@ public class TweetObserverFactory {
     public Observer<Status> getTweetObserver() {
         return new Observer<Status>() {
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
-            }
+            public void onSubscribe(@NonNull Disposable d) {}
 
             @Override
-            public void onNext(@NonNull Status update) {
-            }
+            public void onNext(@NonNull Status update) {}
 
             @Override
             public void onError(@NonNull Throwable e) {
@@ -40,6 +38,4 @@ public class TweetObserverFactory {
             }
         };
     }
-
-
 }
