@@ -14,29 +14,20 @@ import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.OnRecyclerListener;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
-import com.excercise.nns.androidex.model.data.Token;
-import com.excercise.nns.androidex.model.data.Token_Table;
 import com.excercise.nns.androidex.model.usecase.TimelineUseCase;
 import com.excercise.nns.androidex.utils.TwitterUtils;
 import com.excercise.nns.androidex.viewmodel.factory.TimelineObserverFactory;
-import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import twitter4j.MediaEntity;
 import twitter4j.Status;
 import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
-import twitter4j.User;
-import twitter4j.auth.AccessToken;
 
 /**
  * Created by nns on 2017/06/19.

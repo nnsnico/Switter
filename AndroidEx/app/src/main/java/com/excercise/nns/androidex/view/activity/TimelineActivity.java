@@ -13,7 +13,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.OnRecyclerListener;
