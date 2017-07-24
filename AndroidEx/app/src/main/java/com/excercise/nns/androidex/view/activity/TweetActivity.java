@@ -61,6 +61,7 @@ public class TweetActivity extends AppCompatActivity implements TweetContract {
     @Override
     public void setReplyUser(String screenName) {
         binding.editTweet.setText(String.format("@%s ", screenName));
+        binding.editTweet.setSelection(screenName.length() + 2);
     }
 
     @Override
