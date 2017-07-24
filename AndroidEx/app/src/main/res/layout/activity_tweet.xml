@@ -33,6 +33,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:textSize="20sp"
+                    tools:textColor="@android:color/holo_red_light"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="35/140" />
@@ -45,7 +46,8 @@
                     android:ems="10"
                     android:gravity="left|top"
                     android:inputType="textMultiLine"
-                    android:text="@{viewmodel.message}"
+                    android:text="@={viewmodel.message}"
+                    android:onTextChanged="@{viewmodel.onTweetChanged}"
                     android:textColor="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -61,12 +63,12 @@
                 android:id="@+id/tweet"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_gravity="end|bottom"
                 android:layout_marginBottom="24dp"
                 android:layout_marginRight="16dp"
-                android:layout_gravity="end|bottom"
+                android:background="@drawable/bt_tweet_ripple"
                 android:onClick="@{viewmodel.onClickTweet}"
-                android:src="@drawable/ic_tweet"
-                android:background="@drawable/bt_tweet_ripple" />
+                android:src="@drawable/ic_tweet" />
 
         </FrameLayout>
 
