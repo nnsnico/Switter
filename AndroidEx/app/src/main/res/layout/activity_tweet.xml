@@ -32,11 +32,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
+                    android:text="140/140"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp"
-                    tools:textColor="@android:color/holo_red_light"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="35/140" />
+                    tools:text="35/140"
+                    tools:textColor="@android:color/holo_red_light" />
 
                 <EditText
                     android:id="@+id/edit_tweet"
@@ -46,8 +48,8 @@
                     android:ems="10"
                     android:gravity="left|top"
                     android:inputType="textMultiLine"
-                    android:text="@={viewmodel.message}"
                     android:onTextChanged="@{viewmodel.onTweetChanged}"
+                    android:text="@={viewmodel.message}"
                     android:textColor="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
