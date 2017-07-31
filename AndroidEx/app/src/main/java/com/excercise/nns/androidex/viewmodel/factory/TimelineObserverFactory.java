@@ -28,12 +28,11 @@ public class TimelineObserverFactory {
     public Observer<List<Status>> getTimelineObserver() {
         return new Observer<List<Status>>() {
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
+            public void onSubscribe(@NonNull Disposable d) {}
 
             @Override
             public void onNext(@NonNull List<Status> result) {
+                contract.setProgress();
                 if(result != null) {
                     statuses = new ArrayList<>();
                     for(Status status : result) {

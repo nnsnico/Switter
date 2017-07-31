@@ -14,8 +14,10 @@ import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.OnRecyclerListener;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.androidex.model.usecase.FavoriteUseCase;
 import com.excercise.nns.androidex.model.usecase.TimelineUseCase;
 import com.excercise.nns.androidex.utils.TwitterUtils;
+import com.excercise.nns.androidex.viewmodel.factory.FavoriteObserverFactory;
 import com.excercise.nns.androidex.viewmodel.factory.TimelineObserverFactory;
 import com.squareup.picasso.Picasso;
 
@@ -128,6 +130,14 @@ public class TimelineViewModel {
         swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
             // TODO: 2017/07/16 favorite user by usecase and observer.
             // contract -> onFavoriteSuccess and onFavoriteFailed
+            Twitter twitter = TwitterUtils.getTwitterInstance();
+            FavoriteObserverFactory factory = new FavoriteObserverFactory(contract);
+            FavoriteUseCase useCase = new FavoriteUseCase(twitter);
+            Observer<Boolean> observer = factory.getFavoriteObserver(status);
+            useCase.postFavorite(status)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(observer);
             swipeLayout.close();
         });
 

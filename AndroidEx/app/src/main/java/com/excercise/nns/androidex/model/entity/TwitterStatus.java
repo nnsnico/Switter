@@ -15,6 +15,7 @@ public class TwitterStatus {
     private String tweetText;
     private MediaEntity[] mediaImageUrl;
     private String retweet = "";
+    public boolean isFavorited = false;
 
     public void setId(long id) {
         this.id = id;

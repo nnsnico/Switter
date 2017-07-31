@@ -29,9 +29,7 @@ public class OAuthObserverFactory {
     public Observer<String> getRequestTokenObserver() {
         return new Observer<String>() {
             @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
+            public void onSubscribe(@NonNull Disposable d) {}
 
             @Override
             public void onNext(@NonNull String url) {

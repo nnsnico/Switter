@@ -20,4 +20,10 @@ public interface TimelineContract {
     void getTimelineFailed(String error);
 
     void getTimelineSuccess(List<TwitterStatus> statuses);
+
+    void postFavoriteSuccess();
+
+    void postActionFailed(String error);
+
+    void setProgress();
 }

@@ -13,6 +13,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.OnRecyclerListener;
@@ -50,7 +52,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
         binding.toolbar.setTitle(R.string.app_name);
         binding.toolbar.inflateMenu(R.menu.toolbar_item);
         binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
-        // recycler setup
+        // recyclerView setup
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.addItemDecoration(new RecyclerDivider(this));
@@ -75,6 +77,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
 
     @Override
     public void getTimelineFailed(String error) {
+        binding.progress.setVisibility(ProgressBar.GONE);
         final Snackbar snackbar =
                 Snackbar.make(findViewById(android.R.id.content), error, Snackbar.LENGTH_INDEFINITE);
         View view = snackbar.getView();
@@ -87,11 +90,27 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
 
     @Override
     public void getTimelineSuccess(List<TwitterStatus> statuses) {
+        binding.progress.setVisibility(ProgressBar.GONE);
         RecyclerAdapter adapter = new RecyclerAdapter(statuses, this);
         Parcelable state = binding.recyclerView.getLayoutManager().onSaveInstanceState();
         binding.recyclerView.getLayoutManager().onRestoreInstanceState(state);
         binding.recyclerView.setAdapter(adapter);
         binding.swipeLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void postFavoriteSuccess() {
+        Toast.makeText(this, "ふぁぼしたよ", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void postActionFailed(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setProgress() {
+        binding.progress.setVisibility(ProgressBar.VISIBLE);
     }
 
     @Override
@@ -101,10 +120,6 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
                 break;
             case "reply":
                 TweetActivity.start(this, status.getScreenName(), status.getId());
-                break;
-            case "retweet":
-                break;
-            case "fav":
                 break;
             default:
                 break;

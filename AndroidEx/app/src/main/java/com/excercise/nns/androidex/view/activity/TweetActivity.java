@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -16,6 +15,7 @@ import com.excercise.nns.androidex.contract.TweetContract;
 import com.excercise.nns.androidex.databinding.ActivityTweetBinding;
 import com.excercise.nns.androidex.viewmodel.TweetViewModel;
 
+// TODO: 2017/07/28 if released uploading medias, set reading files permission by "PermissionDispatcher"
 public class TweetActivity extends AppCompatActivity implements TweetContract {
 
     private ProgressDialog progressDialog;
