@@ -11,6 +11,7 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import twitter4j.Status;
+import twitter4j.URLEntity;
 
 /**
  * Created by nns on 2017/07/16.
@@ -36,7 +37,8 @@ public class TimelineObserverFactory {
                 if(result != null) {
                     statuses = new ArrayList<>();
                     for(Status status : result) {
-                        TwitterStatus st = TwitterUtils.getStatus(status);
+                        URLEntity[] entities = status.getURLEntities();
+                        TwitterStatus st = TwitterUtils.getStatus(status, entities);
                         statuses.add(st);
                     }
                 } else {
