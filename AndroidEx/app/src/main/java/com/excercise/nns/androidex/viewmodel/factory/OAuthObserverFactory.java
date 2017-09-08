@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.excercise.nns.androidex.contract.OAuthContract;
-import com.excercise.nns.androidex.model.data.Token;
+import com.excercise.nns.androidex.data.Token;
 import com.excercise.nns.androidex.viewmodel.OAuthViewModel;
 
 import io.reactivex.Observer;

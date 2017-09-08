@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.model.data;
+package com.excercise.nns.androidex.data;
 
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;

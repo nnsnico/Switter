@@ -1,7 +1,7 @@
 package com.excercise.nns.androidex.utils;
 
-import com.excercise.nns.androidex.model.data.Token;
-import com.excercise.nns.androidex.model.data.Token_Table;
+import com.excercise.nns.androidex.data.Token;
+import com.excercise.nns.androidex.data.Token_Table;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 

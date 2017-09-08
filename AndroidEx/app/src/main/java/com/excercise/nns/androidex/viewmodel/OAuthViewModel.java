@@ -1,15 +1,12 @@
 package com.excercise.nns.androidex.viewmodel;
 
-import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 
 import com.excercise.nns.androidex.BR;
 import com.excercise.nns.androidex.contract.OAuthContract;
-import com.excercise.nns.androidex.model.data.Token;
 import com.excercise.nns.androidex.model.usecase.OAuthUseCase;
 import com.excercise.nns.androidex.viewmodel.factory.OAuthObserverFactory;
 
@@ -17,8 +14,6 @@ import java.util.Objects;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
