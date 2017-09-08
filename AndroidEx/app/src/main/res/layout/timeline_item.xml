@@ -131,6 +131,7 @@
                         android:ellipsize="none"
                         android:maxLines="40"
                         android:textColor="@color/colorText"
+                        android:autoLink="web"
                         android:text="@{status.tweetText}"
                         android:visibility="@{status.tweetText.empty ? android.view.View.GONE : android.view.View.VISIBLE}"
                         app:layout_constraintHorizontal_bias="1.0"
