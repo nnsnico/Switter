@@ -15,8 +15,19 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 環境変数からapikeyとapisecretを読みだす
+            manifestPlaceholders = [
+                    api_k: System.getenv("APIKEY2"),
+                    api_s: System.getenv("APISECRET2")
+            ]
+        }
+        debug {
+            manifestPlaceholders = [
+                    api_k: System.getenv("API_KEY_2"),
+                    api_s: System.getenv("API_SECRET_2")
+            ]
         }
     }
     dataBinding {
