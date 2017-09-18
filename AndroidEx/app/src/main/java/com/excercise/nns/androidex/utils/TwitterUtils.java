@@ -48,35 +48,35 @@ public class TwitterUtils {
     public static TwitterStatus getStatus(Status status, URLEntity[] entities) {
         TwitterStatus tStatus = new TwitterStatus();
         Status result;
+        String refactoredText = status.getText();
         if(status.isRetweet()) {
             result = status.getRetweetedStatus();
             tStatus.setRetweet(status.getUser().getName());
+            refactoredText = replaceText(refactoredText, String.format("RT @%s: ", result.getUser().getScreenName()), "");
         } else {
             result = status;
         }
-        String refactoredText = status.getText();
         tStatus.setId(result.getUser().getId());
         tStatus.setProfileImageUrl(result.getUser().getOriginalProfileImageURL());
         tStatus.setName(result.getUser().getName());
         tStatus.setScreenName(result.getUser().getScreenName());
         tStatus.setCreatedTime(time.toTimeSpanString(result.getCreatedAt()));
         for (URLEntity entity : entities) {
-            refactoredText = refactorTweetText(status.getText(), entity.getURL(), entity.getExpandedURL());
+            refactoredText = replaceText(refactoredText, entity.getURL(), entity.getExpandedURL());
         }
         if(result.getMediaEntities().length > 0) {
             for (MediaEntity entity : result.getMediaEntities()) {
-                refactoredText = refactorTweetText(refactoredText, entity.getURL(), "");
+                refactoredText = replaceText(refactoredText, entity.getURL(), "");
             }
             tStatus.setMediaImageUrl(result.getMediaEntities());
         } else {
             tStatus.setMediaImageUrl(null);
         }
-        Log.d("text", refactoredText);
         tStatus.setTweetText(refactoredText);
         return tStatus;
     }
 
-    private static String refactorTweetText(String text, String originalText, String replaceText) {
+    private static String replaceText(String text, String originalText, String replaceText) {
         Pattern pattern = Pattern.compile(originalText);
         Matcher matcher = pattern.matcher(text);
         return matcher.replaceAll(replaceText);
