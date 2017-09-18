@@ -70,7 +70,7 @@ public class CustomBindingAdapter {
         swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
             // TODO: 2017/07/16 favorite user by usecase and observer.
             // contract -> onFavoriteSuccess and onFavoriteFailed
-            Twitter twitter = TwitterUtils.getTwitterInstance();
+            Twitter twitter = TwitterUtils.getTwitterInstance(v.getContext());
             FavoriteObserverFactory factory = new FavoriteObserverFactory(contract);
             FavoriteUseCase useCase = new FavoriteUseCase(twitter);
             Observer<Boolean> observer = factory.getFavoriteObserver(status);

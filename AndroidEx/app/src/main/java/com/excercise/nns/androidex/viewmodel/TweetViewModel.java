@@ -41,13 +41,13 @@ public class TweetViewModel extends BaseObservable {
     @Bindable
     public String message;
 
-    public TweetViewModel(TweetContract contract, String screenName, long userId) {
+    public TweetViewModel(Twitter twitter, TweetContract contract, String screenName, long userId) {
+        this.twitter = twitter;
         this.contract = contract;
         this.screenName = screenName;
         this.userId = userId;
 
         factory = new TweetObserverFactory(contract);
-        twitter = TwitterUtils.getTwitterInstance();
 
         isUser = screenName != null;
 

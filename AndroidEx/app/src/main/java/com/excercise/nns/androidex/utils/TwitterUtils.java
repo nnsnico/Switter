@@ -1,5 +1,8 @@
 package com.excercise.nns.androidex.utils;
 
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.util.Log;
 
 import com.excercise.nns.androidex.data.Token;
@@ -28,13 +31,21 @@ public class TwitterUtils {
 
     private static TimeSpanConverter time = new TimeSpanConverter(Locale.JAPAN);
 
-    public static Twitter getTwitterInstance() {
+    public static Twitter getTwitterInstance(Context context) {
         ConfigurationBuilder config = new ConfigurationBuilder();
         config.setTweetModeExtended(true);
         TwitterFactory factory = new TwitterFactory(config.build());
+        String consumerKey = "";
+        String consumerSecret = "";
+        try {
+            ApplicationInfo info = context.getPackageManager().getApplicationInfo(
+                    context.getPackageName(), PackageManager.GET_META_DATA);
+            consumerKey = info.metaData.getString("API_KEY");
+            consumerSecret = info.metaData.getString("API_SECRET");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         Twitter twitter = factory.getInstance();
-        String consumerKey = "7fd5ZNhqoElIzsd8eAIqyQK7B";
-        String consumerSecret = "o2hZaNoZRoRPCz9zMI8C4Q5QKQWsMI6uZq3GmieAVGRwPeBoYJ";
         twitter.setOAuthConsumer(consumerKey, consumerSecret);
         Token token = SQLite.select().from(Token.class).where(Token_Table.id.is(1)).querySingle();
         if(token != null) {

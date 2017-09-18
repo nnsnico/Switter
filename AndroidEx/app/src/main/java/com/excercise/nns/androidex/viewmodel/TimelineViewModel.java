@@ -1,5 +1,6 @@
 package com.excercise.nns.androidex.viewmodel;
 
+import android.content.Context;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -33,10 +34,11 @@ public class TimelineViewModel {
     private TimelineObserverFactory factory;
 
     public TimelineViewModel(
+            Twitter twitter,
             TimelineContract contract) {
+        this.twitter = twitter;
         this.contract = contract;
         factory = new TimelineObserverFactory(contract);
-        twitter = TwitterUtils.getTwitterInstance();
         if (twitter == null) {
             contract.onStartOAuth();
         }

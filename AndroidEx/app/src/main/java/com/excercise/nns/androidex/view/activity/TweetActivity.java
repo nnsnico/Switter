@@ -13,7 +13,10 @@ import android.widget.Toast;
 import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.TweetContract;
 import com.excercise.nns.androidex.databinding.ActivityTweetBinding;
+import com.excercise.nns.androidex.utils.TwitterUtils;
 import com.excercise.nns.androidex.viewmodel.TweetViewModel;
+
+import twitter4j.Twitter;
 
 // TODO: 2017/07/28 if released uploading medias, set reading files permission by "PermissionDispatcher"
 public class TweetActivity extends AppCompatActivity implements TweetContract {
@@ -32,9 +35,10 @@ public class TweetActivity extends AppCompatActivity implements TweetContract {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String screenName = getIntent().getStringExtra("screenName");
+        Twitter twitter = TwitterUtils.getTwitterInstance(this);
         long userId = getIntent().getLongExtra("userId", 0);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_tweet);
-        TweetViewModel viewModel = new TweetViewModel(this, screenName, userId);
+        TweetViewModel viewModel = new TweetViewModel(twitter, this, screenName, userId);
         viewModel.setMessage(binding.editTweet.getText().toString());
         binding.setViewmodel(viewModel);
     }

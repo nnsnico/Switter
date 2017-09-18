@@ -21,12 +21,15 @@ import com.excercise.nns.androidex.contract.OnRecyclerListener;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.databinding.ActivityTimelineBinding;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.androidex.utils.TwitterUtils;
 import com.excercise.nns.androidex.view.adapter.RecyclerAdapter;
 import com.excercise.nns.androidex.view.component.RecyclerDivider;
 import com.excercise.nns.androidex.viewmodel.TimelineViewModel;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.util.List;
+
+import twitter4j.Twitter;
 
 /**
  * Created by nns on 2017/06/12.
@@ -45,7 +48,9 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FlowManager.init(this);
-        TimelineViewModel viewModel = new TimelineViewModel(this);
+
+        Twitter twitter = TwitterUtils.getTwitterInstance(this);
+        TimelineViewModel viewModel = new TimelineViewModel(twitter, this);
         binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_timeline);
         // toolbar setup
