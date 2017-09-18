@@ -2,23 +2,19 @@ package com.excercise.nns.androidex.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.SharedPreferencesCompat;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.excercise.nns.androidex.BR;
 import com.excercise.nns.androidex.contract.TweetContract;
 import com.excercise.nns.androidex.model.usecase.TweetUseCase;
-import com.excercise.nns.androidex.utils.TwitterUtils;
-import com.excercise.nns.androidex.viewmodel.factory.TweetObserverFactory;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -35,7 +31,6 @@ public class TweetViewModel extends BaseObservable {
     private TweetUseCase useCase;
     private Twitter twitter;
     private TweetContract contract;
-    private TweetObserverFactory factory;
     private String screenName;
     private long userId;
     @Bindable
@@ -46,8 +41,6 @@ public class TweetViewModel extends BaseObservable {
         this.contract = contract;
         this.screenName = screenName;
         this.userId = userId;
-
-        factory = new TweetObserverFactory(contract);
 
         isUser = screenName != null;
 
@@ -62,20 +55,18 @@ public class TweetViewModel extends BaseObservable {
         useCase = new TweetUseCase(twitter);
         if (!isUser) {
             // tweet
-            Observer<Status> observer = factory.getTweetObserver();
             contract.onSendingTweet();
             useCase.tweet(message)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer);
+                    .subscribe(tweetObserver());
         } else {
             // reply
-            Observer<Status> observer = factory.getTweetObserver();
             contract.onSendingTweet();
             useCase.reply(message, userId)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer);
+                    .subscribe(tweetObserver());
         }
     }
 
@@ -90,5 +81,25 @@ public class TweetViewModel extends BaseObservable {
     public void setMessage(String message) {
         this.message = message;
         notifyPropertyChanged(BR.message);
+    }
+
+    private Observer<Status> tweetObserver() {
+        return new Observer<Status>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {}
+
+            @Override
+            public void onNext(@NonNull Status update) {}
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                contract.onTweetFailed();
+            }
+
+            @Override
+            public void onComplete() {
+                contract.onTweetSuccess();
+            }
+        };
     }
 }
