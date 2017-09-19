@@ -27,6 +27,7 @@ import com.excercise.nns.androidex.view.component.RecyclerDivider;
 import com.excercise.nns.androidex.viewmodel.TimelineViewModel;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
+import java.util.Collections;
 import java.util.List;
 
 import twitter4j.Twitter;
@@ -38,6 +39,7 @@ import twitter4j.Twitter;
 public class TimelineActivity extends AppCompatActivity implements TimelineContract, OnRecyclerListener {
 
     private ActivityTimelineBinding binding;
+    private RecyclerAdapter adapter;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, TimelineActivity.class);
@@ -58,9 +60,12 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
         binding.toolbar.inflateMenu(R.menu.toolbar_item);
         binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
         // recyclerView setup
+        List<TwitterStatus> statuses = Collections.emptyList();
+        adapter = new RecyclerAdapter(statuses);
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.addItemDecoration(new RecyclerDivider(this));
+        binding.recyclerView.setAdapter(adapter);
         binding.setViewmodel(viewModel);
     }
 
@@ -95,11 +100,11 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
 
     @Override
     public void getTimelineSuccess(List<TwitterStatus> statuses) {
+        adapter.setStatuses(statuses);
+        adapter.notifyDataSetChanged();
         binding.progress.setVisibility(ProgressBar.GONE);
-        RecyclerAdapter adapter = new RecyclerAdapter(statuses);
         Parcelable state = binding.recyclerView.getLayoutManager().onSaveInstanceState();
         binding.recyclerView.getLayoutManager().onRestoreInstanceState(state);
-        binding.recyclerView.setAdapter(adapter);
         binding.swipeLayout.setRefreshing(false);
     }
 

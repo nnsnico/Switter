@@ -24,6 +24,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         this.statuses = statuses;
     }
 
+    public void setStatuses(List<TwitterStatus> statuses) {
+        this.statuses = statuses;
+    }
+
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         TimelineItemBinding binding = TimelineItemBinding.inflate(

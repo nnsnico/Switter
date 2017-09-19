@@ -52,7 +52,7 @@ public class CustomBindingAdapter {
         }
     }
 
-    @BindingAdapter({"targetStatus", "listener", "contract"})
+    @BindingAdapter({"targetStatus"})
     public static void onClickSwipeItem(
             SwipeLayout swipeLayout, TwitterStatus status) {
         OnRecyclerListener rListener = (OnRecyclerListener) swipeLayout.getContext();
