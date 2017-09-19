@@ -23,9 +23,7 @@ public interface TimelineContract {
 
     void getTimelineSuccess(List<TwitterStatus> statuses);
 
-    void postFavoriteSuccess(String message);
+    void postActionSuccess(String message);
 
     void postActionFailed(String error);
-
-    void setProgress();
 }

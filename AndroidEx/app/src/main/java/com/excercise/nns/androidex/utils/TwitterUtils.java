@@ -77,11 +77,14 @@ public class TwitterUtils {
         }
         // Set Status Parameter
         tStatus.setId(result.getId());
+        tStatus.setCurrentRetweetId(status.getCurrentUserRetweetId());
         tStatus.setProfileImageUrl(result.getUser().getOriginalProfileImageURL());
         tStatus.setName(result.getUser().getName());
         tStatus.setScreenName(result.getUser().getScreenName());
         tStatus.setCreatedTime(time.toTimeSpanString(result.getCreatedAt()));
         tStatus.isFavorited = result.isFavorited();
+        tStatus.isRetweeted = status.isRetweeted();
+        tStatus.isRetweetedByMe = status.isRetweetedByMe();
         // Replace URL contained in the Tweet Text
         URLEntity[] entities = status.getURLEntities();
         for (URLEntity entity : entities) {

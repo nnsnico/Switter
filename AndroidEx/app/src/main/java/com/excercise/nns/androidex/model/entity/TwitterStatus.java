@@ -1,5 +1,13 @@
 package com.excercise.nns.androidex.model.entity;
 
+import android.support.annotation.NonNull;
+import android.support.v4.os.ParcelableCompat;
+import android.support.v4.util.Pair;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
 import twitter4j.MediaEntity;
 
 /**
@@ -8,6 +16,7 @@ import twitter4j.MediaEntity;
 
 public class TwitterStatus {
     private long id;
+    private long currentRetweetId;
     private String profileImageUrl;
     private String name;
     private String screenName;
@@ -16,9 +25,15 @@ public class TwitterStatus {
     private MediaEntity[] mediaImageUrl;
     private String retweet = "";
     public boolean isFavorited = false;
+    public boolean isRetweeted = false;
+    public boolean isRetweetedByMe = false;
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setCurrentRetweetId(long currentRetweetId) {
+        this.currentRetweetId = currentRetweetId;
     }
 
     public void setProfileImageUrl(String profileImageUrl) {
@@ -51,6 +66,10 @@ public class TwitterStatus {
 
     public long getId() {
         return id;
+    }
+
+    public long getCurrentRetweetId() {
+        return currentRetweetId;
     }
 
     public String getProfileImageUrl() {

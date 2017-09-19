@@ -1,5 +1,6 @@
 package com.excercise.nns.androidex.utils;
 
+import android.util.Log;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
@@ -11,6 +12,7 @@ import com.excercise.nns.androidex.contract.OnRecyclerListener;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
 import com.excercise.nns.androidex.model.usecase.FavoriteUseCase;
+import com.excercise.nns.androidex.model.usecase.RetweetUseCase;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -67,8 +69,32 @@ public class CustomBindingAdapter {
             swipeLayout.close();
         });
         swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {
-            // TODO: 2017/07/16 retweet user by usecase and observer.
-            // contract -> onRetweetSuccess and onRetweetFailed
+            TimelineContract tContract = (TimelineContract) v.getContext();
+            RetweetUseCase useCase = new RetweetUseCase(twitter);
+            useCase.getRetweetUseCase(status)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<Boolean>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {}
+
+                        @Override
+                        public void onNext(@NonNull Boolean isRetweet) {
+                            status.isRetweeted = isRetweet;
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.e("retweet error", e.toString());
+                            tContract.postActionFailed("リツイートできませんでした。もう一度行ってください。");
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            String message = status.isRetweeted ? "Retweet Success" : "Destroyed Retweet";
+                            tContract.postActionSuccess(message);
+                        }
+                    });
             swipeLayout.close();
         });
 
@@ -94,8 +120,8 @@ public class CustomBindingAdapter {
 
                         @Override
                         public void onComplete() {
-                            String message = status.isFavorited ? "Favorite" : "Destroyed Favorite";
-                            tContract.postFavoriteSuccess(message);
+                            String message = status.isFavorited ? "Favorite Success." : "Destroyed Favorite.";
+                            tContract.postActionSuccess(message);
                         }
                     });
             swipeLayout.close();

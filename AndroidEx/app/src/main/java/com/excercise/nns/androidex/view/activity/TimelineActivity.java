@@ -39,6 +39,8 @@ import twitter4j.Twitter;
 public class TimelineActivity extends AppCompatActivity implements TimelineContract, OnRecyclerListener {
 
     private ActivityTimelineBinding binding;
+    private TimelineViewModel viewModel;
+    private Twitter twitter;
     private RecyclerAdapter adapter;
 
     public static void start(Context context) {
@@ -51,10 +53,10 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
         super.onCreate(savedInstanceState);
         FlowManager.init(this);
 
-        Twitter twitter = TwitterUtils.getTwitterInstance(this);
+        twitter = TwitterUtils.getTwitterInstance(this);
         binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_timeline);
-        TimelineViewModel viewModel = new TimelineViewModel(twitter, this);
+        viewModel = new TimelineViewModel(twitter, this);
         // toolbar setup
         binding.toolbar.setTitle(R.string.app_name);
         binding.toolbar.inflateMenu(R.menu.toolbar_item);
@@ -114,18 +116,14 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     }
 
     @Override
-    public void postFavoriteSuccess(String message) {
+    public void postActionSuccess(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        viewModel.loadTimeline();
     }
 
     @Override
     public void postActionFailed(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setProgress() {
-        binding.progress.setVisibility(ProgressBar.VISIBLE);
     }
 
     @Override

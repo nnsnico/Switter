@@ -49,7 +49,7 @@ public class TimelineViewModel {
         loadTimeline();
     }
 
-    private void loadTimeline() {
+    public void loadTimeline() {
         contract.loadingTimeline();
         TimelineUseCase useCase = new TimelineUseCase(twitter);
         // TODO: 2017/09/18 最下部までスクロールでページ再読み込み
@@ -62,7 +62,6 @@ public class TimelineViewModel {
 
                     @Override
                     public void onNext(@NonNull List<Status> result) {
-                        contract.setProgress();
                         if(result != null) {
                             statuses = new ArrayList<>();
                             for(Status status : result) {
