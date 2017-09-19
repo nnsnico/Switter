@@ -52,9 +52,9 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
         FlowManager.init(this);
 
         Twitter twitter = TwitterUtils.getTwitterInstance(this);
-        TimelineViewModel viewModel = new TimelineViewModel(twitter, this);
         binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_timeline);
+        TimelineViewModel viewModel = new TimelineViewModel(twitter, this);
         // toolbar setup
         binding.toolbar.setTitle(R.string.app_name);
         binding.toolbar.inflateMenu(R.menu.toolbar_item);
@@ -86,8 +86,14 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     }
 
     @Override
+    public void loadingTimeline() {
+        binding.swipeLayout.setRefreshing(false);
+        binding.setIsloaded(true);
+    }
+
+    @Override
     public void getTimelineFailed(String error) {
-        binding.progress.setVisibility(ProgressBar.GONE);
+        binding.setIsloaded(false);
         final Snackbar snackbar =
                 Snackbar.make(findViewById(android.R.id.content), error, Snackbar.LENGTH_INDEFINITE);
         View view = snackbar.getView();
@@ -102,10 +108,9 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     public void getTimelineSuccess(List<TwitterStatus> statuses) {
         adapter.setStatuses(statuses);
         adapter.notifyDataSetChanged();
-        binding.progress.setVisibility(ProgressBar.GONE);
+        binding.setIsloaded(false);
         Parcelable state = binding.recyclerView.getLayoutManager().onSaveInstanceState();
         binding.recyclerView.getLayoutManager().onRestoreInstanceState(state);
-        binding.swipeLayout.setRefreshing(false);
     }
 
     @Override

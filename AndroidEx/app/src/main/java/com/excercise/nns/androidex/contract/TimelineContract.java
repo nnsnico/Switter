@@ -17,6 +17,8 @@ public interface TimelineContract {
 
     void onStartAbout();
 
+    void loadingTimeline();
+
     void getTimelineFailed(String error);
 
     void getTimelineSuccess(List<TwitterStatus> statuses);

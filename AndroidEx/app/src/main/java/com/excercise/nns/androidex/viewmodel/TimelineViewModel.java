@@ -50,6 +50,7 @@ public class TimelineViewModel {
     }
 
     private void loadTimeline() {
+        contract.loadingTimeline();
         TimelineUseCase useCase = new TimelineUseCase(twitter);
         // TODO: 2017/09/18 最下部までスクロールでページ再読み込み
         useCase.getHomeTimeline(40)
