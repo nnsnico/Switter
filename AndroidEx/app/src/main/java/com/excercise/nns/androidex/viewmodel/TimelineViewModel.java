@@ -66,8 +66,7 @@ public class TimelineViewModel {
                         if(result != null) {
                             statuses = new ArrayList<>();
                             for(Status status : result) {
-                                URLEntity[] entities = status.getURLEntities();
-                                TwitterStatus st = TwitterUtils.getStatus(status, entities);
+                                TwitterStatus st = TwitterUtils.getStatus(status);
                                 statuses.add(st);
                             }
                         } else {

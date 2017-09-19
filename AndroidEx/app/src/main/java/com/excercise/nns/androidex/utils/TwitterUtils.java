@@ -55,7 +55,11 @@ public class TwitterUtils {
         return twitter;
     }
 
-    public static TwitterStatus getStatus(Status status, URLEntity[] entities) {
+    /**
+     * TwitterStatusクラス用にキレイに整形した値を返す．
+     * @param status APIより取得した生のデータ
+     * */
+    public static TwitterStatus getStatus(Status status) {
         TwitterStatus tStatus = new TwitterStatus();
         Status result;
         String refactoredText = status.getText();
@@ -75,6 +79,7 @@ public class TwitterUtils {
         tStatus.setCreatedTime(time.toTimeSpanString(result.getCreatedAt()));
         tStatus.isFavorited = result.isFavorited();
         // Replace URL contained in the Tweet Text
+        URLEntity[] entities = status.getURLEntities();
         for (URLEntity entity : entities) {
             refactoredText = replaceText(refactoredText, entity.getURL(), entity.getExpandedURL());
         }
