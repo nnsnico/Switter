@@ -10,12 +10,13 @@ import com.excercise.nns.androidex.contract.OnRecyclerListener;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
 import com.excercise.nns.androidex.model.usecase.FavoriteUseCase;
-import com.excercise.nns.androidex.viewmodel.factory.FavoriteObserverFactory;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import twitter4j.MediaEntity;
 import twitter4j.Twitter;
@@ -71,13 +72,30 @@ public class CustomBindingAdapter {
             // TODO: 2017/07/16 favorite user by usecase and observer.
             // contract -> onFavoriteSuccess and onFavoriteFailed
             Twitter twitter = TwitterUtils.getTwitterInstance(v.getContext());
-            FavoriteObserverFactory factory = new FavoriteObserverFactory(contract);
+            TimelineContract tContract = (TimelineContract) v.getContext();
             FavoriteUseCase useCase = new FavoriteUseCase(twitter);
-            Observer<Boolean> observer = factory.getFavoriteObserver(status);
             useCase.postFavorite(status)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer);
+                    .subscribe(new Observer<Boolean>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {}
+
+                        @Override
+                        public void onNext(@NonNull Boolean isFavorite) {
+                            status.isFavorited = isFavorite;
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            tContract.postActionFailed("エラーが起こりました。もう一度行ってください。");
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            tContract.postFavoriteSuccess();
+                        }
+                    });
             swipeLayout.close();
         });
 

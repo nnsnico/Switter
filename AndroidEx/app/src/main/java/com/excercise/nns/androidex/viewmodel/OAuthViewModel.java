@@ -19,7 +19,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 
 /**
@@ -28,19 +27,17 @@ import twitter4j.auth.AccessToken;
 
 public class OAuthViewModel extends BaseObservable {
     private OAuthContract contract;
+    private Twitter twitter;
     private OAuthUseCase useCase;
     private Intent intent;
     @Bindable
     public String pin;
 
     public OAuthViewModel(
-            OAuthContract contract, String consumer, String consumerSecret) {
+            OAuthContract contract, Twitter twitter) {
         this.contract = contract;
+        this.twitter = twitter;
         // observer取得用のfactory
-        // load Twitter Instance
-        TwitterFactory factory = new TwitterFactory();
-        Twitter twitter = factory.getInstance();
-        twitter.setOAuthConsumer(consumer, consumerSecret);
         useCase = new OAuthUseCase(twitter);
     }
 

@@ -10,7 +10,10 @@ import android.widget.Toast;
 import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.OAuthContract;
 import com.excercise.nns.androidex.databinding.ActivityOauthBinding;
+import com.excercise.nns.androidex.utils.TwitterUtils;
 import com.excercise.nns.androidex.viewmodel.OAuthViewModel;
+
+import twitter4j.Twitter;
 
 public class OAuthActivity extends AppCompatActivity implements OAuthContract {
 
@@ -25,10 +28,11 @@ public class OAuthActivity extends AppCompatActivity implements OAuthContract {
 
         ActivityOauthBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_oauth);
-        String consumerKey = getString(R.string.api_key);
-        String consumerSecret = getString(R.string.api_secret);
+//        String consumerKey = getString(R.string.api_key);
+//        String consumerSecret = getString(R.string.api_secret);
+        Twitter twitter = TwitterUtils.getTwitterInstance(this);
         // set ViewModel
-        OAuthViewModel viewModel = new OAuthViewModel(this, consumerKey, consumerSecret);
+        OAuthViewModel viewModel = new OAuthViewModel(this, twitter);
         viewModel.setPin(binding.pinEditor.getText().toString());
         binding.setViewmodel(viewModel);
     }
