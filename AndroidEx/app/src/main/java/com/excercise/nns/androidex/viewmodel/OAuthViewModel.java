@@ -10,6 +10,7 @@ import com.excercise.nns.androidex.BR;
 import com.excercise.nns.androidex.contract.OAuthContract;
 import com.excercise.nns.androidex.data.Token;
 import com.excercise.nns.androidex.model.usecase.OAuthUseCase;
+import com.excercise.nns.androidex.utils.TwitterUtils;
 
 import java.util.Objects;
 
@@ -38,7 +39,7 @@ public class OAuthViewModel extends BaseObservable {
         this.contract = contract;
         this.twitter = twitter;
         // observer取得用のfactory
-        useCase = new OAuthUseCase(twitter);
+        useCase = new OAuthUseCase(this.twitter);
     }
 
     public void onClickPIN(View view) {

@@ -42,7 +42,7 @@ public class TimelineViewModel {
             TimelineContract contract) {
         this.twitter = twitter;
         this.contract = contract;
-        if (twitter == null) {
+        if (!TwitterUtils.hasAccessToken()) {
             contract.onStartOAuth();
         }
         // get timeline

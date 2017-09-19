@@ -29,7 +29,13 @@ import twitter4j.util.TimeSpanConverter;
 public class TwitterUtils {
 
     private static TimeSpanConverter time = new TimeSpanConverter(Locale.JAPAN);
+    private static Token token;
 
+    /**
+     * Twitterクラスのインスタンスをもらうことが出来る．
+     * DBにアクセスキーとシークレットキーが保存されていれば認証済みのアクセストークンをもったインスタンスを返す．
+     * @return アクセストークンをもつTwitterインスタンス，持っていなければAPIキーのみをもったTwitterインスタンスを返す
+     * */
     public static Twitter getTwitterInstance(Context context) {
         ConfigurationBuilder config = new ConfigurationBuilder();
         config.setTweetModeExtended(true);
@@ -46,11 +52,9 @@ public class TwitterUtils {
         }
         Twitter twitter = factory.getInstance();
         twitter.setOAuthConsumer(consumerKey, consumerSecret);
-        Token token = SQLite.select().from(Token.class).where(Token_Table.id.is(1)).querySingle();
+        token = SQLite.select().from(Token.class).where(Token_Table.id.is(1)).querySingle();
         if(token != null) {
             twitter.setOAuthAccessToken(new AccessToken(token.getAccessToken(), token.getTokenSecret()));
-        } else {
-            twitter = null;
         }
         return twitter;
     }
@@ -93,6 +97,11 @@ public class TwitterUtils {
         }
         tStatus.setTweetText(refactoredText);
         return tStatus;
+    }
+
+    public static boolean hasAccessToken() {
+        token = SQLite.select().from(Token.class).where(Token_Table.id.is(1)).querySingle();
+        return token != null;
     }
 
     private static String replaceText(String text, String originalText, String replaceText) {

@@ -28,8 +28,6 @@ public class OAuthActivity extends AppCompatActivity implements OAuthContract {
 
         ActivityOauthBinding binding =
                 DataBindingUtil.setContentView(this, R.layout.activity_oauth);
-//        String consumerKey = getString(R.string.api_key);
-//        String consumerSecret = getString(R.string.api_secret);
         Twitter twitter = TwitterUtils.getTwitterInstance(this);
         // set ViewModel
         OAuthViewModel viewModel = new OAuthViewModel(this, twitter);
