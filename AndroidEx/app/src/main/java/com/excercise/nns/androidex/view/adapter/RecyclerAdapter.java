@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.excercise.nns.androidex.contract.OnRecyclerListener;
+import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.databinding.TimelineItemBinding;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
 import com.excercise.nns.androidex.view.component.RecyclerViewHolder;
@@ -18,11 +19,9 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private List<TwitterStatus> statuses;
-    private OnRecyclerListener listener;
 
-    public RecyclerAdapter(List<TwitterStatus> statuses, OnRecyclerListener listener) {
+    public RecyclerAdapter(List<TwitterStatus> statuses) {
         this.statuses = statuses;
-        this.listener = listener;
     }
 
     @Override
@@ -35,7 +34,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         TwitterStatus status = statuses.get(position);
-        holder.binding.setListener(listener);
         holder.binding.setStatus(status);
         holder.binding.executePendingBindings();
     }

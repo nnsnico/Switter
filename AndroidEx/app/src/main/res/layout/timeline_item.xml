@@ -8,14 +8,6 @@
         <variable
             name="status"
             type="com.excercise.nns.androidex.model.entity.TwitterStatus" />
-
-        <variable
-            name="listener"
-            type="com.excercise.nns.androidex.contract.OnRecyclerListener" />
-
-        <variable
-            name="contract"
-            type="com.excercise.nns.androidex.contract.TimelineContract" />
     </data>
 
     <com.daimajia.swipe.SwipeLayout

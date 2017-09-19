@@ -3,7 +3,6 @@ package com.excercise.nns.androidex.utils;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import com.excercise.nns.androidex.data.Token;
 import com.excercise.nns.androidex.data.Token_Table;
@@ -60,6 +59,7 @@ public class TwitterUtils {
         TwitterStatus tStatus = new TwitterStatus();
         Status result;
         String refactoredText = status.getText();
+        // UserTypeSelect
         if(status.isRetweet()) {
             result = status.getRetweetedStatus();
             tStatus.setRetweet(status.getUser().getName());
@@ -67,11 +67,14 @@ public class TwitterUtils {
         } else {
             result = status;
         }
-        tStatus.setId(result.getUser().getId());
+        // Set Status Parameter
+        tStatus.setId(result.getId());
         tStatus.setProfileImageUrl(result.getUser().getOriginalProfileImageURL());
         tStatus.setName(result.getUser().getName());
         tStatus.setScreenName(result.getUser().getScreenName());
         tStatus.setCreatedTime(time.toTimeSpanString(result.getCreatedAt()));
+        tStatus.isFavorited = result.isFavorited();
+        // Replace URL contained in the Tweet Text
         for (URLEntity entity : entities) {
             refactoredText = replaceText(refactoredText, entity.getURL(), entity.getExpandedURL());
         }

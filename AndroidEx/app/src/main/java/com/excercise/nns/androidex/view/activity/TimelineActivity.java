@@ -96,7 +96,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     @Override
     public void getTimelineSuccess(List<TwitterStatus> statuses) {
         binding.progress.setVisibility(ProgressBar.GONE);
-        RecyclerAdapter adapter = new RecyclerAdapter(statuses, this);
+        RecyclerAdapter adapter = new RecyclerAdapter(statuses);
         Parcelable state = binding.recyclerView.getLayoutManager().onSaveInstanceState();
         binding.recyclerView.getLayoutManager().onRestoreInstanceState(state);
         binding.recyclerView.setAdapter(adapter);
@@ -104,8 +104,8 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
     }
 
     @Override
-    public void postFavoriteSuccess() {
-        Toast.makeText(this, "ふぁぼしたよ", Toast.LENGTH_SHORT).show();
+    public void postFavoriteSuccess(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

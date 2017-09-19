@@ -4,6 +4,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 
 import android.databinding.BindingAdapter;
+
 import com.daimajia.swipe.SwipeLayout;
 import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.OnRecyclerListener;
@@ -53,13 +54,16 @@ public class CustomBindingAdapter {
 
     @BindingAdapter({"targetStatus", "listener", "contract"})
     public static void onClickSwipeItem(
-            SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener, TimelineContract contract) {
+            SwipeLayout swipeLayout, TwitterStatus status) {
+        OnRecyclerListener rListener = (OnRecyclerListener) swipeLayout.getContext();
+        Twitter twitter = TwitterUtils.getTwitterInstance(swipeLayout.getContext());
+
         swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v -> {
-            listener.onSwipeItemClick("goPro", status);
+            rListener.onSwipeItemClick("goPro", status);
             swipeLayout.close();
         });
         swipeLayout.findViewById(R.id.reply).setOnClickListener(v -> {
-            listener.onSwipeItemClick("reply", status);
+            rListener.onSwipeItemClick("reply", status);
             swipeLayout.close();
         });
         swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {
@@ -69,9 +73,6 @@ public class CustomBindingAdapter {
         });
 
         swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
-            // TODO: 2017/07/16 favorite user by usecase and observer.
-            // contract -> onFavoriteSuccess and onFavoriteFailed
-            Twitter twitter = TwitterUtils.getTwitterInstance(v.getContext());
             TimelineContract tContract = (TimelineContract) v.getContext();
             FavoriteUseCase useCase = new FavoriteUseCase(twitter);
             useCase.postFavorite(status)
@@ -88,12 +89,13 @@ public class CustomBindingAdapter {
 
                         @Override
                         public void onError(@NonNull Throwable e) {
-                            tContract.postActionFailed("エラーが起こりました。もう一度行ってください。");
+                            tContract.postActionFailed("エラーが発生しました。もう一度行ってください。");
                         }
 
                         @Override
                         public void onComplete() {
-                            tContract.postFavoriteSuccess();
+                            String message = status.isFavorited ? "Favorite" : "Destroyed Favorite";
+                            tContract.postFavoriteSuccess(message);
                         }
                     });
             swipeLayout.close();
