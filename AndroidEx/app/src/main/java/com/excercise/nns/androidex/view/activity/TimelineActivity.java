@@ -14,7 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.OnRecyclerListener;
@@ -117,19 +117,22 @@ public class TimelineActivity extends AppCompatActivity implements TimelineContr
 
     @Override
     public void postActionSuccess(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+        snackbar.show();
         viewModel.loadTimeline();
     }
 
     @Override
     public void postActionFailed(String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), error, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     @Override
     public void onSwipeItemClick(String tag, TwitterStatus status) {
         switch (tag) {
             case "goPro":
+                // TODO: 2017/09/19 set ProfileFragment
                 break;
             case "reply":
                 TweetActivity.start(this, status.getScreenName(), status.getId());
