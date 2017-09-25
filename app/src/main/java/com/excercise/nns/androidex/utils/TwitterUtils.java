@@ -66,15 +66,15 @@ public class TwitterUtils {
     public static TwitterStatus getStatus(Status status) {
         TwitterStatus tStatus = new TwitterStatus();
         Status result;
-        String refactoredText = status.getText();
+        String refactoredText;
         // UserTypeSelect
         if(status.isRetweet()) {
             result = status.getRetweetedStatus();
             tStatus.setRetweet(status.getUser().getName());
-            refactoredText = replaceText(refactoredText, String.format("RT @%s: ", result.getUser().getScreenName()), "");
         } else {
             result = status;
         }
+        refactoredText = result.getText();
         // Set Status Parameter
         tStatus.setId(result.getId());
         tStatus.setCurrentRetweetId(status.getCurrentUserRetweetId());
