@@ -3,10 +3,7 @@ package com.excercise.nns.androidex.viewmodel;
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
-import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
 import com.excercise.nns.androidex.model.usecase.TimelineUseCase;
@@ -23,18 +20,15 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import twitter4j.Status;
 import twitter4j.Twitter;
-import twitter4j.URLEntity;
 
 /**
- * Created by nns on 2017/06/19.
+ * Created by nns on 2017/09/25.
  */
-
 @BindingMethods({
-        @BindingMethod(type = Toolbar.class, attribute = "android:onMenuItemClick", method = "setOnMenuItemClickListener"),
         @BindingMethod(type = SwipeRefreshLayout.class, attribute = "android:onRefresh", method = "setOnRefreshListener")})
 public class TimelineViewModel {
-    private TimelineContract contract;
     private Twitter twitter;
+    private TimelineContract contract;
     private List<TwitterStatus> statuses = Collections.emptyList();
 
     public TimelineViewModel(
@@ -42,9 +36,7 @@ public class TimelineViewModel {
             TimelineContract contract) {
         this.twitter = twitter;
         this.contract = contract;
-        if (!TwitterUtils.hasAccessToken()) {
-            contract.onStartOAuth();
-        }
+
         // get timeline
         loadTimeline();
     }
@@ -86,23 +78,6 @@ public class TimelineViewModel {
                         contract.getTimelineSuccess(statuses);
                     }
                 });
-    }
-
-    public boolean onMenuClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_refresh:
-                loadTimeline();
-                return true;
-            case R.id.menu_tweet:
-                contract.onStartTweet();
-                return true;
-            case R.id.AboutApp:
-                contract.onStartAbout();
-                return true;
-            default:
-                break;
-        }
-        return false;
     }
 
     public void onRefresh() {

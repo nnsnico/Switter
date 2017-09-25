@@ -11,12 +11,6 @@ import twitter4j.Status;
  */
 
 public interface TimelineContract {
-    void onStartOAuth();
-
-    void onStartTweet();
-
-    void onStartAbout();
-
     void loadingTimeline();
 
     void getTimelineFailed(String error);
