@@ -17,7 +17,7 @@
         <meta-data android:name="API_KEY" android:value="${api_k}" />
         <meta-data android:name="API_SECRET" android:value="${api_s}" />
 
-        <activity android:name=".view.activity.TimelineActivity">
+        <activity android:name=".view.activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:apps="http://schemas.android.com/apk/res-auto">
+        xmlns:apps="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="android.view.View"/>
 
         <variable
             name="viewmodel"
-            type="com.excercise.nns.androidex.viewmodel.TimelineViewModel" />
+            type="com.excercise.nns.androidex.viewmodel.HomeViewModel"/>
 
         <variable
             name="isloaded"
@@ -20,22 +21,12 @@
         android:layout_height="match_parent"
         android:background="@color/colorBackground">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_layout"
+        <fragment
+            android:id="@+id/container"
+            android:name="com.excercise.nns.androidex.view.fragment.TimelineFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:onRefresh="@{viewmodel.onRefresh}"
-            apps:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="match_parent"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorBackground">
-
-            </android.support.v7.widget.RecyclerView>
-
-        </android.support.v4.widget.SwipeRefreshLayout>
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -51,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
-                    android:onMenuItemClick="@{viewmodel.onMenuClick}" />
+                    android:onMenuItemClick="@{viewmodel.onMenuClick}"/>
 
                 <ProgressBar
                     android:id="@+id/progress"
@@ -63,7 +54,7 @@
                     android:layout_marginTop="-4dp"
                     android:indeterminate="true"
                     android:progressDrawable="@drawable/progress_style"
-                    android:visibility="@{isloaded ? View.VISIBLE : View.GONE}" />
+                    android:visibility="@{isloaded ? View.VISIBLE : View.GONE}"/>
             </FrameLayout>
 
         </android.support.design.widget.AppBarLayout>

@@ -51,7 +51,7 @@ public class OAuthActivity extends AppCompatActivity implements OAuthContract {
     public void OAuthSuccessful() {
         // タイムライン画面へ移動
         Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
-        TimelineActivity.start(this);
+        HomeActivity.start(this);
         finish();
     }
 
