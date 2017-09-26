@@ -36,9 +36,6 @@ public class TimelineViewModel {
             TimelineContract contract) {
         this.twitter = twitter;
         this.contract = contract;
-
-        // get timeline
-        loadTimeline();
     }
 
     public void loadTimeline() {

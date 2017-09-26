@@ -20,6 +20,7 @@ import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.contract.TimelineFragmentCallback;
 import com.excercise.nns.androidex.databinding.FragmentTimelineBinding;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.androidex.utils.TwitterUtils;
 import com.excercise.nns.androidex.view.activity.TweetActivity;
 import com.excercise.nns.androidex.view.adapter.RecyclerAdapter;
 import com.excercise.nns.androidex.view.component.RecyclerDivider;
@@ -35,18 +36,13 @@ import twitter4j.Twitter;
  */
 
 public class TimelineFragment extends Fragment implements TimelineContract, OnRecyclerListener {
-    private Twitter twitter;
     private FragmentTimelineBinding binding;
     private TimelineViewModel viewModel;
     private RecyclerAdapter adapter;
     private TimelineFragmentCallback callback;
 
-    public static TimelineFragment newInstance(Twitter twitter) {
-        Bundle args = new Bundle();
-        args.putSerializable("twitter", twitter);
-        TimelineFragment fragment = new TimelineFragment();
-        fragment.setArguments(args);
-        return fragment;
+    public static TimelineFragment newInstance() {
+        return new TimelineFragment();
     }
 
     @Override
@@ -63,22 +59,37 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
         super.onCreateView(inflater, container, savedInstanceState);
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_timeline, container, false);
-        View root = binding.getRoot();
 
-        twitter = (Twitter) getArguments().getSerializable("twitter");
+        return binding.getRoot();
+    }
 
-        viewModel = new TimelineViewModel(twitter, (TimelineContract) getContext());
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Twitter twitter = TwitterUtils.getTwitterInstance(getContext());
+
+        viewModel = new TimelineViewModel(twitter, this);
+        binding.setViewModel(viewModel);
 
         // recyclerView setup
         List<TwitterStatus> statuses = Collections.emptyList();
-        adapter = new RecyclerAdapter(statuses);
+        adapter = new RecyclerAdapter(statuses, this);
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.addItemDecoration(new RecyclerDivider(getContext()));
         binding.recyclerView.setAdapter(adapter);
-        binding.setViewModel(viewModel);
+    }
 
-        return root;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        viewModel.loadTimeline();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callback = null;
     }
 
     @Override
@@ -89,6 +100,7 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
 
     @Override
     public void getTimelineFailed(String error) {
+        callback.finishedTimeline();
         final Snackbar snackbar =
                 Snackbar.make(getView().findViewById(android.R.id.content), error, Snackbar.LENGTH_INDEFINITE);
         View view = snackbar.getView();
@@ -101,6 +113,7 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
 
     @Override
     public void getTimelineSuccess(List<TwitterStatus> statuses) {
+        callback.finishedTimeline();
         adapter.setStatuses(statuses);
         adapter.notifyDataSetChanged();
         Parcelable state = binding.recyclerView.getLayoutManager().onSaveInstanceState();

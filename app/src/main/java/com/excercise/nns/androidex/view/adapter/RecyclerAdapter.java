@@ -19,9 +19,11 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private List<TwitterStatus> statuses;
+    private OnRecyclerListener listener;
 
-    public RecyclerAdapter(List<TwitterStatus> statuses) {
+    public RecyclerAdapter(List<TwitterStatus> statuses, OnRecyclerListener listener) {
         this.statuses = statuses;
+        this.listener = listener;
     }
 
     public void setStatuses(List<TwitterStatus> statuses) {
@@ -39,6 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     public void onBindViewHolder(RecyclerViewHolder holder, int position) {
         TwitterStatus status = statuses.get(position);
         holder.binding.setStatus(status);
+        holder.binding.setListener(listener);
         holder.binding.executePendingBindings();
     }
 
