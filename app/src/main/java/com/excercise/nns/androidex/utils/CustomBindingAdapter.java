@@ -54,9 +54,9 @@ public class CustomBindingAdapter {
         }
     }
 
-    @BindingAdapter({"targetStatus", "listener"})
+    @BindingAdapter({"targetStatus", "listener", "contract"})
     public static void onClickSwipeItem(
-            SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener) {
+            SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener, TimelineContract contract) {
         Twitter twitter = TwitterUtils.getTwitterInstance(swipeLayout.getContext());
 
         swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v -> {
@@ -98,7 +98,6 @@ public class CustomBindingAdapter {
         });
 
         swipeLayout.findViewById(R.id.favorite).setOnClickListener(v -> {
-            TimelineContract tContract = (TimelineContract) v.getContext();
             FavoriteUseCase useCase = new FavoriteUseCase(twitter);
             useCase.postFavorite(status)
                     .subscribeOn(Schedulers.io())
@@ -114,13 +113,13 @@ public class CustomBindingAdapter {
 
                         @Override
                         public void onError(@NonNull Throwable e) {
-                            tContract.postActionFailed("エラーが発生しました。もう一度行ってください。");
+                            contract.postActionFailed("エラーが発生しました。もう一度行ってください。");
                         }
 
                         @Override
                         public void onComplete() {
                             String message = status.isFavorited ? "Favorite Success." : "Destroyed Favorite.";
-                            tContract.postActionSuccess(message);
+                            contract.postActionSuccess(message);
                         }
                     });
             swipeLayout.close();

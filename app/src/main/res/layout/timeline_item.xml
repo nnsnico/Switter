@@ -12,6 +12,10 @@
         <variable
             name="listener"
             type="com.excercise.nns.androidex.contract.OnRecyclerListener" />
+
+        <variable
+            name="contract"
+            type="com.excercise.nns.androidex.contract.TimelineContract" />
     </data>
 
     <com.daimajia.swipe.SwipeLayout
@@ -19,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:targetStatus="@{status}"
-        app:listener="@{listener}">
+        app:listener="@{listener}"
+        app:contract="@{contract}">
 
         <!-- Bottom View in Right -->
         <include layout="@layout/swipe_item_left" />

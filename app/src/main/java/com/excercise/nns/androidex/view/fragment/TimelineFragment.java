@@ -73,7 +73,7 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
 
         // recyclerView setup
         List<TwitterStatus> statuses = Collections.emptyList();
-        adapter = new RecyclerAdapter(statuses, this);
+        adapter = new RecyclerAdapter(statuses, this, this);
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.recyclerView.addItemDecoration(new RecyclerDivider(getContext()));

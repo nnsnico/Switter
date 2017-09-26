@@ -20,10 +20,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private List<TwitterStatus> statuses;
     private OnRecyclerListener listener;
+    private TimelineContract contract;
 
-    public RecyclerAdapter(List<TwitterStatus> statuses, OnRecyclerListener listener) {
+    public RecyclerAdapter(List<TwitterStatus> statuses, OnRecyclerListener listener, TimelineContract contract) {
         this.statuses = statuses;
         this.listener = listener;
+        this.contract = contract;
     }
 
     public void setStatuses(List<TwitterStatus> statuses) {
@@ -42,6 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
         TwitterStatus status = statuses.get(position);
         holder.binding.setStatus(status);
         holder.binding.setListener(listener);
+        holder.binding.setContract(contract);
         holder.binding.executePendingBindings();
     }
 
