@@ -54,18 +54,17 @@ public class CustomBindingAdapter {
         }
     }
 
-    @BindingAdapter({"targetStatus"})
+    @BindingAdapter({"targetStatus", "listener"})
     public static void onClickSwipeItem(
-            SwipeLayout swipeLayout, TwitterStatus status) {
-        OnRecyclerListener rListener = (OnRecyclerListener) swipeLayout.getContext();
+            SwipeLayout swipeLayout, TwitterStatus status, OnRecyclerListener listener) {
         Twitter twitter = TwitterUtils.getTwitterInstance(swipeLayout.getContext());
 
         swipeLayout.findViewById(R.id.goProfile).setOnClickListener(v -> {
-            rListener.onSwipeItemClick("goPro", status);
+            listener.onSwipeItemClick("goPro", status);
             swipeLayout.close();
         });
         swipeLayout.findViewById(R.id.reply).setOnClickListener(v -> {
-            rListener.onSwipeItemClick("reply", status);
+            listener.onSwipeItemClick("reply", status);
             swipeLayout.close();
         });
         swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {

@@ -32,7 +32,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".view.activity.AboutAppActivity" />
 
-        <activity android:name=".view.activity.ProfileActivity"></activity>
+        <activity android:name=".view.activity.ProfileActivity" />
     </application>
 
 </manifest>

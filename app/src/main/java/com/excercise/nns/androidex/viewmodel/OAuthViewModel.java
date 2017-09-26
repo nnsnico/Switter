@@ -10,7 +10,6 @@ import com.excercise.nns.androidex.BR;
 import com.excercise.nns.androidex.contract.OAuthContract;
 import com.excercise.nns.androidex.data.Token;
 import com.excercise.nns.androidex.model.usecase.OAuthUseCase;
-import com.excercise.nns.androidex.utils.TwitterUtils;
 
 import java.util.Objects;
 

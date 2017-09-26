@@ -9,26 +9,19 @@
             type="com.excercise.nns.androidex.viewmodel.TimelineViewModel"/>
     </data>
 
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:onRefresh="@{viewModel.onRefresh}"
+        apps:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_layout"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onRefresh="@{viewmodel.onRefresh}"
-            apps:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:background="@color/colorBackground"/>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorBackground"/>
-
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-    </LinearLayout>
 </layout>

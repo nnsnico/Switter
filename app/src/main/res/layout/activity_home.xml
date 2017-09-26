@@ -4,15 +4,15 @@
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="viewmodel"
-            type="com.excercise.nns.androidex.viewmodel.HomeViewModel"/>
+            type="com.excercise.nns.androidex.viewmodel.HomeViewModel" />
 
         <variable
             name="isloaded"
-            type="boolean"/>
+            type="boolean" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -25,8 +25,8 @@
             android:id="@+id/container"
             android:name="com.excercise.nns.androidex.view.fragment.TimelineFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_height="match_parent"
+            apps:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
