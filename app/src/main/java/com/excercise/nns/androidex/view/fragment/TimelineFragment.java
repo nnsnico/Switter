@@ -102,7 +102,7 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
     public void getTimelineFailed(String error) {
         callback.finishedTimeline();
         final Snackbar snackbar =
-                Snackbar.make(getView().findViewById(android.R.id.content), error, Snackbar.LENGTH_INDEFINITE);
+                Snackbar.make(getActivity().findViewById(android.R.id.content), error, Snackbar.LENGTH_INDEFINITE);
         View view = snackbar.getView();
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
         params.gravity = Gravity.TOP;
@@ -122,14 +122,14 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
 
     @Override
     public void postActionSuccess(String message) {
-        Snackbar snackbar = Snackbar.make(getView().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
         snackbar.show();
         viewModel.loadTimeline();
     }
 
     @Override
     public void postActionFailed(String error) {
-        Snackbar snackbar = Snackbar.make(getView().findViewById(android.R.id.content), error, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), error, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
 

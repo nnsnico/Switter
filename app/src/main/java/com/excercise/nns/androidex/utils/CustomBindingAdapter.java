@@ -68,7 +68,6 @@ public class CustomBindingAdapter {
             swipeLayout.close();
         });
         swipeLayout.findViewById(R.id.reTweet).setOnClickListener(v -> {
-            TimelineContract tContract = (TimelineContract) v.getContext();
             RetweetUseCase useCase = new RetweetUseCase(twitter);
             useCase.getRetweetUseCase(status)
                     .subscribeOn(Schedulers.newThread())
@@ -85,13 +84,13 @@ public class CustomBindingAdapter {
                         @Override
                         public void onError(@NonNull Throwable e) {
                             Log.e("retweet error", e.toString());
-                            tContract.postActionFailed("リツイートできませんでした。もう一度行ってください。");
+                            contract.postActionFailed("リツイートできませんでした。もう一度行ってください。");
                         }
 
                         @Override
                         public void onComplete() {
                             String message = status.isRetweeted ? "Retweet Success" : "Destroyed Retweet";
-                            tContract.postActionSuccess(message);
+                            contract.postActionSuccess(message);
                         }
                     });
             swipeLayout.close();
