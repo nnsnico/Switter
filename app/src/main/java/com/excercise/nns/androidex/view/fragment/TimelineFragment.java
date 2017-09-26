@@ -90,6 +90,9 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
     public void onDetach() {
         super.onDetach();
         callback = null;
+        binding = null;
+        viewModel = null;
+        adapter = null;
     }
 
     @Override
@@ -137,7 +140,7 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
     public void onSwipeItemClick(String tag, TwitterStatus status) {
         switch (tag) {
             case "goPro":
-                // TODO: 2017/09/19 set ProfileFragment
+                // TODO: 2017/09/19 set ProfileActivity
 
                 break;
             case "reply":

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 
 import com.excercise.nns.androidex.R;
 import com.excercise.nns.androidex.contract.HomeContract;
