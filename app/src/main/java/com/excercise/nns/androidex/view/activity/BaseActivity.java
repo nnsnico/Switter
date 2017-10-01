@@ -23,9 +23,9 @@ public class BaseActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void setupToolbar(Toolbar toolbar) {
-      toolbar.setTitle(R.string.app_name);
-      toolbar.inflateMenu(R.menu.toolbar_item);
+    public void setupToolbar(Toolbar toolbar, String title, int menuId) {
+      toolbar.setTitle(title);
+      toolbar.inflateMenu(menuId);
       toolbar.setTitleTextColor(ContextCompat.getColor(this, android.R.color.white));
     }
 }

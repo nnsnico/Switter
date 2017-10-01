@@ -35,7 +35,7 @@ public class HomeActivity extends BaseActivity implements HomeContract, Timeline
         HomeViewModel viewModel = new HomeViewModel(this);
         binding.setViewmodel(viewModel);
         // toolbar setup
-        setupToolbar(binding.toolbar);
+        setupToolbar(binding.toolbar, getString(R.string.app_name), R.menu.toolbar_item);
         // replace fragment
         TimelineFragment fragment = TimelineFragment.newInstance();
         replaceFragment(R.id.container, fragment);
