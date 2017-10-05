@@ -20,7 +20,9 @@ import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.contract.TimelineFragmentCallback;
 import com.excercise.nns.androidex.databinding.FragmentTimelineBinding;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.androidex.model.entity.TwitterUser;
 import com.excercise.nns.androidex.utils.TwitterUtils;
+import com.excercise.nns.androidex.view.activity.ProfileActivity;
 import com.excercise.nns.androidex.view.activity.TweetActivity;
 import com.excercise.nns.androidex.view.adapter.RecyclerAdapter;
 import com.excercise.nns.androidex.view.component.RecyclerDivider;
@@ -38,11 +40,20 @@ import twitter4j.Twitter;
 public class TimelineFragment extends Fragment implements TimelineContract, OnRecyclerListener {
     private FragmentTimelineBinding binding;
     private TimelineViewModel viewModel;
+    private TwitterUser user;
     private RecyclerAdapter adapter;
     private TimelineFragmentCallback callback;
 
     public static TimelineFragment newInstance() {
         return new TimelineFragment();
+    }
+
+    public static TimelineFragment newInstance(TwitterUser user) {
+        Bundle args = new Bundle();
+        args.putSerializable("user", user);
+        TimelineFragment fragment = new TimelineFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -67,8 +78,9 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Twitter twitter = TwitterUtils.getTwitterInstance(getContext());
+        user = getArguments() != null ? (TwitterUser) getArguments().getSerializable("user") : null;
 
-        viewModel = new TimelineViewModel(twitter, this);
+        viewModel = new TimelineViewModel(twitter, user,  this);
         binding.setViewModel(viewModel);
 
         // recyclerView setup
@@ -83,7 +95,7 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        viewModel.loadTimeline();
+        viewModel.loadTimeline(user);
     }
 
     @Override
@@ -127,7 +139,7 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
     public void postActionSuccess(String message) {
         Snackbar snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
         snackbar.show();
-        viewModel.loadTimeline();
+        viewModel.loadTimeline(user);
     }
 
     @Override
@@ -140,11 +152,10 @@ public class TimelineFragment extends Fragment implements TimelineContract, OnRe
     public void onSwipeItemClick(String tag, TwitterStatus status) {
         switch (tag) {
             case "goPro":
-                // TODO: 2017/09/19 set ProfileActivity
-
+                ProfileActivity.start(getContext(), status);
                 break;
             case "reply":
-                TweetActivity.start(getContext(), status.getScreenName(), status.getId());
+                TweetActivity.start(getContext(), status.getUser().getScreenName(), status.getId());
                 break;
             default:
                 break;

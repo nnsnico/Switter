@@ -13,6 +13,7 @@ import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
 import com.excercise.nns.androidex.model.usecase.FavoriteUseCase;
 import com.excercise.nns.androidex.model.usecase.RetweetUseCase;
+import com.excercise.nns.androidex.view.component.CustomFab;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,6 +33,11 @@ public class CustomBindingAdapter {
     @BindingAdapter({"imageUrl"})
     public static void loadImage(CircleImageView profileImage, String profileImageUrl) {
         Picasso.with(profileImage.getContext()).load(profileImageUrl).into(profileImage);
+    }
+
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(CustomFab fab, String profileImageUrl) {
+        Picasso.with(fab.getContext()).load(profileImageUrl).into(fab);
     }
 
     @BindingAdapter({"uploadImage"})

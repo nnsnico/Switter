@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.excercise.nns.androidex.contract.TimelineContract;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.androidex.model.entity.TwitterUser;
 import com.excercise.nns.androidex.model.usecase.TimelineUseCase;
 import com.excercise.nns.androidex.utils.TwitterUtils;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -28,22 +30,34 @@ import twitter4j.Twitter;
         @BindingMethod(type = SwipeRefreshLayout.class, attribute = "android:onRefresh", method = "setOnRefreshListener")})
 public class TimelineViewModel {
     private Twitter twitter;
+    private TwitterUser user;
     private TimelineContract contract;
     private List<TwitterStatus> statuses = Collections.emptyList();
 
     public TimelineViewModel(
             Twitter twitter,
+            TwitterUser user,
             TimelineContract contract) {
         this.twitter = twitter;
         this.contract = contract;
+        if (user != null) {
+            this.user = user;
+        } else {
+            this.user = null;
+        }
     }
 
-    public void loadTimeline() {
+    public void loadTimeline(TwitterUser user) {
         contract.loadingTimeline();
         TimelineUseCase useCase = new TimelineUseCase(twitter);
+        Observable<List<Status>> observable;
         // TODO: 2017/09/18 最下部までスクロールでページ再読み込み
-        useCase.getHomeTimeline(40)
-                .subscribeOn(Schedulers.io())
+        if (user != null) {
+            observable = useCase.getUserTimeline(user, 40);
+        } else {
+            observable = useCase.getHomeTimeline(40);
+        }
+        observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<Status>>() {
                     @Override
@@ -78,6 +92,6 @@ public class TimelineViewModel {
     }
 
     public void onRefresh() {
-        loadTimeline();
+        loadTimeline(user);
     }
 }
