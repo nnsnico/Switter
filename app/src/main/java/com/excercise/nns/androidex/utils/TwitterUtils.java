@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import com.excercise.nns.androidex.data.Token;
 import com.excercise.nns.androidex.data.Token_Table;
 import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.androidex.model.entity.TwitterUser;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.Locale;
@@ -18,6 +19,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.URLEntity;
+import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.conf.ConfigurationBuilder;
 import twitter4j.util.TimeSpanConverter;
@@ -65,6 +67,7 @@ public class TwitterUtils {
      * */
     public static TwitterStatus getStatus(Status status) {
         TwitterStatus tStatus = new TwitterStatus();
+
         Status result;
         String refactoredText;
         // UserTypeSelect
@@ -78,13 +81,12 @@ public class TwitterUtils {
         // Set Status Parameter
         tStatus.setId(result.getId());
         tStatus.setCurrentRetweetId(status.getCurrentUserRetweetId());
-        tStatus.setProfileImageUrl(result.getUser().getOriginalProfileImageURL());
-        tStatus.setName(result.getUser().getName());
-        tStatus.setScreenName(result.getUser().getScreenName());
-        tStatus.setCreatedTime(time.toTimeSpanString(result.getCreatedAt()));
         tStatus.isFavorited = result.isFavorited();
         tStatus.isRetweeted = status.isRetweeted();
         tStatus.isRetweetedByMe = status.isRetweetedByMe();
+        tStatus.setCreatedTime(time.toTimeSpanString(result.getCreatedAt()));
+        // set User
+        tStatus.setUser(getUser(result.getUser()));
         // Replace URL contained in the Tweet Text
         URLEntity[] entities = status.getURLEntities();
         for (URLEntity entity : entities) {
@@ -100,6 +102,16 @@ public class TwitterUtils {
         }
         tStatus.setTweetText(refactoredText);
         return tStatus;
+    }
+
+    public static TwitterUser getUser(User user) {
+        TwitterUser tUser = new TwitterUser();
+        tUser.setId(user.getId());
+        tUser.setName(user.getName());
+        tUser.setProfileImageUrl(user.getOriginalProfileImageURL());
+        tUser.setScreenName(user.getScreenName());
+        tUser.setProfileDetail(user.getDescription());
+        return tUser;
     }
 
     public static boolean hasAccessToken() {

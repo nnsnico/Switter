@@ -1,13 +1,6 @@
 package com.excercise.nns.androidex.model.entity;
 
-import android.support.annotation.NonNull;
-import android.support.v4.os.ParcelableCompat;
-import android.support.v4.util.Pair;
-
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
 
 import twitter4j.MediaEntity;
 
@@ -18,9 +11,7 @@ import twitter4j.MediaEntity;
 public class TwitterStatus implements Serializable {
     private long id;
     private long currentRetweetId;
-    private String profileImageUrl;
-    private String name;
-    private String screenName;
+    private TwitterUser user;
     private String createdTime;
     private String tweetText;
     private MediaEntity[] mediaImageUrl;
@@ -37,16 +28,8 @@ public class TwitterStatus implements Serializable {
         this.currentRetweetId = currentRetweetId;
     }
 
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setScreenName(String screenName) {
-        this.screenName = screenName;
+    public void setUser(TwitterUser user) {
+        this.user = user;
     }
 
     public void setCreatedTime(String createTime) {
@@ -73,16 +56,8 @@ public class TwitterStatus implements Serializable {
         return currentRetweetId;
     }
 
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getScreenName() {
-        return screenName;
+    public TwitterUser getUser() {
+        return user;
     }
 
     public String getCreatedTime() {

@@ -1,5 +1,7 @@
 package com.excercise.nns.androidex.model.usecase;
 
+import com.excercise.nns.androidex.model.entity.TwitterUser;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -32,7 +34,7 @@ public class TimelineUseCase {
         });
     }
 
-    public Observable<List<Status>> getUserTimeline(User user, int endPage) {
+    public Observable<List<Status>> getUserTimeline(TwitterUser user, int endPage) {
         Paging page = new Paging(1, endPage);
         return Observable.create(e -> {
            try {
