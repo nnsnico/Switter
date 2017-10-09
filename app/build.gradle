@@ -1,9 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.excercise.nns.androidex"
         minSdkVersion 21
@@ -19,8 +18,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // 環境変数からapikeyとapisecretを読みだす
             manifestPlaceholders = [
-                    api_k: System.getenv("APIKEY2"),
-                    api_s: System.getenv("APISECRET2")
+                    api_k: System.getenv("API_KEY_2"),
+                    api_s: System.getenv("API_SECRET_2")
             ]
         }
         debug {
