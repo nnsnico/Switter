@@ -6,7 +6,7 @@
     <data>
         <variable
             name="status"
-            type="com.excercise.nns.androidex.model.entity.TwitterStatus" />
+            type="com.excercise.nns.switter.model.entity.TwitterStatus" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -103,7 +103,7 @@
             app:layout_anchor="@id/appBar"
             app:layout_anchorGravity="bottom"/>
 
-        <com.excercise.nns.androidex.view.component.CustomFab
+        <com.excercise.nns.switter.view.component.CustomFab
             android:id="@+id/screen_image"
             android:layout_width="70dp"
             android:layout_height="70dp"
