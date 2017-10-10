@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.utils;
+package com.excercise.nns.switter.utils;
 
 import android.util.Log;
 import android.widget.GridLayout;
@@ -7,13 +7,13 @@ import android.widget.ImageView;
 import android.databinding.BindingAdapter;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.excercise.nns.androidex.R;
-import com.excercise.nns.androidex.contract.OnRecyclerListener;
-import com.excercise.nns.androidex.contract.TimelineContract;
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
-import com.excercise.nns.androidex.model.usecase.FavoriteUseCase;
-import com.excercise.nns.androidex.model.usecase.RetweetUseCase;
-import com.excercise.nns.androidex.view.component.CustomFab;
+import com.excercise.nns.switter.R;
+import com.excercise.nns.switter.contract.OnRecyclerListener;
+import com.excercise.nns.switter.contract.TimelineContract;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
+import com.excercise.nns.switter.model.usecase.FavoriteUseCase;
+import com.excercise.nns.switter.model.usecase.RetweetUseCase;
+import com.excercise.nns.switter.view.component.CustomFab;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;

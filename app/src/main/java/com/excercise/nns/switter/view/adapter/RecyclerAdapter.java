@@ -1,14 +1,14 @@
-package com.excercise.nns.androidex.view.adapter;
+package com.excercise.nns.switter.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.excercise.nns.androidex.contract.OnRecyclerListener;
-import com.excercise.nns.androidex.contract.TimelineContract;
-import com.excercise.nns.androidex.databinding.TimelineItemBinding;
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
-import com.excercise.nns.androidex.view.component.RecyclerViewHolder;
+import com.excercise.nns.switter.contract.OnRecyclerListener;
+import com.excercise.nns.switter.contract.TimelineContract;
+import com.excercise.nns.switter.databinding.TimelineItemBinding;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
+import com.excercise.nns.switter.view.component.RecyclerViewHolder;
 
 import java.util.List;
 

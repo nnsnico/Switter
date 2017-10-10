@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.viewmodel;
+package com.excercise.nns.switter.viewmodel;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
@@ -7,9 +7,9 @@ import android.databinding.BindingMethods;
 import android.view.View;
 import android.widget.EditText;
 
-import com.excercise.nns.androidex.BR;
-import com.excercise.nns.androidex.contract.TweetContract;
-import com.excercise.nns.androidex.model.usecase.TweetUseCase;
+import com.excercise.nns.switter.BR;
+import com.excercise.nns.switter.contract.TweetContract;
+import com.excercise.nns.switter.model.usecase.TweetUseCase;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;

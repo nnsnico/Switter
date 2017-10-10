@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.model.entity;
+package com.excercise.nns.switter.model.entity;
 
 import java.io.Serializable;
 

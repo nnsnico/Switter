@@ -1,14 +1,14 @@
-package com.excercise.nns.androidex.viewmodel;
+package com.excercise.nns.switter.viewmodel;
 
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import com.excercise.nns.androidex.contract.TimelineContract;
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
-import com.excercise.nns.androidex.model.entity.TwitterUser;
-import com.excercise.nns.androidex.model.usecase.TimelineUseCase;
-import com.excercise.nns.androidex.utils.TwitterUtils;
+import com.excercise.nns.switter.contract.TimelineContract;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
+import com.excercise.nns.switter.model.entity.TwitterUser;
+import com.excercise.nns.switter.model.usecase.TimelineUseCase;
+import com.excercise.nns.switter.utils.TwitterUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

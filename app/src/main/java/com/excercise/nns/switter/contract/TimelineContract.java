@@ -1,10 +1,8 @@
-package com.excercise.nns.androidex.contract;
+package com.excercise.nns.switter.contract;
 
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
 
 import java.util.List;
-
-import twitter4j.Status;
 
 /**
  * Created by nns on 2017/06/19.

@@ -7,15 +7,15 @@
 
         <variable
             name="status"
-            type="com.excercise.nns.androidex.model.entity.TwitterStatus" />
+            type="com.excercise.nns.switter.model.entity.TwitterStatus" />
 
         <variable
             name="listener"
-            type="com.excercise.nns.androidex.contract.OnRecyclerListener" />
+            type="com.excercise.nns.switter.contract.OnRecyclerListener" />
 
         <variable
             name="contract"
-            type="com.excercise.nns.androidex.contract.TimelineContract" />
+            type="com.excercise.nns.switter.contract.TimelineContract" />
     </data>
 
     <com.daimajia.swipe.SwipeLayout

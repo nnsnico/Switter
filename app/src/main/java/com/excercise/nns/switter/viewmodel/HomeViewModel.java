@@ -1,13 +1,13 @@
-package com.excercise.nns.androidex.viewmodel;
+package com.excercise.nns.switter.viewmodel;
 
 import android.databinding.BindingMethod;
 import android.databinding.BindingMethods;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.excercise.nns.androidex.R;
-import com.excercise.nns.androidex.contract.HomeContract;
-import com.excercise.nns.androidex.utils.TwitterUtils;
+import com.excercise.nns.switter.R;
+import com.excercise.nns.switter.contract.HomeContract;
+import com.excercise.nns.switter.utils.TwitterUtils;
 
 /**
  * Created by nns on 2017/06/19.

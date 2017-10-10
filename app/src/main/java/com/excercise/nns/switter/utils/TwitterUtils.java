@@ -1,13 +1,13 @@
-package com.excercise.nns.androidex.utils;
+package com.excercise.nns.switter.utils;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
-import com.excercise.nns.androidex.data.Token;
-import com.excercise.nns.androidex.data.Token_Table;
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
-import com.excercise.nns.androidex.model.entity.TwitterUser;
+import com.excercise.nns.switter.data.Token;
+import com.excercise.nns.switter.data.Token_Table;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
+import com.excercise.nns.switter.model.entity.TwitterUser;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import java.util.Locale;

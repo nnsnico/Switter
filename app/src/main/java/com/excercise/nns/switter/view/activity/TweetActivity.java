@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.view.activity;
+package com.excercise.nns.switter.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,11 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.excercise.nns.androidex.R;
-import com.excercise.nns.androidex.contract.TweetContract;
-import com.excercise.nns.androidex.databinding.ActivityTweetBinding;
-import com.excercise.nns.androidex.utils.TwitterUtils;
-import com.excercise.nns.androidex.viewmodel.TweetViewModel;
+import com.excercise.nns.switter.R;
+import com.excercise.nns.switter.contract.TweetContract;
+import com.excercise.nns.switter.databinding.ActivityTweetBinding;
+import com.excercise.nns.switter.utils.TwitterUtils;
+import com.excercise.nns.switter.viewmodel.TweetViewModel;
 
 import twitter4j.Twitter;
 

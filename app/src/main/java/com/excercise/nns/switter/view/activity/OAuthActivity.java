@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.view.activity;
+package com.excercise.nns.switter.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,11 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.excercise.nns.androidex.R;
-import com.excercise.nns.androidex.contract.OAuthContract;
-import com.excercise.nns.androidex.databinding.ActivityOauthBinding;
-import com.excercise.nns.androidex.utils.TwitterUtils;
-import com.excercise.nns.androidex.viewmodel.OAuthViewModel;
+import com.excercise.nns.switter.R;
+import com.excercise.nns.switter.contract.OAuthContract;
+import com.excercise.nns.switter.databinding.ActivityOauthBinding;
+import com.excercise.nns.switter.utils.TwitterUtils;
+import com.excercise.nns.switter.viewmodel.OAuthViewModel;
 
 import twitter4j.Twitter;
 

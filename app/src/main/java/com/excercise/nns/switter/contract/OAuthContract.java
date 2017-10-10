@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.contract;
+package com.excercise.nns.switter.contract;
 
 import android.content.Intent;
 

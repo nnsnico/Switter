@@ -1,6 +1,6 @@
-package com.excercise.nns.androidex.model.usecase;
+package com.excercise.nns.switter.model.usecase;
 
-import com.excercise.nns.androidex.model.entity.TwitterUser;
+import com.excercise.nns.switter.model.entity.TwitterUser;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
-import twitter4j.User;
 
 /**
  * Created by nns on 2017/07/11.

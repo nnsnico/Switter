@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.excercise.nns.androidex.viewmodel.TweetViewModel" />
+            type="com.excercise.nns.switter.viewmodel.TweetViewModel" />
     </data>
 
     <LinearLayout
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
         android:orientation="vertical"
-        tools:context="com.excercise.nns.androidex.view.activity.TweetActivity">
+        tools:context="com.excercise.nns.switter.view.activity.TweetActivity">
 
         <FrameLayout
             android:layout_width="match_parent"

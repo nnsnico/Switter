@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.view.activity;
+package com.excercise.nns.switter.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,12 +6,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.excercise.nns.androidex.R;
-import com.excercise.nns.androidex.contract.HomeContract;
-import com.excercise.nns.androidex.contract.TimelineFragmentCallback;
-import com.excercise.nns.androidex.databinding.ActivityHomeBinding;
-import com.excercise.nns.androidex.view.fragment.TimelineFragment;
-import com.excercise.nns.androidex.viewmodel.HomeViewModel;
+import com.excercise.nns.switter.R;
+import com.excercise.nns.switter.contract.HomeContract;
+import com.excercise.nns.switter.contract.TimelineFragmentCallback;
+import com.excercise.nns.switter.databinding.ActivityHomeBinding;
+import com.excercise.nns.switter.view.fragment.TimelineFragment;
+import com.excercise.nns.switter.viewmodel.HomeViewModel;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
 /**

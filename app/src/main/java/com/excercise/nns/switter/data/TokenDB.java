@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.data;
+package com.excercise.nns.switter.data;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 

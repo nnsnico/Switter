@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.view.component;
+package com.excercise.nns.switter.view.component;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -9,7 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.excercise.nns.androidex.R;
+import com.excercise.nns.switter.R;
 
 /**
  * Created by nns on 2017/07/11.

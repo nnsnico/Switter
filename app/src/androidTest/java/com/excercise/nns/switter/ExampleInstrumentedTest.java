@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex;
+package com.excercise.nns.switter;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

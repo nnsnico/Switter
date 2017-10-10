@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.model.usecase;
+package com.excercise.nns.switter.model.usecase;
 
 import io.reactivex.Observable;
 import twitter4j.Twitter;

@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.excercise.nns.androidex.view.activity.AboutAppActivity">
+    tools:context="com.excercise.nns.switter.view.activity.AboutAppActivity">
 
 </android.support.constraint.ConstraintLayout>

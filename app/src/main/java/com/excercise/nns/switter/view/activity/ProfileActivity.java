@@ -1,15 +1,14 @@
-package com.excercise.nns.androidex.view.activity;
+package com.excercise.nns.switter.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.excercise.nns.androidex.R;
-import com.excercise.nns.androidex.databinding.ActivityProfileBinding;
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
-import com.excercise.nns.androidex.view.fragment.TimelineFragment;
+import com.excercise.nns.switter.R;
+import com.excercise.nns.switter.databinding.ActivityProfileBinding;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
+import com.excercise.nns.switter.view.fragment.TimelineFragment;
 
 public class ProfileActivity extends BaseActivity {
     private TwitterStatus status;

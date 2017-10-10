@@ -7,14 +7,14 @@
 
         <variable
             name="viewmodel"
-            type="com.excercise.nns.androidex.viewmodel.OAuthViewModel" />
+            type="com.excercise.nns.switter.viewmodel.OAuthViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        tools:context="com.excercise.nns.androidex.view.activity.OAuthActivity">
+        tools:context="com.excercise.nns.switter.view.activity.OAuthActivity">
 
         <TextView
             android:id="@+id/textView"

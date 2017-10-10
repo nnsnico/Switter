@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.viewmodel;
+package com.excercise.nns.switter.viewmodel;
 
 import android.content.Intent;
 import android.databinding.BaseObservable;
@@ -6,10 +6,10 @@ import android.databinding.Bindable;
 import android.net.Uri;
 import android.view.View;
 
-import com.excercise.nns.androidex.BR;
-import com.excercise.nns.androidex.contract.OAuthContract;
-import com.excercise.nns.androidex.data.Token;
-import com.excercise.nns.androidex.model.usecase.OAuthUseCase;
+import com.excercise.nns.switter.BR;
+import com.excercise.nns.switter.contract.OAuthContract;
+import com.excercise.nns.switter.data.Token;
+import com.excercise.nns.switter.model.usecase.OAuthUseCase;
 
 import java.util.Objects;
 

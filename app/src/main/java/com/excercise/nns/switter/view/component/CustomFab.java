@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.view.component;
+package com.excercise.nns.switter.view.component;
 
 import android.content.Context;
 import android.graphics.Bitmap;

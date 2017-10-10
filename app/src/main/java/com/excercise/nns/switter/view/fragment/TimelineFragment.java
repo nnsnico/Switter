@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.view.fragment;
+package com.excercise.nns.switter.view.fragment;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -14,19 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.excercise.nns.androidex.R;
-import com.excercise.nns.androidex.contract.OnRecyclerListener;
-import com.excercise.nns.androidex.contract.TimelineContract;
-import com.excercise.nns.androidex.contract.TimelineFragmentCallback;
-import com.excercise.nns.androidex.databinding.FragmentTimelineBinding;
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
-import com.excercise.nns.androidex.model.entity.TwitterUser;
-import com.excercise.nns.androidex.utils.TwitterUtils;
-import com.excercise.nns.androidex.view.activity.ProfileActivity;
-import com.excercise.nns.androidex.view.activity.TweetActivity;
-import com.excercise.nns.androidex.view.adapter.RecyclerAdapter;
-import com.excercise.nns.androidex.view.component.RecyclerDivider;
-import com.excercise.nns.androidex.viewmodel.TimelineViewModel;
+import com.excercise.nns.switter.R;
+import com.excercise.nns.switter.contract.OnRecyclerListener;
+import com.excercise.nns.switter.contract.TimelineContract;
+import com.excercise.nns.switter.contract.TimelineFragmentCallback;
+import com.excercise.nns.switter.databinding.FragmentTimelineBinding;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
+import com.excercise.nns.switter.model.entity.TwitterUser;
+import com.excercise.nns.switter.utils.TwitterUtils;
+import com.excercise.nns.switter.view.activity.ProfileActivity;
+import com.excercise.nns.switter.view.activity.TweetActivity;
+import com.excercise.nns.switter.view.adapter.RecyclerAdapter;
+import com.excercise.nns.switter.view.component.RecyclerDivider;
+import com.excercise.nns.switter.viewmodel.TimelineViewModel;
 
 import java.util.Collections;
 import java.util.List;

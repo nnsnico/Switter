@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.excercise.nns.androidex.viewmodel.HomeViewModel" />
+            type="com.excercise.nns.switter.viewmodel.HomeViewModel" />
 
         <variable
             name="isloaded"
@@ -24,7 +24,7 @@
 
         <fragment
             android:id="@+id/container"
-            android:name="com.excercise.nns.androidex.view.fragment.TimelineFragment"
+            android:name="com.excercise.nns.switter.view.fragment.TimelineFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:layout="@layout/fragment_timeline"

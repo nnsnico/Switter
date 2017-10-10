@@ -1,9 +1,9 @@
-package com.excercise.nns.androidex.view.component;
+package com.excercise.nns.switter.view.component;
 
 import android.support.v7.widget.RecyclerView;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.excercise.nns.androidex.databinding.TimelineItemBinding;
+import com.excercise.nns.switter.databinding.TimelineItemBinding;
 
 /**
  * Created by nns on 2017/07/12.

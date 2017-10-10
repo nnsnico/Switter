@@ -1,4 +1,4 @@
-package com.excercise.nns.androidex.contract;
+package com.excercise.nns.switter.contract;
 
 /**
  * Created by nns on 2017/09/25.

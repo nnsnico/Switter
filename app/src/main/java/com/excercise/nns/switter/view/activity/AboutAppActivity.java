@@ -1,11 +1,11 @@
-package com.excercise.nns.androidex.view.activity;
+package com.excercise.nns.switter.view.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.excercise.nns.androidex.R;
+import com.excercise.nns.switter.R;
 
 public class AboutAppActivity extends AppCompatActivity {
 

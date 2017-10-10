@@ -1,6 +1,6 @@
-package com.excercise.nns.androidex.contract;
+package com.excercise.nns.switter.contract;
 
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
 
 /**
  * Created by nns on 2017/07/15.

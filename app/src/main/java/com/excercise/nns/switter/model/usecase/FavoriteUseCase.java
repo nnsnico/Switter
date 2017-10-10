@@ -1,6 +1,6 @@
-package com.excercise.nns.androidex.model.usecase;
+package com.excercise.nns.switter.model.usecase;
 
-import com.excercise.nns.androidex.model.entity.TwitterStatus;
+import com.excercise.nns.switter.model.entity.TwitterStatus;
 
 import io.reactivex.Observable;
 import twitter4j.Twitter;
