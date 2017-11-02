@@ -17,7 +17,7 @@ iOSのメールアプリっぽいものをイメージ
 
 ## 開発環境
 ### IDE
-* AndroidStudio 2.3.3
+* AndroidStudio 3.0.0
 
 ### TargetAPI
 * Min 21 (Lolipopでいいでしょ)
@@ -26,6 +26,10 @@ iOSのメールアプリっぽいものをイメージ
 ### デバッグ端末
 * ~~DOCOMO XperiaZ3 SO-01G~~
 * DOCOMO Galaxy S7 Edge SC-02H
+
+### デバッグ
+* APIキーを内部で管理しているので、CloneおよびForkによるプロジェクトのデバッグは***できません。***
+* それでも試してみたい人は何らかの方法でコンタクトしてください
 
 ### Libraries
 * [Twitter API](https://dev.twitter.com/)
