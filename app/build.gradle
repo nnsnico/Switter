@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.excercise.nns.androidex"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -51,10 +51,10 @@ dependencies {
     annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
 
     // support library
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:appcompat-v7:27.0.1'
+    compile 'com.android.support:design:27.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:27.0.1'
     // Swipe Layout
     compile "com.daimajia.swipelayout:library:1.2.0@aar"
     // DBFlow
@@ -64,7 +64,7 @@ dependencies {
     // Twitter4j
     compile 'org.twitter4j:twitter4j-core:4.0.6'
     // RxJava, RxAndroid
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.4'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // circle ImageView
     compile 'de.hdodenhof:circleimageview:2.1.0'
