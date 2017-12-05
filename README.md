@@ -17,18 +17,18 @@ iOSのメールアプリっぽいものをイメージ
 
 ## 開発環境
 ### IDE
-* AndroidStudio 3.0.0
+* AndroidStudio 3.0
 
 ### TargetAPI
-* Min 21 (Lolipopでいいでしょ)
-* Max 25 (Nuger)
+* Min 21 (Android 5.0 Lolipop)
+* Max 27 (Android 9.0? P?)
 
 ### デバッグ端末
 * ~~DOCOMO XperiaZ3 SO-01G~~
 * DOCOMO Galaxy S7 Edge SC-02H
 
 ### デバッグ
-* APIキーを内部で管理しているので、CloneおよびForkによるプロジェクトのデバッグは**できません。**
+* APIキーをPC内部で管理しているので、CloneおよびForkによるプロジェクトのデバッグは**できません。**
 * それでも試してみたい人は何らかの方法でコンタクトしてください
 
 ### Libraries
